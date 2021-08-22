@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/cat.png" type="Texture" id=1]
+[ext_resource path="res://Cat.cs" type="Script" id=2]
+
+[node name="Cat" type="Area2D"]
+position = Vector2( -0.932007, -2.32949 )
+scale = Vector2( 0.378074, 0.378074 )
+gravity = -1024.0
+script = ExtResource( 2 )
+SPEED = 300
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1.90735e-06, 1.43051e-06 )
+scale = Vector2( 0.386089, 0.388832 )
+texture = ExtResource( 1 )
+offset = Vector2( 18.2161, 19.6387 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 7.03302, 7.63615 )
+scale = Vector2( 0.386089, 0.388832 )
+polygon = PoolVector2Array( -204.971, -34.9856, -135.045, -23.5196, -130.554, -95.501, -51.6457, -96.138, 39.4515, -92.953, 78.5848, -89.768, 84.3586, -32.4376, 110.661, -35.6226, 131.19, -57.9178, 137.605, 10.8786, 102.963, 47.1879, 67.6788, 53.5579, 63.188, 63.75, 53.5651, 76.49, 22.7717, 85.4081, -0.323349, 55.4689, -65.1178, 52.9209, -89.4959, 73.942, -136.328, 65.0239, -129.271, -17.7865, -135.686, -25.4306 )
