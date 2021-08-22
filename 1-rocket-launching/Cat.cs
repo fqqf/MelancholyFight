@@ -46,11 +46,12 @@ public class Cat : Area2D
         }
     }
 
+    Vector2 vector2;
+
     public void FireBullet()
     {
         Area2D bullet = (Area2D)bulletScene.Instance();
         GetTree().CurrentScene.AddChild(bullet);
-        bullet.GlobalPosition = GlobalPosition;
-
+        bullet.GlobalPosition = new Vector2(GlobalPosition.x+9, GlobalPosition.y+7);
     }
 }

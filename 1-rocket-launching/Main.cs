@@ -12,10 +12,11 @@ public class Main : Node2D
     {
         PackedScene enemyScene = (PackedScene)GD.Load("res://Enemy.tscn");
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 100; i++)
         {
             Enemy enemy = enemyScene.Instance<Enemy>();
-            enemy.Position = new Vector2(200,50*i);
+            float f = (float) GD.RandRange(0,2000) + 340;
+            enemy.Position = new Vector2(f,(float)GD.RandRange(0,250));
             AddChild(enemy);
         }
 
