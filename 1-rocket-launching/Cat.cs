@@ -12,8 +12,11 @@ public class Cat : Area2D
 
     public override void _Ready()
     {
+        explosionEffectScene = (PackedScene)GD.Load("res://ExplosionEffect.tscn");
         bulletScene = (PackedScene)GD.Load("res://Bullet.tscn");
         Connect("area_entered", this, "OnAreaEntered");
+        Connect("tree_exited", this, "onExitTree");
+        packedScene = this.GetTree().CurrentScene;
     }
 
     void OnAreaEntered(Area2D area)
@@ -52,6 +55,18 @@ public class Cat : Area2D
     {
         Area2D bullet = (Area2D)bulletScene.Instance();
         GetTree().CurrentScene.AddChild(bullet);
-        bullet.GlobalPosition = new Vector2(GlobalPosition.x+9, GlobalPosition.y+7);
+        bullet.GlobalPosition = new Vector2(GlobalPosition.x + 9, GlobalPosition.y + 7);
     }
+
+    PackedScene explosionEffectScene;
+
+
+	void onExitTree()
+	{
+		ExplosionEffect explosionEffect = explosionEffectScene.Instance<ExplosionEffect>();
+		packedScene.AddChild(explosionEffect);
+		explosionEffect.GlobalPosition = GlobalPosition;
+	}
+
+    Node packedScene;
 }
