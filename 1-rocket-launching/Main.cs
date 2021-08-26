@@ -26,7 +26,7 @@ public class Main : Node2D
     Label scoreLabel;
 
     int _score;
-    int score {get {return _score;} set {_score += value; scoreLabel.Text = "score is "+score;}}
+    int score {get {return _score;} set {_score += value; scoreLabel.Text = ""+score;}}
 
     public void onScoredUp(int score_)
     {

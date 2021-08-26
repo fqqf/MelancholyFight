@@ -17,6 +17,8 @@ public class Bullet : Area2D
     [Export]
     int RotationForce;
 
+    AudioStreamPlayer sound;
+    PackedScene packedScene;
 
     public override void _Ready()
     {
@@ -29,6 +31,19 @@ public class Bullet : Area2D
         if (RotationForce > 0) RotationForce += 40; else RotationForce -= 40;
         this.Connect("screen_exited", this, "OnScreenExited");
         color = this.Modulate;
+        sound = GetNode<AudioStreamPlayer>("sound");
+        packedScene = GD.Load<PackedScene>("res://HitEffect.tscn");
+        this.sound.Play();
+        main = (Node2D) GetTree().CurrentScene;
+    }
+
+    Node2D main;
+
+    public void createHitEffect()
+    {
+        Node2D effect = (Node2D) packedScene.Instance();
+        main.AddChild(effect);
+        effect.GlobalPosition = GlobalPosition;
     }
 
     Color color;

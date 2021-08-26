@@ -40,6 +40,9 @@ public class Enemy : Area2D
 
 	void OnAreaEntered(Area2D area)
 	{
+		if (area is Bullet && ARMOR != 1)
+		{Bullet h = (Bullet) area;
+		h.createHitEffect();}
 		if (area is Enemy) return;
 		area.QueueFree();
 
@@ -47,7 +50,11 @@ public class Enemy : Area2D
 		if (ARMOR == 0) 
         {
             int score_ = (int)(area.Scale.x*3);
-            QueueFree();EmitSignal("scoredUp",score_);}
+            QueueFree();EmitSignal("scoredUp",score_);
+			ExplosionEffect explosionEffect = explosionEffectScene.Instance<ExplosionEffect>();
+			packedScene.AddChild(explosionEffect);
+			explosionEffect.GlobalPosition = GlobalPosition;
+		}
 	}
 
 	void OnScreenExited()
@@ -59,9 +66,7 @@ public class Enemy : Area2D
 
 	void onExitTree()
 	{
-		ExplosionEffect explosionEffect = explosionEffectScene.Instance<ExplosionEffect>();
-		packedScene.AddChild(explosionEffect);
-		explosionEffect.GlobalPosition = GlobalPosition;
+
 	}
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
