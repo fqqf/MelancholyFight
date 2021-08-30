@@ -10,12 +10,17 @@ public class Cat : Area2D
     [Export]
     int SPEED = 30;
 
+    [Signal]
+    public delegate void player_death();
+
     public override void _Ready()
     {
         explosionEffectScene = (PackedScene)GD.Load("res://ExplosionEffect.tscn");
         bulletScene = (PackedScene)GD.Load("res://Bullet.tscn");
         Connect("area_entered", this, "OnAreaEntered");
         Connect("tree_exited", this, "onExitTree");
+        Connect("player_death",this.GetParent<Main>(),"onPlayerDeath");
+      
         packedScene = this.GetTree().CurrentScene;
     }
 
@@ -66,6 +71,7 @@ public class Cat : Area2D
 		ExplosionEffect explosionEffect = explosionEffectScene.Instance<ExplosionEffect>();
 		packedScene.AddChild(explosionEffect);
 		explosionEffect.GlobalPosition = GlobalPosition;
+        EmitSignal("player_death");
 	}
 
     Node packedScene;

@@ -33,6 +33,12 @@ public class Main : Node2D
         score = score_;
     }
 
+    public async void onPlayerDeath()
+    {
+        await ToSignal(GetTree().CreateTimer(1), "timeout");
+        GetTree().ChangeScene("res://GameOverScreen.tscn");
+    }
+
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     //  public override void _Process(float delta)
     //  {
