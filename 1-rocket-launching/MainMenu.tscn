@@ -3,12 +3,12 @@
 [ext_resource path="res://MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://assets/Kiss Me Quick.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 17
 outline_color = Color( 0.129412, 0.0117647, 0.0117647, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
 emission_box_extents = Vector3( 0, 90, 0 )
 flag_disable_z = true
@@ -46,11 +46,11 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="CenterContainer"]
 modulate = Color( 0.454902, 0.454902, 0.454902, 1 )
-margin_left = 120.0
+margin_left = 118.0
 margin_top = 69.0
-margin_right = 200.0
+margin_right = 201.0
 margin_bottom = 110.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "press Space to start
 press Escape to quit"
 __meta__ = {
@@ -63,4 +63,4 @@ amount = 200
 lifetime = 19.0
 preprocess = 19.0
 speed_scale = 3.21
-process_material = SubResource( 1 )
+process_material = SubResource( 2 )

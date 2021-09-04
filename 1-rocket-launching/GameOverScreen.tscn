@@ -78,13 +78,14 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 139.0
+margin_left = 90.0
 margin_top = 104.0
-margin_right = 179.0
+margin_right = 224.0
 margin_bottom = 122.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.654902, 0.654902, 0.654902, 1 )
-text = "score is 0"
+text = "maximum score is 0"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
