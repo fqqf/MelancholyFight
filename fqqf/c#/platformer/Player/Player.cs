@@ -3,12 +3,9 @@ using System;
 
 public class Player : KinematicBody2D
 {
-    [Export]
-    int ACCELERATION = 512; 
-    [Export]
-    int MAX_SPEED = 64;
-    [Export]
-    float FRICTION = 0.25f;
+    [Export] int ACCELERATION = 512; 
+    [Export] int MAX_SPEED = 64;
+    [Export] float FRICTION = 0.25f;
 
     Vector2 motion = Vector2.Zero;
 
