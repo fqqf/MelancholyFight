@@ -12,6 +12,9 @@ export (int) var GRAVITY = 200
 export (int) var JUMP_FORCE = 128
 export (int) var MAX_SLOPE_ANGLE = 46
 
+onready var sprite = $Sprite
+onready var animation_player = $AnimationPlayer
+
 var motion = Vector2.ZERO
 
 func _physics_process(delta):
@@ -21,12 +24,22 @@ func _physics_process(delta):
 	apply_friction(input_vector)
 	jump_check()
 	apply_gravity(delta)
+	update_animations(input_vector)
 	move()
 		
 func apply_horizontal_force(input_vector: Vector2, delta):
 	if input_vector.x != 0:
 		motion.x += input_vector.x * ACCELERATION * delta
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+
+func update_animations(input_vector):
+	if input_vector.x != 0:
+		sprite.scale.x = sign(input_vector.x)
+		animation_player.play("Run")
+	else:
+		animation_player.play("Idle")
+	if not is_on_floor():
+		animation_player.play("Jump")
 
 func apply_friction(input_vector):
 	if input_vector.x == 0 and is_on_floor():
