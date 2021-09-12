@@ -4,7 +4,7 @@
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12.2645, 50.5514 )
+extents = Vector2( 12.2645, 45.1993 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -62,7 +62,7 @@ scale = Vector2( 0.15, 0.15 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.09197, -53.1022 )
+position = Vector2( -1.6889, -47.9576 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -76,3 +76,5 @@ frame = 13
 anims/Idle = SubResource( 2 )
 anims/Jump = SubResource( 3 )
 anims/Run = SubResource( 4 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
