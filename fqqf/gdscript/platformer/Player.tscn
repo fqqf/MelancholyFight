@@ -78,3 +78,7 @@ anims/Jump = SubResource( 3 )
 anims/Run = SubResource( 4 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

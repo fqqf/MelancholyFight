@@ -14,6 +14,7 @@ export (int) var MAX_SLOPE_ANGLE = 46
 
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
+onready var coyote_timer = $CoyoteJumpTimer
 
 var motion = Vector2.ZERO
 var snap_vector = Vector2.ZERO
@@ -59,7 +60,7 @@ func update_snap_vector():
 		snap_vector = Vector2.DOWN
 
 func jump_check():
-	if is_on_floor(): # Works only, if there is a force that constantly pushes you down
+	if is_on_floor() or coyote_timer.time_left > 0 : # Works only, if there is a force that constantly pushes you down
 		if Input.is_action_just_pressed("ui_up"):
 			motion.y = -JUMP_FORCE
 			has_jumped = true
@@ -88,6 +89,7 @@ func move():
 	if was_on_floor and not is_on_floor() and not has_jumped:
 		motion.y = 0
 		position.y = last_position.y
+		coyote_timer.start()
 
 	# Prevent sliding (If our motion is tiny, stops)
 	if is_on_floor() and abs(motion.x) < 3:
