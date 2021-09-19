@@ -5,6 +5,8 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
+const dust_effect_scene = preload("res://Effects/DustEffect.tscn")
+
 export (int) var ACCELERATION = 512
 export (int) var MAX_SPEED = 64
 export (float) var FRICTION = 0.25
@@ -38,10 +40,12 @@ func apply_horizontal_force(input_vector: Vector2, delta):
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 
 func update_animations(input_vector):
+	sprite.scale.x = sign(get_local_mouse_position().x)
 	if input_vector.x != 0:
-		sprite.scale.x = sign(input_vector.x)
 		animation_player.play("Run")
+		animation_player.playback_speed = input_vector.x * sprite.scale.x
 	else:
+		animation_player.playback_speed = 1
 		animation_player.play("Idle")
 	if not is_on_floor():
 		animation_player.play("Jump")
@@ -49,6 +53,13 @@ func update_animations(input_vector):
 func apply_friction(input_vector):
 	if input_vector.x == 0 and is_on_floor():
 		motion.x = lerp(motion.x, 0, FRICTION) # Interpolates
+
+func create_dust_effect():
+	var dust_position = global_position
+	dust_position.x += rand_range(-4,4)
+	var dust_effect = dust_effect_scene.instance()
+	get_tree().current_scene.add_child(dust_effect)
+	dust_effect.global_position = dust_position	
 
 func get_input_vector() -> Vector2:
 	var input_vector = Vector2.ZERO
@@ -84,7 +95,8 @@ func move():
 	# Landing
 	if is_flying and is_on_floor():
 		motion.x = last_motion.x
-	
+		create_dust_effect()
+		
 	# Just left the ground
 	if was_on_floor and not is_on_floor() and not has_jumped:
 		motion.y = 0

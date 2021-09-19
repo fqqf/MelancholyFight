@@ -14,7 +14,7 @@ tile_data = PoolIntArray( 2, 0, 0, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 
 position = Vector2( 16, 144 )
 
 [node name="Sprite" parent="Player" index="1"]
-frame = 9
+frame = 0
 
 [node name="RemoteTransform2D" parent="Player" index="3"]
 remote_path = NodePath("../../Camera2D")
