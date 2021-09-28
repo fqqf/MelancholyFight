@@ -15,8 +15,11 @@ var motion = Vector2.ZERO
 func _physics_process(delta):
 	var input_vector = get_input_vector()
 	apply_horizontal_force(input_vector, delta)
-	apply_gravity(delta)
+	apply_friction(input_vector)
+	
 	jump_check()	
+	apply_gravity(delta)
+	
 	move()
 	
 			 
@@ -32,7 +35,7 @@ func apply_horizontal_force(input_vector, delta):
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	
 func apply_friction(input_vector):
-	if input_vector.x ==0:
+	if input_vector.x ==0 and is_on_floor():
 		motion.x = lerp(motion.x , 0, FRICTION)
 		
 func jump_check():
@@ -44,6 +47,11 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		motion.y += GRAVITY * delta
 		motion.y = min(motion.y, JUMP_FORCE)
+	else:
+		if Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2:
+			motion.y = -JUMP_FORCE/2;
+			
+	
 		
 func move():
 	motion = move_and_slide(motion, Vector2.UP)	
