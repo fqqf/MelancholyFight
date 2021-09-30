@@ -6,6 +6,7 @@ extends KinematicBody2D
 # var b = "text"
 
 const dust_effect_scene = preload("res://Effects/DustEffect.tscn")
+const player_bullet_scene = preload("res://Player/PlayerBullet.tscn")
 
 export (int) var ACCELERATION = 512
 export (int) var MAX_SPEED = 64
@@ -13,10 +14,13 @@ export (float) var FRICTION = 0.25
 export (int) var GRAVITY = 200
 export (int) var JUMP_FORCE = 128
 export (int) var MAX_SLOPE_ANGLE = 46
+export (int) var BULLET_SPEED = 250
 
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var coyote_timer = $CoyoteJumpTimer
+onready var gun = $Sprite/PlayerGun
+onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 
 var motion = Vector2.ZERO
 var snap_vector = Vector2.ZERO
@@ -33,6 +37,9 @@ func _physics_process(delta):
 	apply_gravity(delta)
 	update_animations(input_vector)
 	move()
+	
+	if Input.is_action_just_pressed("Fire"):
+		fire_bullet()
 		
 func apply_horizontal_force(input_vector: Vector2, delta):
 	if input_vector.x != 0:
@@ -54,12 +61,16 @@ func apply_friction(input_vector):
 	if input_vector.x == 0 and is_on_floor():
 		motion.x = lerp(motion.x, 0, FRICTION) # Interpolates
 
+func fire_bullet():
+	var bullet = Utils.instance_scene_on_main(player_bullet_scene, muzzle.global_position)
+	bullet.velocity = Vector2.RIGHT.rotated(gun.rotation) * BULLET_SPEED
+	bullet.velocity.x *= sprite.scale.x
+	bullet.rotation = bullet.velocity.angle()
+
 func create_dust_effect():
 	var dust_position = global_position
 	dust_position.x += rand_range(-4,4)
-	var dust_effect = dust_effect_scene.instance()
-	get_tree().current_scene.add_child(dust_effect)
-	dust_effect.global_position = dust_position	
+	Utils.instance_scene_on_main(dust_effect_scene, dust_position)
 
 func get_input_vector() -> Vector2:
 	var input_vector = Vector2.ZERO
