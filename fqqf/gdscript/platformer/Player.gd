@@ -19,6 +19,7 @@ export (int) var BULLET_SPEED = 250
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var coyote_timer = $CoyoteJumpTimer
+onready var fire_bullet_timer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 
@@ -38,7 +39,7 @@ func _physics_process(delta):
 	update_animations(input_vector)
 	move()
 	
-	if Input.is_action_just_pressed("Fire"):
+	if Input.is_action_just_pressed("Fire") and fire_bullet_timer.time_left == 0:
 		fire_bullet()
 		
 func apply_horizontal_force(input_vector: Vector2, delta):
@@ -66,6 +67,7 @@ func fire_bullet():
 	bullet.velocity = Vector2.RIGHT.rotated(gun.rotation) * BULLET_SPEED
 	bullet.velocity.x *= sprite.scale.x
 	bullet.rotation = bullet.velocity.angle()
+	fire_bullet_timer.start()
 
 func create_dust_effect():
 	var dust_position = global_position
