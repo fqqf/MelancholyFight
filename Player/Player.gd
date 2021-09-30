@@ -17,9 +17,9 @@ onready var spriteAnimator = $SpriteAnimator
 
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		queue_free()
-	
+#	if Input.is_action_just_pressed("ui_accept"):
+#		queue_free()
+#
 	var input_vector = get_input_vector()
 	apply_horizontal_force(input_vector, delta)
 	apply_friction(input_vector)
@@ -61,10 +61,8 @@ func apply_gravity(delta):
 func update_animations(input_vector):
 	if input_vector.x != 0:
 		sprite.scale.x = sign(input_vector.x)
-		print("run")
 		spriteAnimator.play("Run")
 	else:
-		print("idle")
 		spriteAnimator.play("Idle")	
 	if not is_on_floor():
 		spriteAnimator.play("Jump")
