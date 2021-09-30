@@ -17,6 +17,9 @@ onready var spriteAnimator = $SpriteAnimator
 
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		queue_free()
+	
 	var input_vector = get_input_vector()
 	apply_horizontal_force(input_vector, delta)
 	apply_friction(input_vector)
@@ -51,7 +54,6 @@ func jump_check():
 			
 func apply_gravity(delta):
 	#if not is_on_floor():
-		#print("is not on the floor")
 		motion.y += GRAVITY * delta
 		motion.y = min(motion.y, JUMP_FORCE)
 	

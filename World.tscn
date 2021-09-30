@@ -34,3 +34,13 @@ position = Vector2( 96, 160 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 97.0595, 144.53 )
+
+[node name="CameraFollow" parent="Player" index="3"]
+remote_path = NodePath("../../Camera")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 97.0595, 136.53 )
+current = true
+smoothing_enabled = true
+
+[editable path="Player"]
