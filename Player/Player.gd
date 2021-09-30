@@ -29,7 +29,6 @@ func _physics_process(delta):
 			 
 func get_input_vector():
 	var input_vector = Vector2.ZERO
-	#input_vector.x = Input.get_action_strength("ui_right")
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")	
 	return input_vector
 	
@@ -46,20 +45,24 @@ func jump_check():
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
 			motion.y = -JUMP_FORCE
-
-func apply_gravity(delta):
-	if not is_on_floor():
-		motion.y += GRAVITY * delta
-		motion.y = min(motion.y, JUMP_FORCE)
 	else:
 		if Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2:
 			motion.y = -JUMP_FORCE/2;
 			
+func apply_gravity(delta):
+	#if not is_on_floor():
+		#print("is not on the floor")
+		motion.y += GRAVITY * delta
+		motion.y = min(motion.y, JUMP_FORCE)
+	
+			
 func update_animations(input_vector):
 	if input_vector.x != 0:
 		sprite.scale.x = sign(input_vector.x)
+		print("run")
 		spriteAnimator.play("Run")
 	else:
+		print("idle")
 		spriteAnimator.play("Idle")	
 	if not is_on_floor():
 		spriteAnimator.play("Jump")

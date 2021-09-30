@@ -36,6 +36,10 @@ config/name="Metroidvania"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/width=320
@@ -75,7 +79,3 @@ texture={
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"
