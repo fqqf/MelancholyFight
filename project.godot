@@ -36,10 +36,6 @@ config/name="Metroidvania"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=320
