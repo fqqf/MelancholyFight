@@ -94,6 +94,6 @@ func move():
 		motion.y = 0
 		position.y = last_position.y
 	# Prevent Sliding (hack)
-	if is_on_floor() and get_floor_velocity().length() ==0 and abs(motion.x) < 1:
+	if is_on_floor() and get_floor_velocity().length() == 0 and abs(motion.x) < 1:
 		position.x = last_position.x
 		

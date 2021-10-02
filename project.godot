@@ -13,21 +13,9 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
-}, {
-"base": "Resource",
-"class": "PlayerStats",
-"language": "GDScript",
-"path": "res://Player/PlayerStats.gd"
-}, {
-"base": "Area2D",
-"class": "Powerup",
-"language": "GDScript",
-"path": "res://Player/Powerup.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
-"PlayerStats": "",
-"Powerup": ""
+"GitAPI": ""
 }
 
 [application]
@@ -75,3 +63,7 @@ texture={
 [physics]
 
 common/enable_pause_aware_picking=true
+
+[rendering]
+
+2d/snapping/use_gpu_pixel_snap=true
