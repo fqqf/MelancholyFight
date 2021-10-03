@@ -9,6 +9,8 @@ const dust_effect_scene = preload("res://Effects/DustEffect.tscn")
 const jump_effect_scene = preload("res://Effects/JumpEffect.tscn")
 const player_bullet_scene = preload("res://Player/PlayerBullet.tscn")
 
+var player_stats = ResourceLoader.player_stats
+
 export (int) var ACCELERATION = 512
 export (int) var MAX_SPEED = 64
 export (float) var FRICTION = 0.25
@@ -32,6 +34,9 @@ var has_jumped = false
 
 func set_invincibility(value):
 	invincibility = value
+	
+func _ready():
+	player_stats.connect("player_died",self,"_on_died")
 
 func _physics_process(delta):
 	has_jumped = false
@@ -131,4 +136,8 @@ func move():
 
 func _on_Hurtbox_hit(damage):
 	if not invincibility:
+		player_stats.health -= damage
 		blink_animator.play("Blink")
+
+func _on_died():
+	queue_free()
