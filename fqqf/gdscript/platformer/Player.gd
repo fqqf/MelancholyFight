@@ -6,6 +6,7 @@ extends KinematicBody2D
 # var b = "text"
 
 const dust_effect_scene = preload("res://Effects/DustEffect.tscn")
+const jump_effect_scene = preload("res://Effects/JumpEffect.tscn")
 const player_bullet_scene = preload("res://Player/PlayerBullet.tscn")
 
 export (int) var ACCELERATION = 512
@@ -70,6 +71,7 @@ func fire_bullet():
 	fire_bullet_timer.start()
 
 func create_dust_effect():
+	Utils.instance_scene_on_main(jump_effect_scene, global_position)
 	var dust_position = global_position
 	dust_position.x += rand_range(-4,4)
 	Utils.instance_scene_on_main(dust_effect_scene, dust_position)
@@ -86,6 +88,7 @@ func update_snap_vector():
 func jump_check():
 	if is_on_floor() or coyote_timer.time_left > 0 : # Works only, if there is a force that constantly pushes you down
 		if Input.is_action_just_pressed("ui_up"):
+			Utils.instance_scene_on_main(jump_effect_scene, global_position)
 			motion.y = -JUMP_FORCE
 			has_jumped = true
 			snap_vector = Vector2.ZERO

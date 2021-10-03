@@ -5,5 +5,5 @@ var motion = Vector2.ZERO
 
 
 
-func _on_Hurtbox_hit(damage):
+func _on_Hurtbox_hit(_damage):
 	queue_free()
