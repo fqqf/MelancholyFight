@@ -77,10 +77,13 @@ func apply_gravity(delta):
 	
 			
 func update_animations(input_vector):
+	sprite.scale.x = sign(get_local_mouse_position().x)
 	if input_vector.x != 0:
-		sprite.scale.x = sign(input_vector.x)
+		#sprite.scale.x = sign(input_vector.x)
 		spriteAnimator.play("Run")
+		spriteAnimator.playback_speed = input_vector.x * sprite.scale.x
 	else:
+		spriteAnimator.playback_speed = 1
 		spriteAnimator.play("Idle")	
 	if not is_on_floor():
 		spriteAnimator.play("Jump")
