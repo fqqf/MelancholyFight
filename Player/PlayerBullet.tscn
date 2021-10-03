@@ -39,9 +39,9 @@ tracks/1/keys = {
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
+modulate = Color( 0.929412, 0.0235294, 0.0235294, 1 )
 texture = ExtResource( 2 )
 hframes = 2
-frame = 1
 
 [node name="AnimationPlayer" parent="." index="2"]
 autoplay = "Fire"
