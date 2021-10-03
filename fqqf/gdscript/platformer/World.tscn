@@ -84,4 +84,5 @@ position = Vector2( -0.0163002, -29.1906 )
 anims/Loop = SubResource( 1 )
 
 [editable path="Player"]
+[editable path="Player/Hurtbox"]
 [editable path="MovingPlatforms2"]

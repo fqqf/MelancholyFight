@@ -20,13 +20,18 @@ export (int) var BULLET_SPEED = 250
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var coyote_timer = $CoyoteJumpTimer
+onready var blink_animator = $BlinkAnimator
 onready var fire_bullet_timer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 
+var invincibility = false setget set_invincibility
 var motion = Vector2.ZERO
 var snap_vector = Vector2.ZERO
 var has_jumped = false
+
+func set_invincibility(value):
+	invincibility = value
 
 func _physics_process(delta):
 	has_jumped = false
@@ -122,3 +127,8 @@ func move():
 	# Prevent sliding (If our motion is tiny, stops)
 	if is_on_floor() and abs(motion.x) < 3:
 		position.x = last_position.x
+
+
+func _on_Hurtbox_hit(damage):
+	if not invincibility:
+		blink_animator.play("Blink")
