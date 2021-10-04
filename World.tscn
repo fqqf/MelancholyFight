@@ -44,6 +44,12 @@ tile_data = PoolIntArray( -655342, 0, 0, -655341, 0, 2, -655337, 0, 0, -655336, 
 [node name="MovingPlatforms" parent="." instance=ExtResource( 4 )]
 position = Vector2( 384, 160 )
 
+[node name="KinematicBody2D" parent="MovingPlatforms" index="0"]
+position = Vector2( 0, -58.9446 )
+
+[node name="PathFollow2D" parent="MovingPlatforms/Path2D" index="0"]
+position = Vector2( 0, -58.9446 )
+
 [node name="MovingPlatforms2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 640, 16 )
 
