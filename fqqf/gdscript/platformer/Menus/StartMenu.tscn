@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Menus/StartMenu.gd" type="Script" id=1]
+[ext_resource path="res://UI/DefaulTheme.tres" type="Theme" id=2]
+
+[node name="StartMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 128.0
+margin_top = 56.0
+margin_right = 191.0
+margin_bottom = 124.0
+custom_constants/separation = 10
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 63.0
+margin_bottom = 16.0
+text = "  launch  "
+
+[node name="Load" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 63.0
+margin_bottom = 42.0
+text = "load"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 63.0
+margin_bottom = 68.0
+text = "quit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

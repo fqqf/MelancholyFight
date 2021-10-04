@@ -5,7 +5,8 @@
 [node name="UI" type="CanvasLayer"]
 
 [node name="HealthMeter" parent="." instance=ExtResource( 1 )]
-margin_left = 282.376
-margin_top = 160.178
-margin_right = 315.376
-margin_bottom = 175.178
+margin_left = 285.755
+margin_top = 163.473
+margin_right = 318.755
+margin_bottom = 178.473
+grow_horizontal = 0
