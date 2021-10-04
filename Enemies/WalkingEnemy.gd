@@ -1,6 +1,4 @@
-extends "res://Effects/Enemy.gd"
-
-
+extends "res://Enemies/Enemy.gd"
 
 enum DIRECTION {LEFT = -1, RIGHT = 1}
 
@@ -15,7 +13,7 @@ onready var wallLeft = $WallLeft
 onready var wallRight = $WallRight
 
 func _ready():
-	state = WALKING_DIRECTION
+	state  = WALKING_DIRECTION
 	
 func _physics_process(_delta):
 	match state:
@@ -23,19 +21,13 @@ func _physics_process(_delta):
 			motion.x = MAX_SPEED
 			if not floorRight.is_colliding() or wallRight.is_colliding():
 				state = DIRECTION.LEFT
-			
+				
 		DIRECTION.LEFT:
 			motion.x = -MAX_SPEED
 			if not floorLeft.is_colliding() or wallLeft.is_colliding():
 				state = DIRECTION.RIGHT
-		
 			
 	sprite.scale.x = sign(motion.x)
 	motion = move_and_slide_with_snap(motion, Vector2.DOWN * 4, Vector2.UP, true, 4, deg2rad(46))
-
-
-
-
-
-
-	
+		
+			
