@@ -31,6 +31,7 @@ var invincibility = false setget set_invincibility
 var motion = Vector2.ZERO
 var snap_vector = Vector2.ZERO
 var has_jumped = false
+var double_jump = true
 
 func set_invincibility(value):
 	invincibility = value
@@ -98,13 +99,21 @@ func update_snap_vector():
 func jump_check():
 	if is_on_floor() or coyote_timer.time_left > 0 : # Works only, if there is a force that constantly pushes you down
 		if Input.is_action_just_pressed("ui_up"):
-			Utils.instance_scene_on_main(jump_effect_scene, global_position)
-			motion.y = -JUMP_FORCE
-			has_jumped = true
-			snap_vector = Vector2.ZERO
-	elif Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2: # Doesnt let you to get more force, if you have more than JUMP_FORCE/2
-		motion.y = -JUMP_FORCE/2 # You need to remember that going down is actually -y
+			jump(JUMP_FORCE)
+	else:
+		if Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2: # Doesnt let you to get more force, if you have more than JUMP_FORCE/2
+			motion.y = -JUMP_FORCE/2 # You need to remember that going down is actually -y
+		
+		if Input.is_action_just_pressed("ui_up") and double_jump:
+			jump(JUMP_FORCE* .75)
+			double_jump = false
 			
+func jump(force):
+	Utils.instance_scene_on_main(jump_effect_scene, global_position)
+	motion.y = -force
+	has_jumped = true
+	snap_vector = Vector2.ZERO
+		
 func apply_gravity(delta):
 	#if not is_on_floor(): # Now that matters
 		motion.y += GRAVITY * delta
@@ -122,8 +131,9 @@ func move():
 	if is_flying and is_on_floor():
 		motion.x = last_motion.x
 		create_dust_effect()
+		double_jump = true
 		
-	# Just left the ground
+	# Just lefta the ground
 	if was_on_floor and not is_on_floor() and not has_jumped:
 		motion.y = 0
 		position.y = last_position.y
