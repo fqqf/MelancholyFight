@@ -16,6 +16,7 @@ rect = Rect2( -4, -4, 8, 8 )
 [node name="HitBox" parent="." instance=ExtResource( 2 )]
 
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 
 [editable path="HitBox"]

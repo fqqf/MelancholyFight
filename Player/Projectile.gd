@@ -15,3 +15,7 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport):
 
 func _on_HitBox_body_entered(body):
 	queue_free()
+
+
+func _on_HitBox_area_entered(area):
+	queue_free()
