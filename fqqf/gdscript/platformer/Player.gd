@@ -51,7 +51,7 @@ func _ready():
 	main_instances.Player = self
 
 func _exit_tree():
-	MainInstances.Player = null
+	main_instances.Player = null
 
 func _physics_process(delta):
 	has_jumped = false
@@ -198,7 +198,7 @@ func wall_slide_jump_check(wall_axis):
 		motion.x = wall_axis*MAX_SPEED
 		motion.y = -JUMP_FORCE/1.25
 		state = MOVE
-		var dust_position = global_position + Vector2(wall_axis*4, -10)
+		var dust_position = global_position + Vector2(wall_axis*4, -2)
 		var dust = Utils.instance_scene_on_main(wall_dust_effect_scene, dust_position)
 		dust.scale.x = wall_axis
 		

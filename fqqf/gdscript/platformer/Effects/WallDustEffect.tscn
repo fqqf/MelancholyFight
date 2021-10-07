@@ -37,7 +37,7 @@ tracks/1/keys = {
 
 [node name="Sprite" parent="." index="0"]
 self_modulate = Color( 1, 1, 1, 0.478431 )
-scale = Vector2( 0.151747, 0.151747 )
+scale = Vector2( 0.0803944, 0.0803944 )
 texture = ExtResource( 2 )
 hframes = 5
 
