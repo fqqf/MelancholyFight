@@ -8,16 +8,20 @@ extends KinematicBody2D
 const dust_effect_scene = preload("res://Effects/DustEffect.tscn")
 const jump_effect_scene = preload("res://Effects/JumpEffect.tscn")
 const player_bullet_scene = preload("res://Player/PlayerBullet.tscn")
+const wall_dust_effect_scene = preload("res://Effects/WallDustEffect.tscn")
 
 var player_stats = ResourceLoader.player_stats
+var main_instances = ResourceLoader.main_instances
 
 export (int) var ACCELERATION = 512
 export (int) var MAX_SPEED = 64
 export (float) var FRICTION = 0.25
 export (int) var GRAVITY = 200
+export (int) var MAX_WALL_SLIDE_SPEED = 12
 export (int) var JUMP_FORCE = 128
 export (int) var MAX_SLOPE_ANGLE = 46
 export (int) var BULLET_SPEED = 250
+export (int) var WALL_SLIDE_SPEED = 48
 
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
@@ -27,6 +31,12 @@ onready var fire_bullet_timer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 
+enum {
+	MOVE,
+	WALL_SLIDE
+}
+
+var state = MOVE
 var invincibility = false setget set_invincibility
 var motion = Vector2.ZERO
 var snap_vector = Vector2.ZERO
@@ -38,19 +48,38 @@ func set_invincibility(value):
 	
 func _ready():
 	player_stats.connect("player_died",self,"_on_died")
+	main_instances.Player = self
+
+func _exit_tree():
+	MainInstances.Player = null
 
 func _physics_process(delta):
 	has_jumped = false
-	var input_vector = get_input_vector()
+
+	match state:
+		MOVE:
+			var input_vector = get_input_vector()
 	
-	apply_horizontal_force(input_vector, delta)
-	apply_friction(input_vector)
-	update_snap_vector()
-	jump_check()
-	apply_gravity(delta)
-	update_animations(input_vector)
-	move()
-	
+			apply_horizontal_force(input_vector, delta)
+			apply_friction(input_vector)
+			update_snap_vector()
+			jump_check()
+			apply_gravity(delta)
+			update_animations(input_vector)
+			move()
+			
+			wall_slide_check()
+			
+		WALL_SLIDE:
+			animation_player.play("Wall Slide")
+			var wall_axis = get_wall_axis()
+			if wall_axis != 0:
+				sprite.scale.x = wall_axis
+				
+			wall_slide_jump_check(wall_axis)
+			wall_slide_drop(delta)
+			move()
+			wall_detach(delta,wall_axis)
 	if Input.is_action_just_pressed("Fire") and fire_bullet_timer.time_left == 0:
 		fire_bullet()
 		
@@ -133,7 +162,7 @@ func move():
 		create_dust_effect()
 		double_jump = true
 		
-	# Just lefta the ground
+	# Just left the ground
 	if was_on_floor and not is_on_floor() and not has_jumped:
 		motion.y = 0
 		position.y = last_position.y
@@ -151,3 +180,41 @@ func _on_Hurtbox_hit(damage):
 
 func _on_died():
 	queue_free()
+
+func wall_slide_check():
+	if not is_on_floor() and is_on_wall():
+		state = WALL_SLIDE
+		double_jump = true
+		create_dust_effect()
+		
+func get_wall_axis():
+	var is_right_wall = test_move(transform, Vector2.RIGHT)
+	var is_left_wall = test_move(transform, Vector2.LEFT)
+	return int(is_left_wall) - int(is_right_wall)
+
+
+func wall_slide_jump_check(wall_axis):
+	if Input.is_action_just_pressed("ui_up"):
+		motion.x = wall_axis*MAX_SPEED
+		motion.y = -JUMP_FORCE/1.25
+		state = MOVE
+		var dust_position = global_position + Vector2(wall_axis*4, -10)
+		var dust = Utils.instance_scene_on_main(wall_dust_effect_scene, dust_position)
+		dust.scale.x = wall_axis
+		
+func wall_slide_drop(delta):
+	var max_slide_speed = WALL_SLIDE_SPEED
+	if Input.is_action_pressed("ui_down"):
+		max_slide_speed = MAX_WALL_SLIDE_SPEED
+	motion.y = min(motion.y + GRAVITY * delta, max_slide_speed)
+
+func wall_detach(delta, wall_axis):
+	if Input.is_action_just_pressed("ui_right"): 
+		motion.x = ACCELERATION * delta
+		state = MOVE
+		
+	if Input.is_action_just_pressed("ui_left"):
+		motion.x = -ACCELERATION * delta
+		state = MOVE
+	if wall_axis == 0 or is_on_floor():
+		state = MOVE
