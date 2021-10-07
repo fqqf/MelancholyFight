@@ -51,7 +51,7 @@ position = Vector2( 0, -58.9446 )
 position = Vector2( 0, -58.9446 )
 
 [node name="MovingPlatforms2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 640, 16 )
+position = Vector2( 639.58, 15.5796 )
 
 [node name="KinematicBody2D" parent="MovingPlatforms2" index="0"]
 position = Vector2( 58.9446, -59 )
