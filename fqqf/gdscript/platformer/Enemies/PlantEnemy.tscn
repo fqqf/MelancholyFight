@@ -43,6 +43,7 @@ radius = 20.0
 
 [node name="PlantEnemy" instance=ExtResource( 1 )]
 scale = Vector2( 0.241764, 0.241764 )
+z_index = 2
 script = ExtResource( 3 )
 
 [node name="BulletSpawnPoint" type="Position2D" parent="." index="0"]

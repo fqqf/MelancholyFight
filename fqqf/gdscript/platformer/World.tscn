@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -10,9 +10,216 @@
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/FlyingEnemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/UpDown.tres" type="Curve2D" id=10]
+[ext_resource path="res://assets/World/grass.png" type="Texture" id=11]
+[ext_resource path="res://assets/World/stalactite.png" type="Texture" id=12]
 
 [node name="World" type="Node"]
 script = ExtResource( 3 )
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="WalkingEnemy" type="Node2D" parent="Entities"]
+position = Vector2( 384, 169.25 )
+scale = Vector2( 0.758965, 0.758965 )
+
+[node name="WalkingEnemy2" parent="Entities/WalkingEnemy" instance=ExtResource( 7 )]
+position = Vector2( -455.884, -21.4113 )
+scale = Vector2( 1, 1 )
+
+[node name="WalkingEnemy" parent="Entities/WalkingEnemy" instance=ExtResource( 7 )]
+position = Vector2( 100.136, -190.062 )
+scale = Vector2( 1, 1 )
+
+[node name="WalkingEnemy3" parent="Entities/WalkingEnemy" instance=ExtResource( 7 )]
+position = Vector2( -569.196, 83.446 )
+scale = Vector2( 1, 1 )
+
+[node name="WalkingEnemy4" parent="Entities/WalkingEnemy" instance=ExtResource( 7 )]
+position = Vector2( 105.407, -20.1041 )
+scale = Vector2( 1, 1 )
+
+[node name="WalkingEnemy5" parent="Entities/WalkingEnemy" instance=ExtResource( 7 )]
+position = Vector2( 0, 0 )
+scale = Vector2( 1, 1 )
+
+[node name="Stalactites" type="Node2D" parent="Entities"]
+
+[node name="stalactite" type="Sprite" parent="Entities/Stalactites"]
+position = Vector2( 93.2335, 90.3841 )
+rotation = 3.14159
+scale = Vector2( 0.0779078, 0.0779077 )
+texture = ExtResource( 12 )
+
+[node name="stalactite3" type="Sprite" parent="Entities/Stalactites"]
+position = Vector2( 288.299, 170.146 )
+scale = Vector2( 0.0779078, 0.0779077 )
+texture = ExtResource( 12 )
+offset = Vector2( -35.0754, -67.0728 )
+
+[node name="stalactite2" type="Sprite" parent="Entities/Stalactites"]
+position = Vector2( 518.591, -21.2824 )
+rotation = 3.14159
+scale = Vector2( 0.0779078, 0.0779077 )
+texture = ExtResource( 12 )
+
+[node name="Grass" type="Node2D" parent="Entities"]
+
+[node name="grass" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 103.562, 131 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass8" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 126.922, 260.146 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass9" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 392.555, 213.426 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass13" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 418.555, 300.5 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+offset = Vector2( 52.0078, -27.6479 )
+
+[node name="grass25" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 393.305, 300.75 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+offset = Vector2( 52.0078, -27.6479 )
+
+[node name="grass23" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 375.059, 276.83 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass24" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 325.809, 260.33 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass14" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 473.791, 292.811 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass15" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 492.645, 292.978 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass16" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 528.519, 293.311 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass17" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 563.892, 292.477 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass18" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 559.554, 292.477 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass19" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 510.666, 294.146 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass20" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 605.606, 293.145 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass21" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 645.985, 291.81 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass22" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 686.531, 292.144 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass10" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 527.707, 180.055 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass11" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 558.575, 35.7944 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass7" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 157.727, 149.945 )
+scale = Vector2( 0.204879, 0.204879 )
+texture = ExtResource( 11 )
+
+[node name="grass2" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 25, 147 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass12" type="Sprite" parent="Entities/Grass"]
+position = Vector2( -85.8731, 149.205 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+
+[node name="grass5" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 624.48, 107.68 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+offset = Vector2( -928.365, 213.239 )
+
+[node name="grass6" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 705.941, 91.6844 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+offset = Vector2( -928.365, 213.239 )
+
+[node name="grass3" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 462, 17.5039 )
+scale = Vector2( 0.29, 0.29 )
+texture = ExtResource( 11 )
+
+[node name="grass4" type="Sprite" parent="Entities/Grass"]
+position = Vector2( 449.941, 29.6622 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 11 )
+offset = Vector2( 215.385, -38.4615 )
+
+[node name="PlantEnemy" type="Node2D" parent="Entities"]
+
+[node name="PlantEnemy" parent="Entities/PlantEnemy" instance=ExtResource( 5 )]
+position = Vector2( 176, 96 )
+rotation = 3.14159
+
+[node name="PlantEnemy2" parent="Entities/PlantEnemy" instance=ExtResource( 5 )]
+position = Vector2( 393.799, -32 )
+rotation = 3.14158
+
+[node name="MovingPlatform" type="Node2D" parent="Entities"]
+
+[node name="MovingPlatforms" parent="Entities/MovingPlatform" instance=ExtResource( 4 )]
+position = Vector2( 186, 191 )
+
+[node name="MovingPlatforms2" parent="Entities/MovingPlatform" instance=ExtResource( 4 )]
+position = Vector2( 300, 157 )
+
+[node name="KinematicBody2D" parent="Entities/MovingPlatform/MovingPlatforms2" index="0"]
+position = Vector2( 13.9995, -8 )
+
+[node name="Path2D" parent="Entities/MovingPlatform/MovingPlatforms2" index="1"]
+curve = ExtResource( 10 )
+
+[node name="PathFollow2D" parent="Entities/MovingPlatform/MovingPlatforms2/Path2D" index="0"]
+position = Vector2( -0.0163002, -29.1906 )
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]
 collision_layer = 2
@@ -36,55 +243,17 @@ position = Vector2( 111.747, 134.257 )
 
 [node name="UI" parent="." instance=ExtResource( 8 )]
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="OverEntities" type="Node2D" parent="."]
 
-[node name="WalkingEnemy2" parent="Entities" instance=ExtResource( 7 )]
-position = Vector2( 38, 153 )
-
-[node name="WalkingEnemy" parent="Entities" instance=ExtResource( 7 )]
-position = Vector2( 460, 25 )
-
-[node name="WalkingEnemy3" parent="Entities" instance=ExtResource( 7 )]
-position = Vector2( -48, 232.583 )
-
-[node name="WalkingEnemy4" parent="Entities" instance=ExtResource( 7 )]
-position = Vector2( 464, 153 )
-
-[node name="WalkingEnemy5" parent="Entities" instance=ExtResource( 7 )]
-position = Vector2( 384, 168.583 )
-
-[node name="MovingPlatforms" parent="Entities" instance=ExtResource( 4 )]
-position = Vector2( 186, 191 )
-
-[node name="MovingPlatforms2" parent="Entities" instance=ExtResource( 4 )]
-position = Vector2( 300, 157 )
-
-[node name="KinematicBody2D" parent="Entities/MovingPlatforms2" index="0"]
-position = Vector2( 13.9995, -8 )
-
-[node name="Path2D" parent="Entities/MovingPlatforms2" index="1"]
-curve = ExtResource( 10 )
-
-[node name="PathFollow2D" parent="Entities/MovingPlatforms2/Path2D" index="0"]
-position = Vector2( -0.0163002, -29.1906 )
-
-[node name="FlyingEnemy" parent="Entities" instance=ExtResource( 9 )]
+[node name="FlyingEnemy" parent="OverEntities" instance=ExtResource( 9 )]
 position = Vector2( 272, 112 )
 
-[node name="FlyingEnemy2" parent="Entities" instance=ExtResource( 9 )]
+[node name="FlyingEnemy2" parent="OverEntities" instance=ExtResource( 9 )]
 position = Vector2( 480, -16 )
 
-[node name="FlyingEnemy3" parent="Entities" instance=ExtResource( 9 )]
+[node name="FlyingEnemy3" parent="OverEntities" instance=ExtResource( 9 )]
 position = Vector2( -96, 224 )
 
-[node name="PlantEnemy" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 176, 96 )
-rotation = 3.14159
-
-[node name="PlantEnemy2" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 393.799, -32 )
-rotation = 9.42476
-
+[editable path="Entities/MovingPlatform/MovingPlatforms2"]
 [editable path="Player"]
 [editable path="Player/Hurtbox"]
-[editable path="Entities/MovingPlatforms2"]

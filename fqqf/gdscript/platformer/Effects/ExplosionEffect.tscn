@@ -34,6 +34,7 @@ tracks/1/keys = {
 }
 
 [node name="ExplosionEffect" instance=ExtResource( 2 )]
+z_index = 4
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.19995, 0.19995 )

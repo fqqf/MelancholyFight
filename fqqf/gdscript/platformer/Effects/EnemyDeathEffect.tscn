@@ -4,6 +4,7 @@
 [ext_resource path="res://Effects/EnemyDeathEffect.gd" type="Script" id=2]
 
 [node name="EnemyDeathEffect" type="Node2D"]
+z_index = 4
 script = ExtResource( 2 )
 
 [node name="DustEffect" parent="." instance=ExtResource( 1 )]
