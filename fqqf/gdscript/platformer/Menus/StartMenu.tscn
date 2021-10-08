@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Menus/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://UI/DefaulTheme.tres" type="Theme" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/World/tree.png" type="Texture" id=7]
 [ext_resource path="res://assets/UI/vignette.png" type="Texture" id=8]
 [ext_resource path="res://Player/MovingPlatforms.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player/UpDown.tres" type="Curve2D" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 47.6806, 8 )
@@ -23,6 +24,19 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MovingPlatforms" parent="." instance=ExtResource( 9 )]
+position = Vector2( 16.7717, 139.718 )
+scale = Vector2( 1.70928, 1.70928 )
+
+[node name="KinematicBody2D" parent="MovingPlatforms" index="0"]
+position = Vector2( 13.9995, -8 )
+
+[node name="Path2D" parent="MovingPlatforms" index="1"]
+curve = ExtResource( 10 )
+
+[node name="PathFollow2D" parent="MovingPlatforms/Path2D" index="0"]
+position = Vector2( -0.0163002, -29.1906 )
 
 [node name="stars" type="Sprite" parent="."]
 position = Vector2( 5, 167 )
@@ -146,10 +160,8 @@ position = Vector2( 209, 188 )
 position = Vector2( -1.67044, 0 )
 shape = SubResource( 1 )
 
-[node name="MovingPlatforms" parent="." instance=ExtResource( 9 )]
-position = Vector2( 226.809, 71.0465 )
-scale = Vector2( 1.70928, 1.70928 )
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+
+[editable path="MovingPlatforms"]
