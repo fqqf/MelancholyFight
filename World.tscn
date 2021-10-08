@@ -54,13 +54,13 @@ position = Vector2( 0, -58.9446 )
 position = Vector2( 639.58, 15.5796 )
 
 [node name="KinematicBody2D" parent="MovingPlatforms2" index="0"]
-position = Vector2( 58.9446, -59 )
+position = Vector2( 58.9001, -59.0565 )
 
 [node name="Path2D" parent="MovingPlatforms2" index="1"]
 curve = ExtResource( 5 )
 
 [node name="PathFollow2D" parent="MovingPlatforms2/Path2D" index="0"]
-position = Vector2( 58.9446, -59 )
+position = Vector2( 58.9001, -59.0565 )
 
 [node name="AnimationPlayer" parent="MovingPlatforms2" index="2"]
 anims/Loop = SubResource( 1 )
