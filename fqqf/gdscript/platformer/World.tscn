@@ -4,28 +4,12 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World.gd" type="Script" id=3]
 [ext_resource path="res://Player/MovingPlatforms.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Player/UpDown.tres" type="Curve2D" id=5]
+[ext_resource path="res://Enemies/PlantEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Camera2D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/WalkingEnemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/FlyingEnemy.tscn" type="PackedScene" id=9]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Loop"
-length = 4.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( -2, -2 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
+[ext_resource path="res://Player/UpDown.tres" type="Curve2D" id=10]
 
 [node name="World" type="Node"]
 script = ExtResource( 3 )
@@ -50,50 +34,57 @@ wait_time = 0.3
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 111.747, 134.257 )
 
-[node name="WalkingEnemy2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 38, 153 )
-
-[node name="WalkingEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 460, 25 )
-
-[node name="WalkingEnemy3" parent="." instance=ExtResource( 7 )]
-position = Vector2( -48, 232.583 )
-
-[node name="WalkingEnemy4" parent="." instance=ExtResource( 7 )]
-position = Vector2( 464, 153 )
-
-[node name="WalkingEnemy5" parent="." instance=ExtResource( 7 )]
-position = Vector2( 384, 168.583 )
-
-[node name="MovingPlatforms" parent="." instance=ExtResource( 4 )]
-position = Vector2( 186, 191 )
-
-[node name="MovingPlatforms2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 300, 157 )
-
-[node name="KinematicBody2D" parent="MovingPlatforms2" index="0"]
-position = Vector2( 13.9995, -8 )
-
-[node name="Path2D" parent="MovingPlatforms2" index="1"]
-curve = ExtResource( 5 )
-
-[node name="PathFollow2D" parent="MovingPlatforms2/Path2D" index="0"]
-position = Vector2( -0.0163002, -29.1906 )
-
-[node name="AnimationPlayer" parent="MovingPlatforms2" index="2"]
-anims/Loop = SubResource( 1 )
-
 [node name="UI" parent="." instance=ExtResource( 8 )]
 
-[node name="FlyingEnemy" parent="." instance=ExtResource( 9 )]
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="WalkingEnemy2" parent="Entities" instance=ExtResource( 7 )]
+position = Vector2( 38, 153 )
+
+[node name="WalkingEnemy" parent="Entities" instance=ExtResource( 7 )]
+position = Vector2( 460, 25 )
+
+[node name="WalkingEnemy3" parent="Entities" instance=ExtResource( 7 )]
+position = Vector2( -48, 232.583 )
+
+[node name="WalkingEnemy4" parent="Entities" instance=ExtResource( 7 )]
+position = Vector2( 464, 153 )
+
+[node name="WalkingEnemy5" parent="Entities" instance=ExtResource( 7 )]
+position = Vector2( 384, 168.583 )
+
+[node name="MovingPlatforms" parent="Entities" instance=ExtResource( 4 )]
+position = Vector2( 186, 191 )
+
+[node name="MovingPlatforms2" parent="Entities" instance=ExtResource( 4 )]
+position = Vector2( 300, 157 )
+
+[node name="KinematicBody2D" parent="Entities/MovingPlatforms2" index="0"]
+position = Vector2( 13.9995, -8 )
+
+[node name="Path2D" parent="Entities/MovingPlatforms2" index="1"]
+curve = ExtResource( 10 )
+
+[node name="PathFollow2D" parent="Entities/MovingPlatforms2/Path2D" index="0"]
+position = Vector2( -0.0163002, -29.1906 )
+
+[node name="FlyingEnemy" parent="Entities" instance=ExtResource( 9 )]
 position = Vector2( 272, 112 )
 
-[node name="FlyingEnemy2" parent="." instance=ExtResource( 9 )]
+[node name="FlyingEnemy2" parent="Entities" instance=ExtResource( 9 )]
 position = Vector2( 480, -16 )
 
-[node name="FlyingEnemy3" parent="." instance=ExtResource( 9 )]
+[node name="FlyingEnemy3" parent="Entities" instance=ExtResource( 9 )]
 position = Vector2( -96, 224 )
+
+[node name="PlantEnemy" parent="Entities" instance=ExtResource( 5 )]
+position = Vector2( 176, 96 )
+rotation = 3.14159
+
+[node name="PlantEnemy2" parent="Entities" instance=ExtResource( 5 )]
+position = Vector2( 393.799, -32 )
+rotation = 9.42476
 
 [editable path="Player"]
 [editable path="Player/Hurtbox"]
-[editable path="MovingPlatforms2"]
+[editable path="Entities/MovingPlatforms2"]

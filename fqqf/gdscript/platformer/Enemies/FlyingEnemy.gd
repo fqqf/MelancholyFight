@@ -11,6 +11,7 @@ onready var sprite = $Sprite
 func _ready():
 	MAX_SPEED = rand_range(30,50)
 	animation_player.seek(rand_range(0,0.6),true)
+	set_physics_process(false)
 
 func _physics_process(delta):
 	var player = main_instances.Player

@@ -7,7 +7,7 @@ func pause(value):
 	get_tree().paused = is_paused
 	visible = is_paused
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		self.is_paused = !is_paused
 
