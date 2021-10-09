@@ -9,6 +9,7 @@ const dust_effect_scene = preload("res://Effects/DustEffect.tscn")
 const jump_effect_scene = preload("res://Effects/JumpEffect.tscn")
 const player_bullet_scene = preload("res://Player/PlayerBullet.tscn")
 const wall_dust_effect_scene = preload("res://Effects/WallDustEffect.tscn")
+const player_missile_scene = preload("res://assets/Player/PlayerMissile.tscn")
 
 var player_stats = ResourceLoader.player_stats
 var main_instances = ResourceLoader.main_instances
@@ -22,6 +23,7 @@ export (int) var JUMP_FORCE = 128
 export (int) var MAX_SLOPE_ANGLE = 46
 export (int) var BULLET_SPEED = 250
 export (int) var WALL_SLIDE_SPEED = 48
+export (int) var MISSILE_BULLET_SPEED = 150
 
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
@@ -64,6 +66,10 @@ func _physics_process(delta):
 			apply_friction(input_vector)
 			update_snap_vector()
 			jump_check()
+			if Input.is_action_pressed("Fire") and fire_bullet_timer.time_left == 0:
+				fire_bullet()
+			elif Input.is_action_just_pressed("fire_missile") and fire_bullet_timer.time_left == 0:
+				fire_missile()
 			apply_gravity(delta)
 			update_animations(input_vector)
 			move()
@@ -80,8 +86,7 @@ func _physics_process(delta):
 			wall_slide_drop(delta)
 			move()
 			wall_detach(delta,wall_axis)
-	if Input.is_action_just_pressed("Fire") and fire_bullet_timer.time_left == 0:
-		fire_bullet()
+
 		
 func apply_horizontal_force(input_vector: Vector2, delta):
 	if input_vector.x != 0:
@@ -89,7 +94,10 @@ func apply_horizontal_force(input_vector: Vector2, delta):
 		motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 
 func update_animations(input_vector):
-	sprite.scale.x = sign(get_local_mouse_position().x)
+	var facing = sign(get_local_mouse_position().x)
+	if facing!=0:
+		sprite.scale.x = facing
+	
 	if input_vector.x != 0:
 		animation_player.play("Run")
 		animation_player.playback_speed = input_vector.x * sprite.scale.x
@@ -108,6 +116,16 @@ func fire_bullet():
 	bullet.velocity = Vector2.RIGHT.rotated(gun.rotation) * BULLET_SPEED
 	bullet.velocity.x *= sprite.scale.x
 	bullet.rotation = bullet.velocity.angle()
+	fire_bullet_timer.start()
+
+func fire_missile():
+	var missile = Utils.instance_scene_on_main(player_missile_scene, Vector2(muzzle.global_position.x, muzzle.global_position.y))
+	missile.velocity = Vector2.RIGHT.rotated(gun.rotation) * MISSILE_BULLET_SPEED
+	missile.velocity.x *= sprite.scale.x
+	motion -= missile.velocity * 0.8
+	snap_vector = Vector2.ZERO
+	has_jumped = true
+	missile.rotation = missile.velocity.angle()
 	fire_bullet_timer.start()
 
 func create_dust_effect():
@@ -129,6 +147,7 @@ func jump_check():
 	if is_on_floor() or coyote_timer.time_left > 0 : # Works only, if there is a force that constantly pushes you down
 		if Input.is_action_just_pressed("ui_up"):
 			jump(JUMP_FORCE)
+			has_jumped = true
 	else:
 		if Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2: # Doesnt let you to get more force, if you have more than JUMP_FORCE/2
 			motion.y = -JUMP_FORCE/2 # You need to remember that going down is actually -y
@@ -140,36 +159,34 @@ func jump_check():
 func jump(force):
 	Utils.instance_scene_on_main(jump_effect_scene, global_position)
 	motion.y = -force
-	has_jumped = true
 	snap_vector = Vector2.ZERO
 		
 func apply_gravity(delta):
-	#if not is_on_floor(): # Now that matters
+	if not is_on_floor():
 		motion.y += GRAVITY * delta
-		motion.y = min(motion.y, JUMP_FORCE) # Minimum value
+		motion.y = min(motion.y, JUMP_FORCE)
 
 func move():
-	var is_flying = not is_on_floor()
+	var was_in_air = not is_on_floor()
 	var was_on_floor = is_on_floor()
-	var last_position = position
 	var last_motion = motion
+	var last_position = position
 	
-	motion = move_and_slide_with_snap(motion, snap_vector * 4, Vector2.UP,true,4,deg2rad(MAX_SLOPE_ANGLE))
-	
+	motion = move_and_slide_with_snap(motion, snap_vector*4, Vector2.UP, true, 4, deg2rad(MAX_SLOPE_ANGLE))
 	# Landing
-	if is_flying and is_on_floor():
+	if was_in_air and is_on_floor():
 		motion.x = last_motion.x
-		create_dust_effect()
+		Utils.instance_scene_on_main(jump_effect_scene, global_position)
 		double_jump = true
-		
-	# Just left the ground
+	
+	# Just left ground
 	if was_on_floor and not is_on_floor() and not has_jumped:
 		motion.y = 0
 		position.y = last_position.y
 		coyote_timer.start()
-
-	# Prevent sliding (If our motion is tiny, stops)
-	if is_on_floor() and abs(motion.x) < 3:
+	
+	# Prevent Sliding (hack)
+	if is_on_floor() and get_floor_velocity().length() == 0 and abs(motion.x) < 1:
 		position.x = last_position.x
 
 
@@ -198,7 +215,7 @@ func wall_slide_jump_check(wall_axis):
 		motion.x = wall_axis*MAX_SPEED
 		motion.y = -JUMP_FORCE/1.25
 		state = MOVE
-		var dust_position = global_position + Vector2(wall_axis*4, -2)
+		var dust_position = global_position + Vector2(wall_axis*4, -2 )
 		var dust = Utils.instance_scene_on_main(wall_dust_effect_scene, dust_position)
 		dust.scale.x = wall_axis
 		

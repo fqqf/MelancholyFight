@@ -209,9 +209,6 @@ position = Vector2( 626.089, 303.623 )
 [node name="CrawlingEnemy2" parent="Entities" instance=ExtResource( 14 )]
 position = Vector2( -136.836, 192.11 )
 
-[node name="CrawlingEnemy3" parent="Entities" instance=ExtResource( 14 )]
-position = Vector2( 98.6295, 143.905 )
-
 [node name="Stalactites" type="Node2D" parent="."]
 
 [node name="stalactite" type="Sprite" parent="Stalactites"]
@@ -257,7 +254,7 @@ position = Vector2( 62.1071, 124.862 )
 [node name="OverEntities" type="Node2D" parent="."]
 
 [node name="FlyingEnemy" parent="OverEntities" instance=ExtResource( 9 )]
-position = Vector2( 272, 112 )
+position = Vector2( 692.546, 183.034 )
 
 [node name="FlyingEnemy2" parent="OverEntities" instance=ExtResource( 9 )]
 position = Vector2( 480, -16 )

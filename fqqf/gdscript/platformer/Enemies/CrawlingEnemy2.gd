@@ -17,7 +17,7 @@ func _physics_process(delta):
 		var normal = wallCast.get_collision_normal()
 		rotation = normal.rotated(deg2rad(90)).angle()
 	else:
-		floorCast.rotation_degrees = -MAX_SPEED * 40 * WALKING_DIRECTION * delta
+		floorCast.rotation_degrees = -MAX_SPEED * 20 * WALKING_DIRECTION * delta
 		if floorCast.is_colliding():
 			global_position = floorCast.get_collision_point()
 			var normal = floorCast.get_collision_normal()
