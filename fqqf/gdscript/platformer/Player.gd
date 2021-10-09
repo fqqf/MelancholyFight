@@ -69,7 +69,8 @@ func _physics_process(delta):
 			if Input.is_action_pressed("Fire") and fire_bullet_timer.time_left == 0:
 				fire_bullet()
 			elif Input.is_action_just_pressed("fire_missile") and fire_bullet_timer.time_left == 0:
-				fire_missile()
+				if player_stats.missiles > 0:
+					fire_missile()
 			apply_gravity(delta)
 			update_animations(input_vector)
 			move()
@@ -127,6 +128,7 @@ func fire_missile():
 	has_jumped = true
 	missile.rotation = missile.velocity.angle()
 	fire_bullet_timer.start()
+	player_stats.missiles -= 1
 
 func create_dust_effect():
 	Utils.instance_scene_on_main(jump_effect_scene, global_position)
