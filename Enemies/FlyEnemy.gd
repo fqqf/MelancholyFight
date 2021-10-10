@@ -7,6 +7,9 @@ var MainInstance = ResourceLoader.MainInstances
 
 onready var sprite = $Sprite
 
+func _ready():
+	set_physics_process(false)
+
 func _physics_process(delta):
 	var player = MainInstance.Player
 	if player != null:
@@ -19,3 +22,7 @@ func chase_player(player, delta):
 	sprite.flip_h = global_position < player.global_position
 	motion = move_and_slide(motion)
 	
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	set_physics_process(true)
