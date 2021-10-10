@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://git_api.gdns"
 }, {
 "base": "Resource",
+"class": "MainInstances",
+"language": "GDScript",
+"path": "res://MainInstances.gd"
+}, {
+"base": "Resource",
 "class": "PlayerStats",
 "language": "GDScript",
 "path": "res://Player/PlayerStats.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
+"MainInstances": "",
 "PlayerStats": ""
 }
 
