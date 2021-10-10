@@ -3,7 +3,7 @@ extends "res://Enemies/Enemy.gd"
 enum DIRECTION {LEFT = -1, RIGHT = 1}
 
 export(DIRECTION) var WALKING_DIRECTION
-
+#export (int) var GRAVITY = 1
 var state
 
 onready var sprite = $Sprite
@@ -16,13 +16,25 @@ func _ready():
 	state  = WALKING_DIRECTION
 	
 func _physics_process(_delta):
+	
 	match state:
+		
+		
+		
 		DIRECTION.RIGHT:
+#			if not is_on_floor():
+#				motion.y = GRAVITY
+#			else:
+#				motion.y = -GRAVITY
 			motion.x = MAX_SPEED
 			if not floorRight.is_colliding() or wallRight.is_colliding():
 				state = DIRECTION.LEFT
 				
 		DIRECTION.LEFT:
+			#if not is_on_floor():
+			#	motion.y = GRAVITY
+			#else:
+			#	motion.y = -GRAVITY
 			motion.x = -MAX_SPEED
 			if not floorLeft.is_colliding() or wallLeft.is_colliding():
 				state = DIRECTION.RIGHT
