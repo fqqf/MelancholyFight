@@ -12,6 +12,7 @@ extra_spacing_space = 3
 font_data = ExtResource( 2 )
 
 [node name="MissilesUI" type="HBoxContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0

@@ -168,6 +168,15 @@ shape = ExtResource( 5 )
 [node name="BlinkAnimator" type="AnimationPlayer" parent="."]
 anims/Blink = SubResource( 5 )
 
+[node name="PowerupDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupDetector"]
+position = Vector2( -2.5, -47.5 )
+shape = ExtResource( 5 )
+
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
+[connection signal="area_entered" from="PowerupDetector" to="." method="_on_PowerupDetector_area_entered"]
 
 [editable path="Hurtbox"]

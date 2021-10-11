@@ -32,6 +32,7 @@ onready var blink_animator = $BlinkAnimator
 onready var fire_bullet_timer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
+onready var powerup_detector = $PowerupDetector
 
 enum {
 	MOVE,
@@ -69,8 +70,9 @@ func _physics_process(delta):
 			if Input.is_action_pressed("Fire") and fire_bullet_timer.time_left == 0:
 				fire_bullet()
 			elif Input.is_action_just_pressed("fire_missile") and fire_bullet_timer.time_left == 0:
-				if player_stats.missiles > 0:
+				if player_stats.missiles > 0 and player_stats.missiles_unlocked:
 					fire_missile()
+			
 			apply_gravity(delta)
 			update_animations(input_vector)
 			move()
@@ -237,3 +239,8 @@ func wall_detach(delta, wall_axis):
 		state = MOVE
 	if wall_axis == 0 or is_on_floor():
 		state = MOVE
+
+
+func _on_PowerupDetector_area_entered(area):
+	if area is Powerup:
+		area._pickup()
