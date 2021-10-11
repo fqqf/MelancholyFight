@@ -34,6 +34,8 @@ onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 onready var powerup_detector = $PowerupDetector
 
+signal hit_door(door)
+
 enum {
 	MOVE,
 	WALL_SLIDE
