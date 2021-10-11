@@ -84,7 +84,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed("Fire") and fireBulletTimer.time_left == 0:
 		fire_bullet()
 	if 	Input.is_action_pressed("fire_missile") and fireBulletTimer.time_left == 0:
-		fire_missile()
+		if PlayerStats.missiles > 0:
+			fire_missile()
+			PlayerStats.missiles -= 1
 	
 func fire_bullet():
 	var bullet = Utils.instance_scene_on_main(PlayerBullet, muzzle.global_position)
@@ -100,6 +102,7 @@ func fire_missile():
 	motion -= missile.velocity *0.25
 	missile.rotation = missile.velocity.angle()
 	fireBulletTimer.start() 
+	
 	
 func 	create_dust_effect():
 	var dust_position = global_position
