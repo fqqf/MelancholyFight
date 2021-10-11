@@ -9,7 +9,7 @@
 [ext_resource path="res://CollisionBoxes/HurtBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/PlayerCollider.tres" type="Shape2D" id=8]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Wall Slide"
 length = 0.1
 tracks/0/type = "value"
@@ -25,8 +25,7 @@ tracks/0/keys = {
 "values": [ 10 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Blink"
+[sub_resource type="Animation" id=2]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:visible")
@@ -81,10 +80,10 @@ shape = ExtResource( 8 )
 anims/Idle = ExtResource( 5 )
 anims/Jump = ExtResource( 4 )
 anims/Run = ExtResource( 3 )
-"anims/Wall Slide" = SubResource( 2 )
+"anims/Wall Slide" = SubResource( 1 )
 
 [node name="BlinkAnimator" type="AnimationPlayer" parent="."]
-anims/Blink = SubResource( 1 )
+anims/Blink = SubResource( 2 )
 
 [node name="CameraFollow" type="RemoteTransform2D" parent="."]
 position = Vector2( 0, -8 )
