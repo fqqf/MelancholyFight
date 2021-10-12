@@ -11,3 +11,5 @@ func _ready():
 func _on_player_missiles_changed(amount):
 	label.text = str(amount)
 	
+func _on_player_missiles_unlocked(value):
+	visible = value

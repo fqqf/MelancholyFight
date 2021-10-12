@@ -13,7 +13,7 @@ var missiles_unlocked = false setget set_missiles_unlocked
 
 signal player_health_change(value)
 signal player_missiles_changed(value)
-signal player_misslies_unlocked(value)
+signal player_missiles_unlocked(value)
 signal player_died
 
 
@@ -32,4 +32,4 @@ func set_missiles(value):
 			
 func set_missiles_unlocked(value):
 	missiles_unlocked = value
-	emit_signal("player_misslies_unlocked", missiles_unlocked)
+	emit_signal("player_missiles_unlocked", missiles_unlocked)

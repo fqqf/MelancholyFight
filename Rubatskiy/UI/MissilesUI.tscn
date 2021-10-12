@@ -2,9 +2,9 @@
 
 [ext_resource path="res://UI/Pixelfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Player/PlayerMissile.png" type="Texture" id=2]
-[ext_resource path="res://UI/MissileUI.gd" type="Script" id=3]
+[ext_resource path="res://UI/MissilesUI.gd" type="Script" id=3]
 
-[node name="MissileUI" type="HBoxContainer"]
+[node name="MissilesUI" type="HBoxContainer"]
 visible = false
 margin_right = 25.0
 margin_bottom = 10.0
