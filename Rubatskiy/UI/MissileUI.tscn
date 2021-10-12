@@ -5,6 +5,7 @@
 [ext_resource path="res://UI/MissileUI.gd" type="Script" id=3]
 
 [node name="MissileUI" type="HBoxContainer"]
+visible = false
 margin_right = 25.0
 margin_bottom = 10.0
 custom_constants/separation = 0
