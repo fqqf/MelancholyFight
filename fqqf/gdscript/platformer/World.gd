@@ -11,17 +11,13 @@ func _ready():
 
 func change_levels(door):
 	var offset = currentLevel.position
-	print(currentLevel.position)
 	currentLevel.queue_free()
 	var Exit_level = load(door.new_level_path)
 	var exit_level = Exit_level.instance()
 	add_child(exit_level)
 	var exit_door = get_door_with_connection(door, door.connection)
-	print(exit_door.position)
 	var exit_position = exit_door.position - offset
 	exit_level.position = door.position - exit_position
-	print(door.position)
-	print(exit_level.position)
 	
 	
 func get_door_with_connection(entered_door, connection): # entered_door - Дверь, которую нужно игнорировать. 

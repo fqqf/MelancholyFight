@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_resource type="TileSet" load_steps=11 format=2]
 
-[ext_resource path="res://assets/tilemap.png" type="Texture" id=1]
-[ext_resource path="res://assets/tilemap_slope.png" type="Texture" id=2]
+[ext_resource path="res://assets/tilemap_slope.png" type="Texture" id=1]
+[ext_resource path="res://assets/tilemap.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
@@ -27,9 +27,9 @@ points = PoolVector2Array( 0, 50, 0, 50, 100, 0, 100, 100, 0, 100 )
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 0, 100, 0, 100, 100, 0, 100, 100 )
 
-[sub_resource type="TileSet" id=9]
+[resource]
 0/name = "tilemap.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 1100, 500 )
@@ -335,7 +335,7 @@ points = PoolVector2Array( 0, 100, 0, 100, 100, 0, 100, 100 )
 } ]
 0/z_index = 0
 1/name = "tilemap_slope.png 1"
-1/texture = ExtResource( 2 )
+1/texture = ExtResource( 1 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 700, 100 )
@@ -398,10 +398,3 @@ points = PoolVector2Array( 0, 100, 0, 100, 100, 0, 100, 100 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
-
-[node name="TileMap" type="TileMap"]
-scale = Vector2( 0.16, 0.16 )
-tile_set = SubResource( 9 )
-cell_size = Vector2( 100, 100 )
-cell_custom_transform = Transform2D( 1, 1, 1, 1, 1, 1 )
-format = 1

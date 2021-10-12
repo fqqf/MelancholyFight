@@ -3,7 +3,7 @@ class_name PlayerStats
 
 var max_health = 4
 var health = max_health setget set_health
-var max_missiles = 3
+var max_missiles = 7
 var missiles = max_missiles setget set_missiles_amount
 var missiles_unlocked = false setget set_missiles_available
 
