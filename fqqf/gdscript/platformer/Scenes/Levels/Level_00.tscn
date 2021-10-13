@@ -211,7 +211,10 @@ position = Vector2( -0.0163002, -29.1906 )
 [node name="MissilesPowerup" parent="Entities" index="4" instance=ExtResource( 5 )]
 position = Vector2( 511.698, 24.9836 )
 
-[node name="Bricks" type="Node2D" parent="Entities" index="5"]
+[node name="MissilesPowerup2" parent="Entities" index="5" instance=ExtResource( 5 )]
+position = Vector2( -161.86, 468.977 )
+
+[node name="Bricks" type="Node2D" parent="Entities" index="6"]
 position = Vector2( -160, 120 )
 
 [node name="Brick" parent="Entities/Bricks" index="0" instance=ExtResource( 9 )]
@@ -229,7 +232,7 @@ position = Vector2( 616, -144 )
 [node name="Brick2" parent="Entities/Bricks" index="4" instance=ExtResource( 9 )]
 position = Vector2( 8.00001, 160 )
 
-[node name="CrawlingEnemy" type="Node2D" parent="Entities" index="6"]
+[node name="CrawlingEnemy" type="Node2D" parent="Entities" index="7"]
 
 [node name="CrawlingEnemy" parent="Entities/CrawlingEnemy" index="0" instance=ExtResource( 7 )]
 position = Vector2( 626.089, 303.623 )
@@ -237,7 +240,7 @@ position = Vector2( 626.089, 303.623 )
 [node name="CrawlingEnemy2" parent="Entities/CrawlingEnemy" index="1" instance=ExtResource( 7 )]
 position = Vector2( -136.836, 192.11 )
 
-[node name="Sprite" type="Sprite" parent="Entities" index="7"]
+[node name="Sprite" type="Sprite" parent="Entities" index="8"]
 modulate = Color( 1, 1, 1, 0.866667 )
 position = Vector2( -311.461, 365.905 )
 scale = Vector2( 0.15, 0.15 )

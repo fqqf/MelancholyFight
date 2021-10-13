@@ -71,7 +71,7 @@ position = Vector2( 222, 165 )
 scale = Vector2( 1.6, 1.6 )
 
 [node name="grass" type="Sprite" parent="."]
-position = Vector2( 169, 51 )
+position = Vector2( 168.405, 50.8016 )
 scale = Vector2( 0.26, 0.26 )
 texture = ExtResource( 4 )
 offset = Vector2( -23.0768, -26.923 )
