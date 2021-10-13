@@ -1,5 +1,5 @@
 extends Node
-
+onready var currentLevel = $level_00
 
 
 func _ready():
