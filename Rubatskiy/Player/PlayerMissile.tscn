@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/PlayerMissile.png" type="Texture" id=2]
 [ext_resource path="res://Effects/Particle.png" type="Texture" id=3]
+[ext_resource path="res://Player/PlayerMissile.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 2 )
@@ -26,6 +27,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 3 )
 
 [node name="PlayerMissile" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color( 0.207843, 0.223529, 0.203922, 1 )
@@ -36,7 +38,7 @@ position = Vector2( -0.5, -1.19209e-07 )
 scale = Vector2( 1.875, 0.75 )
 
 [node name="HitBox" parent="." index="3"]
-collision_mask = 10
+collision_mask = 26
 damage = 3
 
 [node name="Collider" parent="HitBox" index="0"]

@@ -105,6 +105,15 @@ collision_layer = 4
 position = Vector2( 0, -7 )
 shape = ExtResource( 8 )
 
+[node name="PowerupDetectror" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupDetectror"]
+position = Vector2( 0, -7 )
+shape = ExtResource( 8 )
+
 [connection signal="hit" from="HurtBox" to="." method="_on_HurtBox_hit"]
+[connection signal="area_entered" from="PowerupDetectror" to="." method="_on_PowerupDetectror_area_entered"]
 
 [editable path="HurtBox"]
