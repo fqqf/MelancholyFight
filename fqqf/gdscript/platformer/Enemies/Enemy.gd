@@ -14,3 +14,4 @@ func _on_Hurtbox_hit(damage):
 func _on_EnemyStats_enemy_died():
 	Utils.instance_scene_on_main(enemy_death_effect_scene, global_position)
 	queue_free()
+
