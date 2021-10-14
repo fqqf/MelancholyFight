@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/BossEnemyHead.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Enemies/BossEnemyBody.png" type="Texture" id=5]
 [ext_resource path="res://Enemies/BossEnemyLeg3.png" type="Texture" id=6]
 [ext_resource path="res://Enemies/BossEnemyLeg2.png" type="Texture" id=7]
+[ext_resource path="res://Enemies/BossEnemy.gd" type="Script" id=8]
 
 [sub_resource type="Animation" id=3]
 resource_name = "Base"
@@ -833,12 +834,13 @@ tracks/27/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 16.0
+radius = 14.0
 
 [sub_resource type="RayShape2D" id=2]
 length = 16.0
 
 [node name="BossEnemy" instance=ExtResource( 1 )]
+script = ExtResource( 8 )
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 0, -1.97844 )
@@ -1018,6 +1020,22 @@ max_health = 100
 
 [node name="Collider" parent="HitBox" index="0"]
 shape = SubResource( 2 )
+
+[node name="RightWallCheck" type="RayCast2D" parent="." index="6"]
+enabled = true
+cast_to = Vector2( 16, 0 )
+collision_mask = 2
+
+[node name="LeftWallCheck" type="RayCast2D" parent="." index="7"]
+enabled = true
+cast_to = Vector2( -16, 0 )
+collision_mask = 2
+
+[node name="Timer" type="Timer" parent="." index="8"]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]
