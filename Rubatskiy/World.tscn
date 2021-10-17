@@ -22,5 +22,7 @@ position = Vector2( 272, 168 )
 
 [node name="level_00" parent="." instance=ExtResource( 1 )]
 
+[connection signal="player_died" from="Player" to="." method="_on_Player_player_died"]
+
 [editable path="Player"]
 [editable path="Player/HurtBox"]

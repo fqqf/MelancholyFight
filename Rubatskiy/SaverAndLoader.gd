@@ -33,9 +33,7 @@ func load_game():
 		node.queue_free()
 	
 	#yield(get_tree(), "idle_frame")
-	
 		
-	
 	save_game.open("user://savegame.save", File.READ)
 	if not save_game.eof_reached():
 		custom_data = parse_json(save_game.get_line())

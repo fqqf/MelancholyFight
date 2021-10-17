@@ -43,3 +43,9 @@ func _on_Player_hit_door(door):
 	call_deferred("change_levels", door)
 	#change_levels(door)
 		
+
+
+func _on_Player_player_died():
+	print("died")
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_tree().change_scene("res://Menus/GameOverMenu.tscn")

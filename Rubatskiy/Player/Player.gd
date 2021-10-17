@@ -44,6 +44,7 @@ onready var cameraFollow = $CameraFollow
 
 # warning-ignore:unused_signal
 signal hit_door(door)
+signal player_died
 
 func set_invincible(value):
 	invincible = value
@@ -284,6 +285,8 @@ func _on_HurtBox_hit(damage):
 		blinkAnimator.play("Blink")
 
 func _on_died():
+	print("Player died")
+	emit_signal("player_died")
 	queue_free()
 	
 	
