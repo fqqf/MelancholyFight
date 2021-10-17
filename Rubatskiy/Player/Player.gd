@@ -90,6 +90,8 @@ func _physics_process(delta):
 		if PlayerStats.missiles > 0 and PlayerStats.missiles_unlocked:
 			fire_missile()
 			PlayerStats.missiles -= 1
+			
+			
 	if Input.is_action_just_pressed("save"):
 		SaverAndLoader.save_game()
 		
