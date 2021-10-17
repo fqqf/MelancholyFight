@@ -39,9 +39,10 @@ onready var coyoteJumpTimer = $CoyoteJumpTimer
 onready var fireBulletTimer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
-onready var powerupDetector = $PowerupDetectror
+#onready var powerupDetector = $PowerupDetectror
 onready var cameraFollow = $CameraFollow
 
+# warning-ignore:unused_signal
 signal hit_door(door)
 
 func set_invincible(value):
@@ -52,9 +53,13 @@ func _ready():
 	MainInstances.Player = self
 	call_deferred("assign_world_camera")
 	
-
-func _exit_tree():
+func queue_free():
 	MainInstances.Player = null
+	.queue_free()
+
+
+#func _exit_tree():
+#	MainInstances.Player = null
 
 
 func _physics_process(delta):

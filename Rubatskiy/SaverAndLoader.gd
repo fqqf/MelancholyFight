@@ -23,6 +23,9 @@ func load_game():
 	for node in persistingNodes:
 		node.queue_free()
 	
+	#yield(get_tree(), "idle_frame")
+	
+	
 	save_game.open("user://savegame.save", File.READ)
 	while not save_game.eof_reached():
 		var current_line = parse_json(save_game.get_line())

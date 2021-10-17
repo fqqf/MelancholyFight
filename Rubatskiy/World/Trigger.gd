@@ -6,7 +6,7 @@ var enabled = true
 
 
 
-func _on_Trigger_body_entered(body):
+func _on_Trigger_body_entered(_body):
 	if enabled:
 		emit_signal("area_triggerd")
 		enabled = false
