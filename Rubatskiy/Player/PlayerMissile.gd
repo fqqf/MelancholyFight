@@ -3,6 +3,9 @@ extends "res://Player/Projectile.gd"
 const BRICK_LAYER_BIT = 4
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 
+func _ready():
+	SoundFx.play("Explosion", 1, -20)
+
 func _on_HitBox_body_entered(body):
 	if body.get_collision_layer_bit(BRICK_LAYER_BIT):
 		body.queue_free()
