@@ -8,4 +8,4 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[connection signal="area_triggered" from="." to="." method="_on_Trigger_area_triggered"]
+[connection signal="body_entered" from="." to="." method="_on_Trigger_body_entered"]

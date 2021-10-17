@@ -33,7 +33,9 @@ onready var fire_bullet_timer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 onready var powerup_detector = $PowerupDetector
+onready var camera_follow = $CameraFollow
 
+# warning-ignore:unused_signal
 signal hit_door(door)
 
 enum {
@@ -54,9 +56,13 @@ func set_invincibility(value):
 func _ready():
 	player_stats.connect("player_died",self,"_on_died")
 	main_instances.Player = self
+	call_deferred("assign_world_camera")
 
 func _exit_tree():
 	main_instances.Player = null
+
+func assign_world_camera():
+	camera_follow.remote_path = main_instances.WorldCamera.get_path()
 
 func _physics_process(delta):
 	has_jumped = false
@@ -91,6 +97,10 @@ func _physics_process(delta):
 			wall_slide_drop(delta)
 			move()
 			wall_detach(delta,wall_axis)
+	if Input.is_action_just_pressed("save"):
+		SaverAndLoader.save_game()
+	if Input.is_action_just_pressed("load"):
+		SaverAndLoader.load_game()
 
 		
 func apply_horizontal_force(input_vector: Vector2, delta):
@@ -246,3 +256,12 @@ func wall_detach(delta, wall_axis):
 func _on_PowerupDetector_area_entered(area):
 	if area is Powerup:
 		area._pickup()
+		
+func save():
+	var save_dictionary = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"position_x" : position.x,
+		"position_y" : position.y
+	}
+	return save_dictionary

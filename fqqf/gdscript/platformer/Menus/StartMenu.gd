@@ -9,7 +9,9 @@ func _on_Start_pressed():
 
 
 func _on_Load_pressed():
-	pass # Replace with function body.
+	SaverAndLoader.is_loading = true
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://World.tscn")
 
 
 func _on_Quit_pressed():

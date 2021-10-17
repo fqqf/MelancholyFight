@@ -20,6 +20,9 @@ tile_data = PoolIntArray( -393213, 0, 0, -393212, 0, 1, -393211, 0, 1, -393210, 
 [node name="Boss" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( 112, 16 )
 
+[node name="EnemyStats" parent="Boss" index="5"]
+max_health = 10
+
 [node name="Door2" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( 8, 48 )
 scale = Vector2( -1, 1 )
@@ -41,6 +44,8 @@ tile_data = PoolIntArray( 131072, 0, 3, 196608, 0, 131075 )
 
 [connection signal="died" from="Boss" to="." method="_on_Boss_died"]
 [connection signal="area_triggered" from="Trigger" to="." method="_on_Trigger_area_triggered"]
-[connection signal="body_entered" from="Trigger" to="Trigger" method="_on_Trigger_body_entered"]
 
+[editable path="Boss"]
+[editable path="Boss/Hurtbox"]
+[editable path="Boss/Hitbox"]
 [editable path="Trigger"]
