@@ -123,6 +123,7 @@ tracks/1/keys = {
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Persists",
+"Player",
 ]]
 position = Vector2( -0.0217257, 0.244335 )
 scale = Vector2( 0.15, 0.15 )
