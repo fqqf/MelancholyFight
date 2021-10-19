@@ -7,8 +7,15 @@ onready var currentLevel = $Level_00
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.05,0.05,0.05))
+	
+	Music.list_play()
+	
+	if SaverAndLoader.is_loading:
+		SaverAndLoader.load_game()
+		SaverAndLoader.is_loading = false
+	
 	MainInstances.Player.connect("hit_door",self,"_on_Player_hit_door")
-
+	
 func change_levels(door):
 	var offset = currentLevel.position
 	currentLevel.queue_free()
@@ -34,3 +41,8 @@ func _on_Player_hit_door(door):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Player_player_death():
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_tree().change_scene("res://Menus/GameOverMenu.tscn")

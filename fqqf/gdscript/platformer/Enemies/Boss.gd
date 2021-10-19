@@ -11,6 +11,10 @@ onready var leftWallCheck = $LeftWallCheck
 
 signal died
 
+func _ready():
+	if SaverAndLoader.custom_data.boss_defeated:
+		queue_free()
+
 func _process(delta):
 	chase_player(delta)
 	
@@ -32,20 +36,13 @@ func fire_bullet() -> void:
 	var velocity = Vector2.DOWN * 50
 	velocity = velocity.rotated(deg2rad(rand_range(-30,30)))
 	bullet.velocity = velocity
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _on_Timer_timeout():
 	fire_bullet()
+	
+func _on_EnemyStats_enemy_died():
+	emit_signal("died")
+	SaverAndLoader.custom_data.boss_defeated = true
+	._on_EnemyStats_enemy_died()
+

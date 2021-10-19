@@ -33,8 +33,11 @@ onready var fire_bullet_timer = $FireBulletTimer
 onready var gun = $Sprite/PlayerGun
 onready var muzzle = $Sprite/PlayerGun/Sprite/Muzzle
 onready var powerup_detector = $PowerupDetector
+onready var camera_follow = $CameraFollow
 
+# warning-ignore:unused_signal
 signal hit_door(door)
+signal player_death
 
 enum {
 	MOVE,
@@ -53,10 +56,16 @@ func set_invincibility(value):
 	
 func _ready():
 	player_stats.connect("player_died",self,"_on_died")
+	player_stats.missiles_unlocked = SaverAndLoader.custom_data.missiles_unlocked
 	main_instances.Player = self
+	call_deferred("assign_world_camera")
 
-func _exit_tree():
+func queue_free():
 	main_instances.Player = null
+	.queue_free()
+
+func assign_world_camera():
+	camera_follow.remote_path = main_instances.WorldCamera.get_path()
 
 func _physics_process(delta):
 	has_jumped = false
@@ -91,6 +100,10 @@ func _physics_process(delta):
 			wall_slide_drop(delta)
 			move()
 			wall_detach(delta,wall_axis)
+	if Input.is_action_just_pressed("save"):
+		SaverAndLoader.save_game()
+	if Input.is_action_just_pressed("load"):
+		SaverAndLoader.load_game()
 
 		
 func apply_horizontal_force(input_vector: Vector2, delta):
@@ -135,6 +148,7 @@ func fire_missile():
 	player_stats.missiles -= 1
 
 func create_dust_effect():
+	SoundFX.play("Step", rand_range(0.6,1.2),-10)
 	Utils.instance_scene_on_main(jump_effect_scene, global_position)
 	var dust_position = global_position
 	dust_position.x += rand_range(-4,4)
@@ -163,6 +177,7 @@ func jump_check():
 			double_jump = false
 			
 func jump(force):
+	SoundFX.play("Jump", rand_range(0.8, 1.1), -5)
 	Utils.instance_scene_on_main(jump_effect_scene, global_position)
 	motion.y = -force
 	snap_vector = Vector2.ZERO
@@ -198,10 +213,12 @@ func move():
 
 func _on_Hurtbox_hit(damage):
 	if not invincibility:
+		SoundFX.play("Hurt")
 		player_stats.health -= damage
 		blink_animator.play("Blink")
 
 func _on_died():
+	emit_signal("player_death")
 	queue_free()
 
 func wall_slide_check():
@@ -218,6 +235,7 @@ func get_wall_axis():
 
 func wall_slide_jump_check(wall_axis):
 	if Input.is_action_just_pressed("ui_up"):
+		SoundFX.play("Jump", rand_range(0.8, 1.1), -5)
 		motion.x = wall_axis*MAX_SPEED
 		motion.y = -JUMP_FORCE/1.25
 		state = MOVE
@@ -246,3 +264,12 @@ func wall_detach(delta, wall_axis):
 func _on_PowerupDetector_area_entered(area):
 	if area is Powerup:
 		area._pickup()
+		
+func save():
+	var save_dictionary = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"position_x" : position.x,
+		"position_y" : position.y
+	}
+	return save_dictionary

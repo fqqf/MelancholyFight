@@ -121,9 +121,12 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Persists",
+]]
 position = Vector2( -0.0217257, 0.244335 )
 scale = Vector2( 0.15, 0.15 )
+z_index = 1
 collision_mask = 2
 script = ExtResource( 2 )
 
@@ -148,7 +151,7 @@ anims/Jump = SubResource( 2 )
 anims/Run = SubResource( 3 )
 "anims/Wall Slide" = SubResource( 4 )
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="CameraFollow" type="RemoteTransform2D" parent="."]
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 wait_time = 0.2
