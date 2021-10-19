@@ -2,9 +2,17 @@ extends Node
 
 var is_loading = false
 
+var custom_data = {
+	missiles_unlocked = false,
+	boss_defeated = false
+}
+
 func save_game():
 	var savefile = File.new()
 	savefile.open("user://game_.save", File.WRITE)
+	
+	savefile.store_line(to_json(custom_data))
+	
 	var persisitng_nodes = get_tree().get_nodes_in_group("Persists")
 	for node in persisitng_nodes:
 		var node_data = node.save()
@@ -21,6 +29,10 @@ func load_game():
 		node.queue_free() # Убиваем существующие ноды, требующие загрузки параметров
 	
 	savefile.open("user://game_.save",File.READ)
+	
+	if not savefile.eof_reached():
+		custom_data = parse_json(savefile.get_line())
+	
 	while not savefile.eof_reached():
 		var current_line = parse_json(savefile.get_line())
 		if current_line != null:

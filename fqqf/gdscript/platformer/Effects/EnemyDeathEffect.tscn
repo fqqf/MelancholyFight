@@ -39,4 +39,5 @@ position = Vector2( -5, 7 )
 [node name="DustEffect11" parent="." instance=ExtResource( 1 )]
 position = Vector2( -2, -5 )
 
+[connection signal="tree_exited" from="." to="." method="_on_EnemyDeathEffect_tree_exited"]
 [connection signal="tree_exited" from="DustEffect11" to="DustEffect" method="_on_DustEffect11_tree_exited"]

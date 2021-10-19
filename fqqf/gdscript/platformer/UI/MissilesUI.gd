@@ -15,4 +15,3 @@ func _on_player_missiles_amount_changed(amount):
 
 func _on_player_missiles_unlocked(value):
 	visible = value
-	print("unlocked2")
