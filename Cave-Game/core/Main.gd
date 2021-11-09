@@ -21,7 +21,7 @@ func _root_viewport_size_changed():
 	print(camera.position.x)
 	_adjustPos()
 	camera.position.x = (cur_width/default_width)*curPos
-	
+	lastPos=camera.position.x
 	
 func _process(delta):
 	_adjustPos()
