@@ -7,9 +7,11 @@
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Camera" parent="." instance=ExtResource( 3 )]
-position = Vector2( 50, 50 )
-
 [node name="World" parent="." instance=ExtResource( 1 )]
 
-[editable path="Camera"]
+[node name="CameraViewport" type="Node2D" parent="."]
+
+[node name="Camera" parent="CameraViewport" instance=ExtResource( 3 )]
+position = Vector2( 50, 50 )
+
+[editable path="CameraViewport/Camera"]

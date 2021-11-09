@@ -1,0 +1,6 @@
+Godot Engine v3.3.2.stable.mono.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: NVIDIA GeForce GTX 1050 Ti/PCIe/SSE2
+OpenGL ES Batching: ON
+ 
+Mono: Log file is: 'C:\Users\admin\AppData\Roaming/Godot/mono/mono_logs/2021-11-09_18.43.14_12892.log'
+[18:43:14][res://core/Config.gd][INFO] :: PROJECT WIDTH : 100, PROJECT HEIGHT : 100, ASPECT : 1
