@@ -394,6 +394,11 @@ func info(message, module = default_module_name, error_code = -1):
 	"""Log a message in the given module with level INFO."""
 	put(INFO, message, get_stack()[1].get("source"), error_code)
 
+# warning-ignore:unused_argument	
+func log(message, module = default_module_name, error_code = -1):
+	"""Log a message in the given module with level INFO."""
+	put(INFO, message, get_stack()[1].get("source"), error_code)
+
 
 # warning-ignore:unused_argument
 func warn(message, module = default_module_name, error_code = -1):
