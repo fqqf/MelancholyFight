@@ -5,7 +5,8 @@
 export.cfg
 export_presets.cfg
 .mono/
-
+logs/*
+!logs/.gitkeep
 
 # Binaries
 bin/
