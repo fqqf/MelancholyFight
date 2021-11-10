@@ -13,10 +13,7 @@ func _ready():
 	viewport.connect("size_changed", self, "_root_viewport_size_changed")
 	last_pos = cameraViewport.position.x
 	cur_pos = cameraViewport.position.x
-	
 	_root_viewport_size_changed()
-	
-
 
 func _root_viewport_size_changed():
 	var cur_ratio = viewport.size.x/viewport.size.y
