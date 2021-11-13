@@ -232,12 +232,13 @@ class Module:
 const PLUGIN_NAME = "logger"
 
 # Logging levels - the array and the integers should be matching
-const LEVELS = ["VERBOSE", "DEBUG", "INFO", "WARN", "ERROR"]
+const LEVELS = ["VERBOSE", "DEBUG", "INFO", "WARN", "ERROR", "GAME"]
 const VERBOSE = 0
 const DEBUG = 1
 const INFO = 2
 const WARN = 3
 const ERROR = 4
+const GAME = 5
 
 # Output strategies
 const STRATEGY_MUTE = 0
@@ -390,14 +391,14 @@ func debug(message, module = default_module_name, error_code = -1):
 
 
 # warning-ignore:unused_argument
-func info(message, module = default_module_name, error_code = -1):
+func info(message, inf=INFO, error_code = -1):
 	"""Log a message in the given module with level INFO."""
-	put(INFO, message, get_stack()[1].get("source"), error_code)
+	put(inf, message, get_stack()[1].get("source"), error_code)
 
 # warning-ignore:unused_argument	
-func log(message, module = default_module_name, error_code = -1):
+func log(message, inf=INFO, error_code = -1):
 	"""Log a message in the given module with level INFO."""
-	put(INFO, message, get_stack()[1].get("source"), error_code)
+	put(inf, message, get_stack()[1].get("source"), error_code)
 
 
 # warning-ignore:unused_argument

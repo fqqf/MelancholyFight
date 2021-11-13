@@ -5,9 +5,9 @@ extends Node2D
 
 const U_BLOCK_SIZE = 16
 
-export var SIZE_LIMITS = [3,20]
-export var HEIGHT_LIMITS = [56.247, 92.3]
-export var GAP_LIMITS = [40,100]
+export var SIZE_LIMITS = [7,28] # Пусть если сейчас нижний, то с большей вероятностью выпадет такого же уровня, или выше
+export var HEIGHT_LIMITS = [55.247, 90.2]#[56.247, 92.3] # TODO: РАСПРЕДЕЛИТЬ ВЕРОЯТНОСТИ (ВСЕГО) 
+export var GAP_LIMITS = [70,170]
 export var BORDER_SIZE = 5*U_BLOCK_SIZE
 
 const platformScene = preload("res://core/gameplay/Platform.tscn")
