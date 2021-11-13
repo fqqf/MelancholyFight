@@ -74,6 +74,11 @@ jump={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="World"
+
 [logging]
 
 file_logging/enable_file_logging=true

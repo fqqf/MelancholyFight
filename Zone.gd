@@ -12,6 +12,8 @@ export var BORDER_SIZE = 5*U_BLOCK_SIZE
 
 const platformScene = preload("res://core/gameplay/Platform.tscn")
 
+const CREATION_LENGTH = 300
+
 onready var Dynamic = $Dynamic
 
 var _length
