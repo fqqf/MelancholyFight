@@ -36,16 +36,14 @@ func _physics_process(delta):
 	apply_gravity(delta)
 	jump_check()
 	move()
-	
 
-
-
-
-	
 func jump_check():
+	if Input.is_action_just_pressed("jump"):
+		Logger.log("pressed jump")
 	if is_on_floor() or coyote_timer.time_left > 0 : # Works only, if there is a force that constantly pushes you down
 		jump_released = false
 		if Input.is_action_just_pressed("jump"):	
+			Logger.log("actually jumped")
 			jump(JUMP_FORCE)
 			has_jumped = true
 	else:
@@ -59,12 +57,14 @@ func jump(force):
 	motion.y = -force
 
 func apply_gravity(delta):
-		motion.y += GRAVITY * delta
+		var gravity = GRAVITY
+		if jump_released:
+			gravity += (GRAVITY/2 if early_released else GRAVITY*2)
+
+		motion.y += gravity * delta
 		motion.y = min(motion.y, JUMP_FORCE)
 		
-		if jump_released:
-			motion.y += (GRAVITY if early_released else GRAVITY*2)*delta
-
+		
 
 func _on_CoyoteJumpTimer_timeout():
 	Logger.info("Coyote timer has ended")

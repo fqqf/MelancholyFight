@@ -5,7 +5,7 @@ extends Node2D
 
 const U_BLOCK_SIZE = 16
 
-export var SIZE_LIMITS = [7,28] # Пусть если сейчас нижний, то с большей вероятностью выпадет такого же уровня, или выше
+export var SIZE_LIMITS = [7,58] # Пусть если сейчас нижний, то с большей вероятностью выпадет такого же уровня, или выше
 export var HEIGHT_LIMITS = [55.247, 90.2]#[56.247, 92.3] # TODO: РАСПРЕДЕЛИТЬ ВЕРОЯТНОСТИ (ВСЕГО) 
 export var GAP_LIMITS = [70,170]
 export var BORDER_SIZE = 5*U_BLOCK_SIZE
@@ -20,7 +20,7 @@ var _length
 var _length_taken = 0
 
 func _ready():
-	init(10000)
+	init(20000)
 
 func init(length = 100, tag = 0):
 	_length = length
