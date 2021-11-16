@@ -14,11 +14,11 @@ script = ExtResource( 2 )
 [node name="CameraViewport" type="Node2D" parent="."]
 
 [node name="Camera" parent="CameraViewport" instance=ExtResource( 3 )]
-position = Vector2( 50, 50 )
+position = Vector2( 0, 50 )
 
 [node name="Zone" parent="." instance=ExtResource( 4 )]
 
 [node name="Character" parent="." instance=ExtResource( 5 )]
-position = Vector2( 15.1641, 46.1358 )
+position = Vector2( 17, 46.136 )
 
 [editable path="CameraViewport/Camera"]

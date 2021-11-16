@@ -5,66 +5,88 @@ extends Node2D
 
 const U_BLOCK_SIZE = 16
 
-export var SIZE_LIMITS = [3,20]
-export var HEIGHT_LIMITS = [56.247, 92.3]
-export var GAP_LIMITS = [40,100]
+export var WIDTH_LIMITS = [7,58] # Пусть если сейчас нижний, то с большей вероятностью выпадет такого же уровня, или выше
+export var HEIGHT_LIMITS = [55.247, 90.2]#[56.247, 92.3] # TODO: РАСПРЕДЕЛИТЬ ВЕРОЯТНОСТИ (ВСЕГО) 
+
+export var GAP_LIMITS = [70,170]
+export var BORDER_GAP_LIMITS = [30,50]
 export var BORDER_SIZE = 5*U_BLOCK_SIZE
 
 const platformScene = preload("res://core/gameplay/Platform.tscn")
+const CREATION_LENGTH = 300
 
-
-const CREATION_LENGTH = 2000
+const DEFAULT_PLATFORM_WIDTH = 10
+var DEFAULT_PLATFORM_HEIGHT = HEIGHT_LIMITS[0]
+const DEFAULT_GAP_SIZE = 50
 
 onready var Dynamic = $Dynamic
-onready var Souly = $Souly
 
-
+var _length = 0
 var _length_taken = 0
 var terrain_array = []
-var count=0
 
-func _process(delta):
-	if count == 0:
-		fill_terrain_array(1,CREATION_LENGTH) #формируем платформы для игрока на уровень смещения
-		create_platforms()
-	else:
-		#привязка к движению + смещение
-		if Dynamic.position.x - CREATION_LENGTH < -_length_taken:
-			fill_terrain_array()
-			create_platforms()
+func _ready():
+	init(10000)
 
-
+func init(length = 100, tag = 0):
+	Logger.log("Zone init")
+	_length = length
+	total = _length
+	fill_terrain_array_()
+	Logger.log("Generated terrain: "+str(terrain_array) )
+	build_platforms()
 
 
-func create_platforms():
+
+func build_platforms():
 	var platform_instance
-	var platform
-	while count != terrain_array.size():
-		platform = terrain_array[count]
+	for platform in terrain_array:
 		platform_instance = platformScene.instance()
 		platform_instance.build(platform)
 		Dynamic.add_child(platform_instance)
-		count+=1
-	
-func fill_terrain_array(quantity=1, _length = 0):
-	var alloc_len = 0
-	var height = 0
-	if _length == 0: #если длинна платформ не задана 
-		while quantity:
-			#1 длинна платформы, 2 - высота, 3 записываем в массив, 4 получаем следующую точку начала платформы 
-			alloc_len = round(rand_range(SIZE_LIMITS[0], SIZE_LIMITS[1]))*U_BLOCK_SIZE
-			height = rand_range(HEIGHT_LIMITS[0],HEIGHT_LIMITS[1])
-			terrain_array.append(Vector3(_length_taken, height, alloc_len/U_BLOCK_SIZE))
-			_length_taken+=alloc_len+rand_range(GAP_LIMITS[0], GAP_LIMITS[1])
-			quantity-=1
-			
-	else:
-		while _length_taken <= _length-BORDER_SIZE:
-			alloc_len = min(round(rand_range(SIZE_LIMITS[0], SIZE_LIMITS[1]))*U_BLOCK_SIZE,_length-_length_taken)
-			height = rand_range(HEIGHT_LIMITS[0],HEIGHT_LIMITS[1])
-			if _length_taken+alloc_len == _length:
-				print("ENDING")
-				alloc_len += BORDER_SIZE
-			terrain_array.append(Vector3(_length_taken, height, alloc_len/U_BLOCK_SIZE)) # x, y (height), width
-			_length_taken+=alloc_len+rand_range(GAP_LIMITS[0], GAP_LIMITS[1])
+
+var allocate = 0
+var used = 0
+var total = 0
+var left = 0
+
+func fill_terrain_array_():
+
+	var maximum_size = block2unit(WIDTH_LIMITS[1])+GAP_LIMITS[1]
+	left = total - used
 		
+	create_platform(0,DEFAULT_PLATFORM_HEIGHT,block2unit(DEFAULT_PLATFORM_WIDTH))
+	alloc(DEFAULT_GAP_SIZE)
+	
+	while used != total:
+		assert(not used > total, "Memory problem!")
+		var height = rand_range(HEIGHT_LIMITS[0],HEIGHT_LIMITS[1])
+		var width = block2unit(round(rand_range(WIDTH_LIMITS[0], WIDTH_LIMITS[1])))
+		
+		if left <= maximum_size:
+			var last_platform = ( ceil((left - DEFAULT_GAP_SIZE)/U_BLOCK_SIZE) * U_BLOCK_SIZE) 
+			create_platform(used,height, last_platform)
+			alloc(left)
+		else:
+			create_platform(used,height,width)
+			alloc(rand_range(GAP_LIMITS[0],GAP_LIMITS[1]))
+
+
+func create_platform(x,height,width,create_gap=false): # Accept units only
+	Logger.log("Creating platform: x: "+str(x)+", height: "+str(height)+", width: "+str(width))
+	assert(width <= left,"No size left for platform "+str(allocate)+">"+str(left))
+	terrain_array.append(Vector3(x,height,unit2block(width)))
+	alloc(width)
+
+func alloc(mem):
+	used += mem
+	left = total - used
+
+func unit2block(unit):
+	assert(int(unit)%int(U_BLOCK_SIZE)==0,unit)
+	return unit/U_BLOCK_SIZE
+	
+func block2unit(block):
+	assert(str(block)==str(int(block)),"Wrong block! "+str(block)+"::"+str(int(block)) )
+	return block*U_BLOCK_SIZE
+

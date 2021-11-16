@@ -145,8 +145,3 @@ collision_layer = 2
 collision_mask = 0
 format = 1
 script = ExtResource( 2 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -10, -10, 1800, 20 )
-
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="queue_free"]
