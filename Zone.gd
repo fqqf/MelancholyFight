@@ -24,6 +24,8 @@ onready var Dynamic = $Dynamic
 var _length = 0
 var _length_taken = 0
 var terrain_array = []
+var position_x_next_platform =0
+var count = 0
 
 func _ready():
 	init(10000)
@@ -40,10 +42,24 @@ func init(length = 100, tag = 0):
 
 func build_platforms():
 	var platform_instance
-	for platform in terrain_array:
-		platform_instance = platformScene.instance()
-		platform_instance.build(platform)
-		Dynamic.add_child(platform_instance)
+	if count != terrain_array.size():
+		#create visible platforms
+		if count == 0 and terrain_array.size() != 0:
+			while position_x_next_platform < CREATION_LENGTH:
+				platform_instance = platformScene.instance()
+				platform_instance.build(terrain_array[count])
+				Dynamic.add_child(platform_instance)
+				count += 1
+				if count !=terrain_array.size():
+					position_x_next_platform = terrain_array[count][0]
+		else: #create platform on signal from visibility.notifier from platforms
+			platform_instance = platformScene.instance()
+			platform_instance.build(terrain_array[count])
+			Dynamic.add_child(platform_instance)
+			count += 1
+			if count !=terrain_array.size():
+				position_x_next_platform = terrain_array[count][0]
+
 
 var allocate = 0
 var used = 0

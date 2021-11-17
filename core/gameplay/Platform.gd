@@ -12,3 +12,11 @@ func build(vec3):
 		for y in BLOCK_HEIGHT:
 			set_cell(x,y,0)
 	update_bitmask_region(Vector2(0,0),Vector2(vec3.z, BLOCK_HEIGHT))	
+	
+	#set_rect of VisibilityNotifier2D
+	get_node("VisibilityNotifier2D").set_rect(Rect2(0,0,vec3[2]*100, BLOCK_HEIGHT*100))
+
+#call to create platforms
+func _on_VisibilityNotifier2D_screen_entered():
+	get_parent().get_parent().build_platforms()
+	pass # Replace with function body.
