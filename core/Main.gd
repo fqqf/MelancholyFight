@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var viewport
 onready var cameraViewport = $CameraViewport
