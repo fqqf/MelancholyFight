@@ -24,6 +24,8 @@ onready var Dynamic = $Dynamic
 var _length = 0
 var _length_taken = 0
 var terrain_array = []
+var position_x_next_platform =0
+var count = 0
 
 func _ready():
 	init(10000)
@@ -44,6 +46,7 @@ func build_platforms():
 		platform_instance = platformScene.instance()
 		platform_instance.build(platform)
 		Dynamic.add_child(platform_instance)
+
 
 var allocate = 0
 var used = 0

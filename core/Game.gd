@@ -39,7 +39,5 @@ func _physics_process(delta):
 	elif time_passed > 15:
 		acceleration = 0.01
 	
-	
-	
 	speed = min(speed+acceleration, MAX_SPEED)
 	dynamic.position.x -=  speed*delta
