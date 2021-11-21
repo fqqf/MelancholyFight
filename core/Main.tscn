@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://core/World.tscn" type="PackedScene" id=1]
+[ext_resource path="res://core/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://core/Main.gd" type="Script" id=2]
 [ext_resource path="res://core/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://core/gameplay/Zone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://core/Souly/Souly.tscn" type="PackedScene" id=5]
+
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
