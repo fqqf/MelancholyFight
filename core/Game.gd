@@ -12,7 +12,6 @@ func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
 	current_zone = zoneScene.instance()
 	add_child(current_zone)
-	print(current_zone)
 	dynamic = current_zone.get_node("Dynamic")
 	time_started = OS.get_unix_time()
 
@@ -26,9 +25,6 @@ func _physics_process(delta):
 	assert(current_zone,"Current zone is null!")
 	
 	time_passed = OS.get_unix_time() - time_started
-	
-	print(speed)
-	print(acceleration)
 	
 	if time_passed > 90:
 		acceleration = 0.02
