@@ -12,6 +12,8 @@ func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
 	current_zone = zoneScene.instance()
 	add_child(current_zone)
+	current_zone.init(10_000,0,[50,70])
+	
 	dynamic = current_zone.get_node("Dynamic")
 	time_started = OS.get_unix_time()
 

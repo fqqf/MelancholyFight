@@ -40,7 +40,7 @@ func _physics_process(delta):
 func ground_functions():
 		jump_released = false
 		if Input.is_action_just_pressed("jump"):	
-			Logger.log("Actually jumped")
+			#Logger.log("Actually jumped")
 			jump(JUMP_FORCE)
 			has_jumped = true	
 			
@@ -48,12 +48,12 @@ func jump_released_functions():
 		if motion.y < -JUMP_FORCE/2:
 			motion.y = -JUMP_FORCE/2 # You need to remember that going down is actually -y
 			early_released = true
-			Logger.log("Added force for releasing jump early")
+			#Logger.log("Added force for releasing jump early")
 		jump_released = true
 		coyote_timer.stop()	
 
 func jump_check():
-	if Input.is_action_just_pressed("jump"): Logger.log("Pressed jump")
+	if Input.is_action_just_pressed("jump"): pass#Logger.log("Pressed jump")
 	if is_on_floor() or coyote_timer.time_left > 0 : ground_functions() # Works only, if there is a force that constantly pushes you down
 	if Input.is_action_just_released("jump"): jump_released_functions()# Doesnt let you to get more force, if you have more than JUMP_FORCE/2
 		
@@ -79,4 +79,5 @@ func apply_gravity(delta):
 
 
 func _on_CoyoteJumpTimer_timeout():
-	Logger.log("Coyote timer has ended")
+	pass
+	#Logger.log("Coyote timer has ended")

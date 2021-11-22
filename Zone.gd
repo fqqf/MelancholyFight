@@ -21,24 +21,24 @@ const DEFAULT_GAP_SIZE = 50
 
 onready var Dynamic = $Dynamic
 
-var _length = 0
-var _length_taken = 0
 var terrain_array = []
-var position_x_next_platform =0
-var count = 0
+
+var allocate = 0
+var used = 0
+var total = 0
+var left = 0
 
 func _ready():
-	init(10000)
+	pass
 
-func init(length = 100, tag = 0):
-	Logger.log("Zone init")
-	_length = length
-	total = _length
+func init(length = 10000, tag = 0, gap_limits=GAP_LIMITS):
+
+	GAP_LIMITS=gap_limits
+	#Logger.log("Zone init")
+	total = length
 	fill_terrain_array_()
-	Logger.log("Generated terrain: "+str(terrain_array) )
+	#Logger.log("Generated terrain: "+str(terrain_array) )
 	build_platforms()
-
-
 
 func build_platforms():
 	var platform_instance
@@ -47,14 +47,7 @@ func build_platforms():
 		platform_instance.build(platform)
 		Dynamic.add_child(platform_instance)
 
-
-var allocate = 0
-var used = 0
-var total = 0
-var left = 0
-
 func fill_terrain_array_():
-
 	var maximum_size = block2unit(WIDTH_LIMITS[1])+GAP_LIMITS[1]
 	left = total - used
 		
@@ -76,7 +69,7 @@ func fill_terrain_array_():
 
 
 func create_platform(x,height,width,create_gap=false): # Accept units only
-	Logger.log("Creating platform: x: "+str(x)+", height: "+str(height)+", width: "+str(width))
+	#Logger.log("Creating platform: x: "+str(x)+", height: "+str(height)+", width: "+str(width))
 	assert(width <= left,"No size left for platform "+str(allocate)+">"+str(left))
 	terrain_array.append(Vector3(x,height,unit2block(width)))
 	alloc(width)
