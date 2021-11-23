@@ -12,7 +12,7 @@ var chunks = []
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
 	
-	platform_builder.desired_chunk_len=1000
+	platform_builder.desired_chunk_len=10000
 	chunks.append(platform_builder.generate_chunk())
 	platform_builder.create_gap_at_chunk_start = true
 	

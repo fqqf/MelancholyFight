@@ -3,7 +3,7 @@ extends Node
 onready var platform_scene = preload("res://core/gameplay/Platform.tscn")
 
 var gap_len_limits = [30, 70] # Platform vars
-var platform_len_limits = [100,200]
+var platform_len_limits = [100,800]
 var platform_height_limits = [55.247, 90.2]
 
 var desired_chunk_len=10000 # Chunk vars
@@ -29,14 +29,8 @@ func generate_chunk(offset=0):
 	
 	while true:
 		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
-		
-		
-		
-		gap_len = Utils.get_prob([gap_len_limits[0],gap_len_limits[1]], [gap_len_limits[0], gap_len_limits[1], 1000])
-		
-		
-		
-		platform_height = rand_range(platform_height_limits[0], platform_height_limits[1])
+		gap_len = rand_range(gap_len_limits[0],gap_len_limits[1])
+		platform_height = Utils.get_prob([platform_height_limits[0], platform_height_limits[1]], [[platform_height_limits[1]-3, platform_height_limits[1], 1000],[platform_height_limits[0]+3,platform_height_limits[0],200]])
 		
 		if create_gap_at_chunk_start and taken==0: pass
 		elif platform_len<=left: # Instance platform
