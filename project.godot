@@ -41,10 +41,10 @@ config/icon="res://icon.png"
 Logger="*res://core/Logger.gd"
 Config="*res://core/Config.gd"
 Singleton="*res://core/Instances.gd"
+Utils="*res://core/Utils.gd"
 
 [debug]
 
-settings/stdout/print_fps=true
 gdscript/warnings/return_value_discarded=false
 
 [display]
