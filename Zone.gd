@@ -19,7 +19,7 @@ const DEFAULT_PLATFORM_WIDTH = 10
 var DEFAULT_PLATFORM_HEIGHT = HEIGHT_LIMITS[0]
 const DEFAULT_GAP_SIZE = 50
 
-onready var Dynamic = $Dynamic
+onready var GameObjects = $Layers/GameObjects
 
 var terrain_array = []
 
@@ -45,7 +45,7 @@ func build_platforms():
 	for platform in terrain_array:
 		platform_instance = platformScene.instance()
 		platform_instance.build(platform)
-		Dynamic.add_child(platform_instance)
+		GameObjects.add_child(platform_instance)
 
 func fill_terrain_array_():
 	var maximum_size = block2unit(WIDTH_LIMITS[1])+GAP_LIMITS[1]
@@ -53,6 +53,7 @@ func fill_terrain_array_():
 		
 	create_platform(0,DEFAULT_PLATFORM_HEIGHT,block2unit(DEFAULT_PLATFORM_WIDTH))
 	alloc(DEFAULT_GAP_SIZE)
+	
 	
 	while used != total:
 		assert(not used > total, "Memory problem!")

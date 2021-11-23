@@ -16,9 +16,4 @@ script = ExtResource( 2 )
 
 [node name="TileMapOptimizer" parent="." instance=ExtResource( 3 )]
 script = ExtResource( 4 )
-STOP_RENDER = true
-FREE_AT_END = true
-STOP_PROCESS = true
-STOP_INPUT = true
-STOP_COLLIDE = true
 ENABLE_DISTANCE = 400

@@ -10,12 +10,12 @@ export(int) var ENABLE_DISTANCE = 1000
 export(int) var END_DISTANCE = -1000
 
 var node
-var dynamic
+var game_objects
 var properties_active
 
 func _ready():
 	node = get_parent()
-	dynamic = get_parent().get_parent()
+	game_objects = get_parent().get_parent()
 	stop_properties(true)
 	
 func stop_render(state):
@@ -38,10 +38,10 @@ func stop_properties(state):
 		properties_active = !state
 
 func _physics_process(_delta):
-	if dynamic.position.x + node.position.x < ENABLE_DISTANCE and not properties_active:
+	if game_objects.position.x + node.position.x < ENABLE_DISTANCE and not properties_active:
 		stop_properties(false)
 		
-	if dynamic.position.x + node.position.x  < END_DISTANCE:
+	if game_objects.position.x + node.position.x  < END_DISTANCE:
 		end()
 
 func end():
