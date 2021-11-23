@@ -36,7 +36,6 @@ func generate_chunk():
 		if generate_gap_at_chunk_start: pass
 		elif platform_len<=left: # Instance platform
 			chunk.append(platform_scene.instance().build(taken, platform_height, platform_len))
-			print(platform_len)
 			use_mem(platform_len)
 			add_child(chunk.back())
 		else: break
