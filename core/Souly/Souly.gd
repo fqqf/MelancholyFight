@@ -4,6 +4,7 @@ export (int) var GRAVITY = 210
 export (int) var JUMP_FORCE = 125
 
 onready var coyote_timer = $CoyoteJumpTimer
+onready var collectables_detector = $CollectablesDetector
 
 var motion = Vector2.ZERO
 
@@ -12,7 +13,7 @@ var jump_released = false
 var early_released = false
 
 func _ready():
-	pass
+	collectables_detector.connect("area_entered",get_parent(), "_on_souly_pickup_collectable")
 
 func move():
 	var was_in_air = not is_on_floor()

@@ -40,7 +40,7 @@ config/icon="res://icon.png"
 
 Logger="*res://core/Logger.gd"
 Config="*res://core/Config.gd"
-Singleton="*res://core/Instances.gd"
+Singleton="*res://core/Singleton.gd"
 Utils="*res://core/Utils.gd"
 
 [debug]
@@ -85,6 +85,7 @@ jump={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="World"
+2d_physics/layer_3="Collectable"
 
 [logging]
 

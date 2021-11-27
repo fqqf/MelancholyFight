@@ -30,7 +30,7 @@ func generate_chunk(offset=0):
 	while true:
 		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
 		gap_len = rand_range(gap_len_limits[0],gap_len_limits[1])
-		platform_height = Utils.get_prob([platform_height_limits[0], platform_height_limits[1]], [[platform_height_limits[1]-3, platform_height_limits[1], 1000],[platform_height_limits[0]+3,platform_height_limits[0],200]])
+		platform_height = Utils.get_prob_s([platform_height_limits[0], platform_height_limits[1]], [[platform_height_limits[1]-3, platform_height_limits[1], 1000],[platform_height_limits[0]+3,platform_height_limits[0],200]])
 		
 		if create_gap_at_chunk_start and taken==0: pass
 		elif platform_len<=left: # Instance platform
