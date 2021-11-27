@@ -6,6 +6,7 @@ export (int) var SPEED = 1000
 
 onready var coyote_timer = $CoyoteJumpTimer
 onready var collectables_detector = $CollectablesDetector
+onready var ray_cast2d = $RayCast2D
 
 var motion = Vector2.ZERO
 
@@ -31,10 +32,6 @@ func move():
 		motion.y = 0
 		position.y = last_position.y
 		coyote_timer.start()
-		#Logger.log("Coyote timer has started")
-		
-	#if was_in_air and is_on_floor():
-	#	motion.x = last_motion.x
 
 var is_adjustin_pos
 
@@ -42,11 +39,15 @@ func _physics_process(delta):
 	has_jumped = false
 	apply_gravity(delta)
 	jump_check()
+	
+	if ray_cast2d.is_colliding() and not has_jumped and is_on_floor(): # TODO: remove, when collision for fast speed will be fixed
+		motion.y = 1000
+	
 	adjust_pos_to_start_pos(delta)
 	move()
 	
 func adjust_pos_to_start_pos(delta):
-	if  abs(start_position.x-position.x)>0.005 and not is_on_wall():
+	if  abs(start_position.x-position.x)>0.005 and not ray_cast2d.is_colliding():
 		is_adjustin_pos = true
 		var direction = position.direction_to(start_position).x
 		motion.x = direction * SPEED * delta
@@ -54,9 +55,7 @@ func adjust_pos_to_start_pos(delta):
 		if is_adjustin_pos:
 			is_adjustin_pos = false
 			motion.x = 0
-	
-
-
+			
 
 func ground_functions():
 		jump_released = false

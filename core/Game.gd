@@ -4,11 +4,15 @@ onready var zone_scene = preload("res://core/gameplay/Zone.tscn")
 
 onready var platform_builder = $Position/PlatformBuilder
 onready var item_builder = $Position/ItemBuilder
+onready var souly = $Souly
 onready var position = $Position
 
 
 var chunks = []
 var items = {}
+
+var start_time
+var time_passed
 
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
@@ -20,10 +24,13 @@ func _ready():
 	platform_builder.create_gap_at_chunk_start = true
 	
 	items[chunk] = item_builder.create_collectables(chunk)
+	
+	start_time = OS.get_unix_time()
 
 func _physics_process(delta):
-	position.position.x -= delta * 70
-	
+	time_passed = OS.get_unix_time()-start_time
+	move_scene(delta)
+
 	for chunk in chunks:
 		if chunk.size()==2 and position.position.x < -chunk[1]+450: # TODO: CHANGE TO CONST
 			chunks.append(platform_builder.generate_chunk(chunk[1]))
@@ -39,7 +46,26 @@ func _physics_process(delta):
 			#items.erase(chunk)
 			chunks.erase(chunk)
 
+const MAX_SCENE_SPEED = 4.5
+const START_SCENE_SPEED = 0.5
 
+var scene_acceleration = 0.005
+var scene_speed = START_SCENE_SPEED
+
+func move_scene(delta):
+	scene_speed += min(scene_acceleration*delta, START_SCENE_SPEED)
+	
+	
+
+	position.position.x -= scene_speed*0.6 if souly.ray_cast2d.is_colliding() else scene_speed
+	
+	if time_passed>100:
+		scene_acceleration = 0.005
+	elif time_passed>70:
+		scene_acceleration = 0.015
+	elif time_passed>60:
+		scene_acceleration = 0.065
+	
 	
 func _process(delta):
 	pass

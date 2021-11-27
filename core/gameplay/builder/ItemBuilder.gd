@@ -32,15 +32,8 @@ func create_numus(chunk):
 	for platform in chunk[0]:
 		width = platform.width_PX
 		x = platform.position.x
-		if width < 300 and width > 150:
-			numus_amount = round(rand_range(0.4,0.8))
-			if numus_amount == 1:
-				struct = numus_structures["long"]
-				instance_numus_struct(rand_range(x,x+width-struct[0].size()*numus_size),platform.position.y-20, struct)
-		elif width < 500:
-			numus_amount = floor(rand_range(0.3,2.3))
-		else:
-			numus_amount = floor(rand_range(0.99,4))
+		struct = rand_range(0, numus_structures.size())
+	
 			
 
 func instance_numus_struct(var x, var y, var struct):
