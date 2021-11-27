@@ -16,14 +16,15 @@ var items
 func _ready():
 	numus_structures = collectables_map.numus
 	
-func create_collectables(chunk, offset_=0):
+func create_collectables(chunk_, offset_=0):
 	items = []
+	chunk = chunk_
 	offset = offset_
 	Logger.log("Creating collectables")
-	create_numus(chunk)
+	create_numus()
 	return items
 	
-func create_numus(chunk):
+func create_numus():
 	var width
 	var numus_amount
 	var struct
@@ -32,12 +33,18 @@ func create_numus(chunk):
 	for platform in chunk[0]:
 		width = platform.width_PX
 		x = platform.position.x
-		struct = rand_range(0, numus_structures.size())
-	
+		if width < 300 and width > 150:
+			numus_amount = round(rand_range(0.4,0.8))
+			if numus_amount == 1:
+				struct = numus_structures["long"]
+				instance_numus_struct(rand_range(x,x+width-struct[0].size()*numus_size),platform.position.y-20, struct)
+		elif width < 500:
+			numus_amount = floor(rand_range(0.3,2.3))
+		else:
+			numus_amount = floor(rand_range(0.99,4))
 			
 
 func instance_numus_struct(var x, var y, var struct):
-	var numus_instance
 	var i = 0
 	var j = 0
 	

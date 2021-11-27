@@ -21,9 +21,8 @@ func _ready():
 	collectables_detector.connect("area_entered",get_parent(), "_on_souly_pickup_collectable")
 	start_position = position
 func move():
-	var was_in_air = not is_on_floor()
+	var _was_in_air = not is_on_floor()
 	var was_on_floor = is_on_floor()
-	var last_motion = motion
 	var last_position = position
 	
 	motion = move_and_slide_with_snap(motion, Vector2.DOWN, Vector2.UP) 

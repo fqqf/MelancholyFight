@@ -8,8 +8,8 @@ var height_PX
 func _ready():
 	pass
 
-func build(x, height_PX, width_PX_):
-	height_PX = height_PX
+func build(x, height_PX_, width_PX_):
+	height_PX = height_PX_
 	width_PX = width_PX_
 	var width = unit2block(width_PX)
 	

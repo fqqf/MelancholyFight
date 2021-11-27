@@ -1,7 +1,5 @@
 extends Node
 
-onready var zone_scene = preload("res://core/gameplay/Zone.tscn")
-
 onready var platform_builder = $Position/PlatformBuilder
 onready var item_builder = $Position/ItemBuilder
 onready var souly = $Souly
@@ -67,8 +65,6 @@ func move_scene(delta):
 		scene_acceleration = 0.065
 	
 	
-func _process(delta):
-	pass
 
 func _on_souly_pickup_collectable(collectable):
 	collectable.free()

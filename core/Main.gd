@@ -18,5 +18,5 @@ func _ready():
 func _root_viewport_size_changed():
 	var cur_ratio = viewport.size.x/viewport.size.y
 	var default_ratio = Config.DEFAULT_ASPECT_RATIO
-	var diff = cur_ratio/(default_ratio/cur_ratio)
+	var _diff = cur_ratio/(default_ratio/cur_ratio)
 	cameraViewport.position.x = (cur_ratio/default_ratio)*(Config.DEFAULT_WIDTH/2)-Config.DEFAULT_WIDTH/2

@@ -21,7 +21,7 @@ func generate_chunk(offset=0):
 	alloc_mem()
 	
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
-	var max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
+	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
 	
 	var platform_len
 	var platform_height

@@ -8,28 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "KinematicBody2D",
-"class": "BasePlayerSideScroll",
-"language": "GDScript",
-"path": "res://core/Player.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Player",
-"language": "GDScript",
-"path": "res://common/Player/Player.gd"
-}, {
-"base": "RigidBody2D",
-"class": "RigidPlayer2D",
-"language": "GDScript",
-"path": "res://common/Player/RigidPlayer2D.gd"
-} ]
-_global_script_class_icons={
-"BasePlayerSideScroll": "",
-"Player": "",
-"RigidPlayer2D": ""
-}
-
 [application]
 
 config/name="Cave-Game"

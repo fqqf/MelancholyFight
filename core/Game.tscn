@@ -1,16 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://core/Game.gd" type="Script" id=1]
 [ext_resource path="res://core/Souly/Souly.tscn" type="PackedScene" id=2]
 [ext_resource path="res://core/gameplay/builder/PlatformBuilder.gd" type="Script" id=3]
 [ext_resource path="res://core/gameplay/builder/ItemBuilder.gd" type="Script" id=4]
-[ext_resource path="res://core/gameplay/Layer.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-
-[node name="Souly" parent="." instance=ExtResource( 2 )]
-position = Vector2( 38.1904, 39.4674 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 9.22337e+18
@@ -19,13 +15,8 @@ autostart = true
 
 [node name="Zones" type="Node" parent="."]
 
-[node name="PinkZone" type="Node2D" parent="Zones"]
-
-[node name="Foreground" parent="Zones/PinkZone" instance=ExtResource( 5 )]
-
-[node name="GameObjects" parent="Zones/PinkZone" instance=ExtResource( 5 )]
-
-[node name="Background" parent="Zones/PinkZone" instance=ExtResource( 5 )]
+[node name="Souly" parent="." instance=ExtResource( 2 )]
+position = Vector2( 38.1904, 39.4674 )
 
 [node name="Position" type="Node2D" parent="."]
 
