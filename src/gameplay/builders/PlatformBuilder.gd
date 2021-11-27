@@ -1,6 +1,6 @@
 extends Node
 
-onready var platform_scene = preload("res://core/gameplay/Platform.tscn")
+onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
 var gap_len_limits = [0, 5] # Platform vars
 var platform_len_limits = [100,800]

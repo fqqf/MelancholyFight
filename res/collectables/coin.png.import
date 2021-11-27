@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coin.png-c8766ac4fc5c0ccde2ae41c468f58233.stex"
+path="res://.import/coin.png-f6ba420d1608d2e7ecd56db0907d764f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/collectables/coin.png"
-dest_files=[ "res://.import/coin.png-c8766ac4fc5c0ccde2ae41c468f58233.stex" ]
+source_file="res://res/collectables/coin.png"
+dest_files=[ "res://.import/coin.png-f6ba420d1608d2e7ecd56db0907d764f.stex" ]
 
 [params]
 

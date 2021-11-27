@@ -11,15 +11,15 @@ config_version=4
 [application]
 
 config/name="Cave-Game"
-run/main_scene="res://core/Init.tscn"
+run/main_scene="res://src/core/Init.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Logger="*res://core/Logger.gd"
-Config="*res://core/Config.gd"
-Singleton="*res://core/Singleton.gd"
-Utils="*res://core/Utils.gd"
+Logger="*res://src/core/Logger.gd"
+Config="*res://src/core/Config.gd"
+Singleton="*res://src/core/Singleton.gd"
+Utils="*res://src/core/Utils.gd"
 
 [debug]
 
