@@ -15,7 +15,7 @@ var time_passed
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
 	
-	platform_builder.desired_chunk_len=10000
+	platform_builder.desired_chunk_len=2000
 	var chunk = platform_builder.generate_chunk()
 	
 	chunks.append(chunk)
@@ -45,7 +45,7 @@ func _physics_process(delta):
 			chunks.erase(chunk)
 
 const MAX_SCENE_SPEED = 4.5
-const START_SCENE_SPEED = 0.5
+const START_SCENE_SPEED = 3.5
 
 var scene_acceleration = 0.005
 var scene_speed = START_SCENE_SPEED
