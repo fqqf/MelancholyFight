@@ -16,8 +16,10 @@ autostart = true
 
 [node name="Souly" parent="." instance=ExtResource( 1 )]
 position = Vector2( 38.1904, 39.4674 )
-z_index = 4
+z_index = 1000
 z_as_relative = false
+
+[node name="FrenchRoseZone" parent="." instance=ExtResource( 5 )]
 
 [node name="Position" type="Node2D" parent="."]
 
@@ -26,5 +28,3 @@ script = ExtResource( 2 )
 
 [node name="ItemBuilder" type="Node2D" parent="Position"]
 script = ExtResource( 3 )
-
-[node name="FrenchRoseZone" parent="Position" instance=ExtResource( 5 )]
