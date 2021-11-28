@@ -7,10 +7,10 @@ onready var layer4 = $ParallaxLayer4
 
 var offset_x = 0
 
-func _process(delta):
+func _process(_delta):
 	layer1.set_motion_offset(Vector2(offset_x,0))
 	layer2.set_motion_offset(Vector2(offset_x/2,0))
 	layer3.set_motion_offset(Vector2(offset_x/4,0))
 	layer4.set_motion_offset(Vector2(offset_x/6,0))
-	offset_x += 1
+	offset_x += 3
 	pass
