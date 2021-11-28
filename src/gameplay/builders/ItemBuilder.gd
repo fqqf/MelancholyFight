@@ -1,13 +1,14 @@
 extends Node2D
 
-onready var collectables_map = preload("res://res/collectables/CollectablesMap.gd")
+onready var collectables_map = preload("res://assets/collectables/CollectablesMap.gd")
 
-onready var numus_scene = preload("res://src/gameplay/objects/collectables/Numus.tscn")
+onready var numus_scene = preload("res://core/gameplay/collectables/Numus.tscn")
 
 var numus_structures
 var numus_structure_min_width
 
 var numus_size = 10
+var numus_gap = 2
 
 var chunk
 var offset
@@ -16,33 +17,52 @@ var items
 func _ready():
 	numus_structures = collectables_map.numus
 	
-func create_collectables(chunk_, offset_=0):
+func create_collectables(chunk, offset_=0):
 	items = []
-	chunk = chunk_
 	offset = offset_
 	Logger.log("Creating collectables")
-	create_numus()
+	create_numus(chunk)
 	return items
 	
-func create_numus():
+func create_numus(chunk):
 	var width
 	var numus_amount
 	var struct
 	var x
 	
+	
 	for platform in chunk[0]:
 		width = platform.width_PX
 		x = platform.position.x
-		if width < 300 and width > 150:
-			numus_amount = round(rand_range(0.4,0.8))
-			if numus_amount == 1:
-				struct = numus_structures["long"]
-				instance_numus_struct(rand_range(x,x+width-struct[0].size()*numus_size),platform.position.y-20, struct)
-		elif width < 500:
-			numus_amount = floor(rand_range(0.3,2.3))
-		else:
-			numus_amount = floor(rand_range(0.99,4))
+		
+		while width > 60:
+			#пока платформа не меньше 60 кидаем кубик на каждое место gjrf 50%
+			var lacky = round(rand_range(0,1))
 			
+			if lacky == 1:
+				var struct_range = round(rand_range(0,numus_structures.size()-1))
+				struct = numus_structures[str(struct_range)]
+				
+				#пока остаток платформы меньше чем выбранная структура
+				while struct[0].size()*(numus_size+2) > width:
+					struct_range = round(rand_range(0,6))
+					struct = numus_structures[str(struct_range)]
+
+				var width2 = 0
+				width2 = width
+				width -=10+numus_gap+(struct[0].size()*(numus_size+numus_gap))
+				
+				if width < 60: #если остаток платформы меньше 60 - ставим структуру на весь остаток
+					var c = (width2-struct[0].size()*(numus_size+numus_gap))/2
+					instance_numus_struct(x+c,platform.position.y-20, struct)
+					x += (c*2)+struct[0].size()*(numus_size+numus_gap)
+				else:
+					instance_numus_struct(12+x,platform.position.y-20, struct)
+					x += 10+numus_gap+struct[0].size()*(numus_size+numus_gap)
+			else:# если кубик не выкинул структуру на место - оставляем пустым на 112 пикселей
+				width-= (10+numus_gap+100)
+				x += (10+numus_gap+100)
+
 
 func instance_numus_struct(var x, var y, var struct):
 	var i = 0
@@ -51,9 +71,9 @@ func instance_numus_struct(var x, var y, var struct):
 	for y_ in struct:
 		for x_ in y_:
 			if x_ == 1:
-				#print("created")
+				
 				#Logger.log("Created collectable: ("+str(offset+x+x_)+"::"+str(offset+y+y_)+")")
-				items.append(numus_scene.instance().build(offset+x+i*numus_size+2*i, y-j*numus_size-2*j))
+				items.append(numus_scene.instance().build(offset+x+i*numus_size+numus_gap*i, y-j*numus_size-numus_gap*j))
 				add_child(items.back())
 			i+=1
 		i=0
