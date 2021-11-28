@@ -2,7 +2,7 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
-var gap_len_limits = [0, 5] # Platform vars
+var gap_len_limits = [50, 100] # Platform vars
 var platform_len_limits = [100,800]
 var platform_height_limits = [55.247, 90.2]
 
@@ -34,7 +34,6 @@ func generate_chunk(offset=0):
 		
 		if create_gap_at_chunk_start and taken==0: pass
 		elif platform_len<=left: # Instance platform
-			print(taken)
 			chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
 			use_mem(platform_len)
 			add_child(chunk.back())
