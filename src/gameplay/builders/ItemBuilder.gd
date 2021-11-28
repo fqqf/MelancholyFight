@@ -35,18 +35,40 @@ func create_numus(chunk):
 	for platform in chunk[0]:
 		width = platform.width_PX
 		x = platform.position.x
-		var struct_range = round(rand_range(0,numus_structures.size()-1))
-		struct = numus_structures[str(struct_range)]
-		instance_numus_struct(x,platform.position.y-20, struct)
 		
-		
+		while width > 60:
+			#пока платформа не меньше 60 кидаем кубик на каждое место gjrf 50%
+			var lacky = round(rand_range(0,1))
+			
+			if lacky == 1:
+				var struct_range = round(rand_range(0,numus_structures.size()-1))
+				struct = numus_structures[str(struct_range)]
+				
+				#пока остаток платформы меньше чем выбранная структура
+				while struct[0].size()*(numus_size+2) > width:
+					struct_range = round(rand_range(0,6))
+					struct = numus_structures[str(struct_range)]
+
+				var width2 = 0
+				width2 = width
+				width -=10+numus_gap+(struct[0].size()*(numus_size+numus_gap))
+				
+				if width < 60: #если остаток платформы меньше 60 - ставим структуру на весь остаток
+					var c = (width2-struct[0].size()*(numus_size+numus_gap))/2
+					instance_numus_struct(x+c,platform.position.y-20, struct)
+					x += (c*2)+struct[0].size()*(numus_size+numus_gap)
+				else:
+					instance_numus_struct(12+x,platform.position.y-20, struct)
+					x += 10+numus_gap+struct[0].size()*(numus_size+numus_gap)
+			else:# если кубик не выкинул структуру на место - оставляем пустым на 112 пикселей
+				width-= (10+numus_gap+100)
+				x += (10+numus_gap+100)
 
 
 func instance_numus_struct(var x, var y, var struct):
 	var i = 0
 	var j = 0
-	print("Creating collectables with offset" + str(offset))
-	print("platform pos: "+ str(chunk[0][0].position))
+	print("Creating collectables with offset: " + str(offset))
 	for y_ in struct:
 		for x_ in y_:
 			if x_ == 1:
