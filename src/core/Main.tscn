@@ -4,7 +4,6 @@
 [ext_resource path="res://src/core/Main.gd" type="Script" id=2]
 [ext_resource path="res://src/core/Camera.tscn" type="PackedScene" id=3]
 
-
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 

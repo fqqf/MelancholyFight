@@ -23,6 +23,13 @@ z_as_relative = false
 
 [node name="Position" type="Node2D" parent="."]
 
+[node name="Line2D" type="Line2D" parent="Position"]
+position = Vector2( -55.8419, -69.1678 )
+z_index = 6
+points = PoolVector2Array( 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+width = 1.0
+default_color = Color( 0.0235294, 1, 0.2, 1 )
+
 [node name="PlatformBuilder" type="Node2D" parent="Position"]
 script = ExtResource( 2 )
 

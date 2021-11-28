@@ -17,10 +17,11 @@ var items
 func _ready():
 	numus_structures = collectables_map.numus
 	
-func create_collectables(chunk, offset_=0):
+func create_collectables(chunk_, offset_=0):
 	items = []
+	chunk = chunk_
 	offset = offset_
-	Logger.log("Creating collectables")
+	#Logger.log("Creating collectables")
 	create_numus(chunk)
 	return items
 	
@@ -67,7 +68,7 @@ func create_numus(chunk):
 func instance_numus_struct(var x, var y, var struct):
 	var i = 0
 	var j = 0
-	
+	print("Creating collectables with offset" + str(offset))
 	for y_ in struct:
 		for x_ in y_:
 			if x_ == 1:

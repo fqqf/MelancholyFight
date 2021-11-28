@@ -2,6 +2,7 @@ extends Node
 
 onready var platform_builder = $Position/PlatformBuilder
 onready var item_builder = $Position/ItemBuilder
+onready var line = $Position/Line2D
 onready var souly = $Souly
 onready var position = $Position
 
@@ -19,7 +20,8 @@ func _ready():
 	var chunk = platform_builder.generate_chunk()
 	
 	chunks.append(chunk)
-	platform_builder.create_gap_at_chunk_start = true
+	Logger.log("Created start chunk")
+	platform_builder.create_gap_at_chunk_start = false
 	
 	items[chunk] = item_builder.create_collectables(chunk)
 	
@@ -30,18 +32,18 @@ func _physics_process(delta):
 	move_scene(delta)
 
 	for chunk in chunks:
-		if chunk.size()==2 and position.position.x < -chunk[1]+450: # TODO: CHANGE TO CONST
+		if chunk.size()==2 and position.position.x < -chunk[1]+450: 
 			chunks.append(platform_builder.generate_chunk(chunk[1]))
-			items[chunk] = item_builder.create_collectables(chunk, chunk[1])
+			Logger.log("Created chunk [" +str(chunk[1])+":"+str(chunks.back()[1])+"]")
+			item_builder.create_collectables(chunks.back(), chunk[1])
 			chunk.append("DELETE") # TODO: const
-			Logger.log("Created chunk from " +str(chunk[1])+" to "+str(chunks.back()[1]))
+			line.position.x = chunk[1]
+
 		elif position.position.x < -chunk[1]-300 and chunk.size()==3:
-			Logger.log("Deleted chunk with end: "+str(chunk[1])+", cur. pos is: "+str(position.position.x))
+			Logger.log("Deleted chunk ["+str(chunk[1])+":"+str(chunks.back()[1])+"], cur. pos is: "+str(-position.position.x))
 			for platform in chunk[0]:
 				platform.queue_free()
-			#for item in items[str(chunk)]: # TODO: QUEUE
-			#	item.queue_free()
-			#items.erase(chunk)
+				
 			chunks.erase(chunk)
 
 const MAX_SCENE_SPEED = 4.5
