@@ -8,7 +8,7 @@ onready var position = $Position
 
 
 var chunks = []
-var items = {}
+var items = []
 
 var start_time
 var time_passed
@@ -18,13 +18,14 @@ func _ready():
 	
 	platform_builder.desired_chunk_len=2000
 	var chunk = platform_builder.generate_chunk()
-	
+	var item =[]
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
 	platform_builder.create_gap_at_chunk_start = false
 	
-	items[chunk] = item_builder.create_collectables(chunk)
-	
+	item = item_builder.create_collectables(chunk)
+	items.append(item)
+	print("items", items)
 	start_time = OS.get_unix_time()
 
 func _physics_process(delta):
@@ -35,7 +36,7 @@ func _physics_process(delta):
 		if chunk.size()==2 and position.position.x < -chunk[1]+450: 
 			chunks.append(platform_builder.generate_chunk(chunk[1]))
 			Logger.log("Created chunk [" +str(chunk[1])+":"+str(chunks.back()[1])+"]")
-			item_builder.create_collectables(chunks.back(), chunk[1])
+			items.push_front(item_builder.create_collectables(chunks.back(), chunk[1]))
 			chunk.append("DELETE") # TODO: const
 			line.position.x = chunk[1]
 
@@ -43,8 +44,11 @@ func _physics_process(delta):
 			Logger.log("Deleted chunk ["+str(chunk[1])+":"+str(chunks.back()[1])+"], cur. pos is: "+str(-position.position.x))
 			for platform in chunk[0]:
 				platform.queue_free()
-				
 			chunks.erase(chunk)
+			for it in items[1]:
+				if is_instance_valid(it):it.queue_free()	
+			items.remove(1)
+			
 
 const MAX_SCENE_SPEED = 4.5
 const START_SCENE_SPEED = 3.5
