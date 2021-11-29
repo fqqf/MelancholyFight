@@ -4,7 +4,11 @@ onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platf
 
 var gap_len_limits = [50, 100] # Platform vars
 var platform_len_limits = [100,800]
+var ratio_gap_len = []
+var ratio_platform_len = []
 var platform_height_limits = [55.247, 90.2]
+
+
 
 var desired_chunk_len=10000 # Chunk vars
 var create_gap_at_chunk_start = false
@@ -19,6 +23,7 @@ const U_BLOCK_SIZE = 16
 func generate_chunk(offset=0):
 	var chunk = []
 	alloc_mem()
+	adjust_gap_len_limits_to_player_speed(Singleton.scene_speed)#player_speed)
 	
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
@@ -52,4 +57,13 @@ func alloc_mem():
 	total = desired_chunk_len
 	taken = 0
 	left = desired_chunk_len - taken
+	
+func adjust_gap_len_limits_to_player_speed(player_speed):
+	if ratio_gap_len.empty():#создаем зависимости max-min длины от скорости
+		ratio_gap_len = [gap_len_limits[0]/Singleton.scene_speed, gap_len_limits[1]/Singleton.scene_speed]
+		ratio_platform_len = [platform_len_limits[0]/Singleton.scene_speed, platform_len_limits[1]/Singleton.scene_speed]
+	
+	gap_len_limits = [Singleton.scene_speed*ratio_gap_len[0], Singleton.scene_speed*ratio_gap_len[1]]
+	platform_len_limits = [Singleton.scene_speed*ratio_platform_len[0], Singleton.scene_speed*ratio_platform_len[1]]
+
 	

@@ -15,13 +15,14 @@ var time_passed
 
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
+	Singleton.scene_speed = START_SCENE_SPEED
 	
 	platform_builder.desired_chunk_len=2000
 	var chunk = platform_builder.generate_chunk()
 	var item =[]
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
-	platform_builder.create_gap_at_chunk_start = false
+	platform_builder.create_gap_at_chunk_start = true
 	
 	item = item_builder.create_collectables(chunk)
 	items.append(item)
@@ -54,14 +55,13 @@ const MAX_SCENE_SPEED = 4.5
 const START_SCENE_SPEED = 3.5
 
 var scene_acceleration = 0.005
-var scene_speed = START_SCENE_SPEED
+#var scene_speed = START_SCENE_SPEED
 
 func move_scene(delta):
-	scene_speed += min(scene_acceleration*delta, START_SCENE_SPEED)
-	
+	Singleton.scene_speed += min(scene_acceleration*delta, START_SCENE_SPEED)
 	
 
-	position.position.x -= scene_speed*0.6 if souly.ray_cast2d.is_colliding() else scene_speed
+	position.position.x -= Singleton.scene_speed*0.6 if souly.ray_cast2d.is_colliding() else Singleton.scene_speed
 	
 	if time_passed>100:
 		scene_acceleration = 0.005
