@@ -17,13 +17,16 @@ var generate_unique_platforms = false # Супер большие, платфо�
 var total # Memory vars
 var taken
 var left
+var node
 
 const U_BLOCK_SIZE = 16
+
+
 
 func generate_chunk(offset=0):
 	var chunk = []
 	alloc_mem()
-	adjust_gap_len_limits_to_player_speed(Singleton.scene_speed)#player_speed)
+	adjust_gap_len_limits_to_player_speed()
 	
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
@@ -58,12 +61,14 @@ func alloc_mem():
 	taken = 0
 	left = desired_chunk_len - taken
 	
-func adjust_gap_len_limits_to_player_speed(player_speed):
-	if ratio_gap_len.empty():#создаем зависимости max-min длины от скорости
-		ratio_gap_len = [gap_len_limits[0]/Singleton.scene_speed, gap_len_limits[1]/Singleton.scene_speed]
-		ratio_platform_len = [platform_len_limits[0]/Singleton.scene_speed, platform_len_limits[1]/Singleton.scene_speed]
+func adjust_gap_len_limits_to_player_speed():
+	var scene_speed = get_parent().get_parent().scene_speed
+	if ratio_gap_len.empty():
+		#создаем зависимости max-min длины от скорости
+		ratio_gap_len = [gap_len_limits[0]/scene_speed, gap_len_limits[1]/scene_speed]
+		ratio_platform_len = [platform_len_limits[0]/scene_speed, platform_len_limits[1]/scene_speed]
 	
-	gap_len_limits = [Singleton.scene_speed*ratio_gap_len[0], Singleton.scene_speed*ratio_gap_len[1]]
-	platform_len_limits = [Singleton.scene_speed*ratio_platform_len[0], Singleton.scene_speed*ratio_platform_len[1]]
-
+	gap_len_limits = [scene_speed*ratio_gap_len[0], scene_speed*ratio_gap_len[1]]
+	platform_len_limits = [scene_speed*ratio_platform_len[0], scene_speed*ratio_platform_len[1]]
+	
 	
