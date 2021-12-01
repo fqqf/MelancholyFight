@@ -7,8 +7,8 @@ onready var numus_scene = preload("res://src/gameplay/objects/collectables/Numus
 var numus_structures
 var numus_structure_min_width
 
-var numus_size = 10
-var numus_gap = 2
+var numus_size = 7
+var numus_gap = 1
 
 var chunk
 var offset
@@ -21,7 +21,6 @@ func create_collectables(chunk_, offset_=0):
 	items = []
 	chunk = chunk_
 	offset = offset_
-	#Logger.log("Creating collectables")
 	create_numus(chunk)
 	return items
 	
@@ -55,10 +54,10 @@ func create_numus(chunk):
 				
 				if width < 60: #если остаток платформы меньше 60 - ставим структуру на весь остаток
 					var c = (width2-struct[0].size()*(numus_size+numus_gap))/2
-					instance_numus_struct(x+c,platform.position.y-20, struct)
+					instance_numus_struct(x+c,platform.position.y-11, struct)
 					x += (c*2)+struct[0].size()*(numus_size+numus_gap)
 				else:
-					instance_numus_struct(12+x,platform.position.y-20, struct)
+					instance_numus_struct(12+x,platform.position.y-11, struct)
 					x += 10+numus_gap+struct[0].size()*(numus_size+numus_gap)
 			else:# если кубик не выкинул структуру на место - оставляем пустым на 112 пикселей
 				width-= (10+numus_gap+100)
@@ -68,7 +67,7 @@ func create_numus(chunk):
 func instance_numus_struct(var x, var y, var struct):
 	var i = 0
 	var j = 0
-	print("Creating collectables with offset: " + str(offset))
+	# Logger.log("Creating collectables with offset: " + str(offset))
 	for y_ in struct:
 		for x_ in y_:
 			if x_ == 1:

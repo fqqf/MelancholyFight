@@ -16,12 +16,12 @@ var time_passed
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
 	
-	platform_builder.desired_chunk_len=2000
+	platform_builder.desired_chunk_len=10000
 	var chunk = platform_builder.generate_chunk()
 	
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
-	platform_builder.create_gap_at_chunk_start = false
+	platform_builder.create_gap_at_chunk_start = true
 	
 	items[chunk] = item_builder.create_collectables(chunk)
 	
@@ -47,7 +47,7 @@ func _physics_process(delta):
 			chunks.erase(chunk)
 
 const MAX_SCENE_SPEED = 4.5
-const START_SCENE_SPEED = 3.5
+const START_SCENE_SPEED = 0.5
 
 var scene_acceleration = 0.005
 var scene_speed = START_SCENE_SPEED
