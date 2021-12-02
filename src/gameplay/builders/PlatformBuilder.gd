@@ -2,21 +2,28 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
+
 var gap_len_limits = [30, 40] # Platform vars
 var platform_len_limits = [100,250]
+
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
 var ratio_platform_len = []
 
+
 var desired_chunk_len=500 # Chunk vars
+
 var create_gap_at_chunk_start = false
 var generate_unique_platforms = false # Супер большие, платформы кусочками маленькими
 
 var total # Memory vars
 var taken
 var left
+var node
 
 const U_BLOCK_SIZE = 16
+
+
 
 func generate_chunk(offset=0):
 	var chunk = []
@@ -57,6 +64,7 @@ func alloc_mem():
 	
 func adjust_gap_len_limits_to_player_speed():
 	var scene_speed = get_parent().get_parent().scene_speed
+  
 	desired_chunk_len=scene_speed*500
 	if ratio_gap_len.empty():
 		#создаем зависимости max-min длины от скорости
