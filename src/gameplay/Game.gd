@@ -47,13 +47,14 @@ func _physics_process(delta):
 			chunks.erase(chunk)
 
 const MAX_SCENE_SPEED = 4.5
-const START_SCENE_SPEED = 3.5
+const START_SCENE_SPEED = 1
+
 
 var scene_acceleration = 0.005
 var scene_speed = START_SCENE_SPEED
 
 func move_scene(delta):
-	scene_speed += min(scene_acceleration*delta, START_SCENE_SPEED)
+	scene_speed += min(scene_acceleration*delta, MAX_SCENE_SPEED)
 	
 	
 

@@ -3,7 +3,7 @@ extends Node
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
 var gap_len_limits = [30, 40] # Platform vars
-var platform_len_limits = [100,150]
+var platform_len_limits = [100,250]
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
 var ratio_platform_len = []
@@ -57,6 +57,7 @@ func alloc_mem():
 	
 func adjust_gap_len_limits_to_player_speed():
 	var scene_speed = get_parent().get_parent().scene_speed
+	desired_chunk_len=scene_speed*500
 	if ratio_gap_len.empty():
 		#создаем зависимости max-min длины от скорости
 		ratio_gap_len = [gap_len_limits[0], gap_len_limits[1]]
