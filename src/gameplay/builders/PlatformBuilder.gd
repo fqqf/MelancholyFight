@@ -62,7 +62,6 @@ func alloc_mem():
 	
 func adjust_gap_len_limits_to_player_speed():
 	var scene_speed = get_parent().get_parent().scene_speed
-	desired_chunk_len=scene_speed*500
 	if ratio_gap_len.empty():
 		#создаем зависимости max-min длины от скорости
 		ratio_gap_len = [gap_len_limits[0], gap_len_limits[1]]

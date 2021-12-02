@@ -24,7 +24,7 @@ func _ready():
 	Logger.log("Created start chunk")
 	platform_builder.create_gap_at_chunk_start = true
 
-	items[chunk] = item_builder.create_collectables(chunk)
+	#items[chunk] = item_builder.create_collectables(chunk)
 	
 	item = item_builder.create_collectables(chunk)
 	items.append(item)
@@ -52,8 +52,8 @@ func _physics_process(delta):
 			items.remove(1)
 			
 
-const MAX_SCENE_SPEED = 4.5
-const START_SCENE_SPEED = 1
+const MAX_SCENE_SPEED = 10
+const START_SCENE_SPEED = 8
 
 
 var scene_acceleration = 0.005
