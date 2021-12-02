@@ -23,6 +23,8 @@ func _ready():
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
 	platform_builder.create_gap_at_chunk_start = true
+
+	items[chunk] = item_builder.create_collectables(chunk)
 	
 	item = item_builder.create_collectables(chunk)
 	items.append(item)
@@ -51,13 +53,14 @@ func _physics_process(delta):
 			
 
 const MAX_SCENE_SPEED = 4.5
-const START_SCENE_SPEED = 0.5
+const START_SCENE_SPEED = 1
+
 
 var scene_acceleration = 0.005
 var scene_speed = START_SCENE_SPEED
 
 func move_scene(delta):
-	scene_speed += min(scene_acceleration*delta, START_SCENE_SPEED)
+	scene_speed = min(scene_speed + scene_acceleration*delta, MAX_SCENE_SPEED)
 	
 
 	position.position.x -= scene_speed*0.6 if souly.ray_cast2d.is_colliding() else scene_speed

@@ -34,10 +34,10 @@ func create_numus(chunk):
 	for platform in chunk[0]:
 		width = platform.width_PX
 		x = platform.position.x
-		
-		while width > 60:
+		var scene_speed = get_parent().get_parent().scene_speed
+		while width > scene_speed*50:
 			#пока платформа не меньше 60 кидаем кубик на каждое место gjrf 50%
-			var lacky = round(rand_range(0,1))
+			var lacky = round(rand_range(0,2))
 			
 			if lacky == 1:
 				var struct_range = round(rand_range(0,numus_structures.size()-1))
@@ -52,10 +52,11 @@ func create_numus(chunk):
 				width2 = width
 				width -=10+numus_gap+(struct[0].size()*(numus_size+numus_gap))
 				
-				if width < 60: #если остаток платформы меньше 60 - ставим структуру на весь остаток
-					var c = (width2-struct[0].size()*(numus_size+numus_gap))/2
-					instance_numus_struct(x+c,platform.position.y-11, struct)
-					x += (c*2)+struct[0].size()*(numus_size+numus_gap)
+				if width < scene_speed*50: #если остаток платформы меньше 60 - ставим структуру на весь остаток
+					#var c = (width2-struct[0].size()*(numus_size+numus_gap))/2
+					#instance_numus_struct(x+c,platform.position.y-20, struct)
+					#x += (c*2)+struct[0].size()*(numus_size+numus_gap)
+					width = 0
 				else:
 					instance_numus_struct(12+x,platform.position.y-11, struct)
 					x += 10+numus_gap+struct[0].size()*(numus_size+numus_gap)
