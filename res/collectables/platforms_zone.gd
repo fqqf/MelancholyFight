@@ -2,9 +2,9 @@ extends Node
 
 const platforms = {
 	"0": [
-		[5],
-		[3,3,3,3,3,3],
-		[30,0]
+		[5],#quantity levels
+		[3,3,3,3,3,3],#position 0-top - 5 bottom
+		[30,0] #leght platform, gap if 0 - standart
 	],
 	"1": [
 		[4],
