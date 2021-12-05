@@ -4,7 +4,7 @@
 [ext_resource path="res://src/gameplay/builders/PlatformBuilder.gd" type="Script" id=2]
 [ext_resource path="res://src/gameplay/builders/ItemBuilder.gd" type="Script" id=3]
 [ext_resource path="res://src/gameplay/Game.gd" type="Script" id=4]
-[ext_resource path="res://src/gameplay/zones/FrenchRoseZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/gameplay/zones/EvangelionZone.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node"]
 script = ExtResource( 4 )
@@ -15,11 +15,10 @@ one_shot = true
 autostart = true
 
 [node name="Souly" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 0.145098, 0.839216, 1, 1 )
 position = Vector2( 38.1904, 39.4674 )
 z_index = 1000
 z_as_relative = false
-
-[node name="FrenchRoseZone" parent="." instance=ExtResource( 5 )]
 
 [node name="Position" type="Node2D" parent="."]
 
@@ -35,3 +34,5 @@ script = ExtResource( 2 )
 
 [node name="ItemBuilder" type="Node2D" parent="Position"]
 script = ExtResource( 3 )
+
+[node name="EvangelionZone" parent="." instance=ExtResource( 5 )]

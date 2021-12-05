@@ -17,7 +17,7 @@ func build(x, height_PX_, width_PX_):
 	
 	for x in width:
 		for y in BLOCK_HEIGHT:
-			set_cell(x,y,0)
+			set_cell(x,y,1)
 	update_bitmask_region(Vector2(0,0),Vector2(width, BLOCK_HEIGHT))
 	return self
 
