@@ -5,8 +5,8 @@ func _ready():
 	randomize()
 	
 
-#secure
-#print(Utils.get_prob_s([-30,1000], [[-30,400,50], [401, 405, 400], [406,900,30],[901,1000,5]]))
+# secure
+# (Utils.get_prob_s([-30,1000], [[-30,400,50], [401, 405, 400], [406,900,30],[901,1000,5]]))
 func get_prob_s(all_range, range_percent):
 	var sum_percent =0
 	for percent in range_percent:
@@ -18,8 +18,8 @@ func get_prob_s(all_range, range_percent):
 			assert( all_range[0] <= find_range[0] and find_range[0] <=all_range[1] and all_range[0] <= find_range[1] and find_range[1] <=all_range[1] )
 			return rand_range(find_range[0], find_range[1])
 
-#unsecure
-#print(Utils.get_prob([[-30,400,50], [401, 405, 400], [406,900,30],[901,1000,5]]))
+# unsecure
+# (Utils.get_prob([[-30,400,50], [401, 405, 400], [406,900,30],[901,1000,5]]))
 func get_prob(range_percent):
 	var sum_percent =0
 	for percent in range_percent:
@@ -30,8 +30,8 @@ func get_prob(range_percent):
 		if find_percent <=0: 
 			return rand_range(find_range[0], find_range[1])
 
-#percent secure	
-#print(Utils.get_prob_ps([-30,1000], [[10,30,50], [31, 60, 400], [61,85,30],[86,100,5]]))
+# percent secure	
+# (Utils.get_prob_ps([-30,1000], [[10,30,50], [31, 60, 400], [61,85,30],[86,100,5]]))
 func get_prob_ps(all_range, range_percent):
 	var sum_percent =0
 	var one_percent: float

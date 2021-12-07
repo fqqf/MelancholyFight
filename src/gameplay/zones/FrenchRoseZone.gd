@@ -6,9 +6,17 @@ onready var layer3 = $ParallaxBackground/Layer3
 onready var layer4 = $ParallaxBackground2/Layer4
 onready var stars = $ParallaxBackground/Stars
 
-onready var star_scene = preload("res://src/gameplay/zones/Star.tscn")
+var star_scene = preload("res://src/gameplay/zones/Star.tscn")
 
 var offset_x = 0
+
+func _change_properties(state):
+	#._change_properties(state)
+	var platform_script = load("res://src/gameplay/objects/platforms/Platform.gd")
+	platform_script.set_meta("tilemap_id",0)
+	for chunk in game.chunks:
+		for platform in chunk[0]:
+			platform.tilemap_id = 0
 
 func _ready():
 	var star

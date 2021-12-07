@@ -21,13 +21,12 @@ func create_collectables(chunk_, offset_=0):
 	items = []
 	chunk = chunk_
 	offset = offset_
-	create_numus(chunk)
+	create_numus()
 	return items
 	
-func create_numus(chunk):
+func create_numus():
 	var width
 	var height
-	var numus_amount
 	var struct
 	var x
 	
@@ -50,8 +49,8 @@ func create_numus(chunk):
 					struct_range = round(rand_range(0,6))
 					struct = numus_structures[str(struct_range)]
 
-				var width2 = 0
-				width2 = width
+				# var width2 = 0
+				# width2 = width
 				width -=10+numus_gap+(struct[0].size()*(numus_size+numus_gap))
 				
 				if width < max(40, scene_speed*40):

@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://src/gameplay/Game.gd"
+}, {
 "base": "Node2D",
 "class": "Zone",
 "language": "GDScript",
 "path": "res://src/gameplay/zones/Zone.gd"
 } ]
 _global_script_class_icons={
+"Game": "",
 "Zone": ""
 }
 

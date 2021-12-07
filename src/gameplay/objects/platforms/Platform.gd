@@ -5,7 +5,16 @@ export var BLOCK_HEIGHT = 3
 var width_PX
 var height_PX
 
+var tilemap_id = 1 setget set_tilemap_id, get_tilemap_id
+
+func set_tilemap_id(id):
+	tilemap_id = id
+	Logger.log("Changed platform type (Tilemap id)")
+	
+func get_tilemap_id(): return tilemap_id
+
 func _ready():
+	print(tilemap_id)
 	pass
 
 func build(x, height_PX_, width_PX_):
@@ -17,7 +26,7 @@ func build(x, height_PX_, width_PX_):
 	
 	for x in width:
 		for y in BLOCK_HEIGHT:
-			set_cell(x,y,1)
+			set_cell(x,y,tilemap_id)
 	update_bitmask_region(Vector2(0,0),Vector2(width, BLOCK_HEIGHT))
 	return self
 

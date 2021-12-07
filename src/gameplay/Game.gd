@@ -1,11 +1,15 @@
 extends Node
 
+class_name Game
+
 onready var platform_builder = $Position/PlatformBuilder
 onready var item_builder = $Position/ItemBuilder
 onready var line = $Position/Line2D
 onready var souly = $Souly
 onready var position = $Position
 
+var evangelion_zone_scene = preload("res://src/gameplay/zones/EvangelionZone.tscn")
+var french_rose_zone_scene = preload("res://src/gameplay/zones/FrenchRoseZone.tscn")
 
 var chunks = []
 var items = []
@@ -14,12 +18,28 @@ var zones = []
 var start_time
 var time_passed
 
+var zone
+
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
 	
 	setup_initial_chunk()
 	
 	start_time = OS.get_unix_time()
+	
+	create_zones()
+	
+
+func create_zones():
+	
+	zones = {
+		"evangelion": evangelion_zone_scene.instance().init(self),
+		"french_rose": french_rose_zone_scene.instance().init(self)
+	}
+	
+	zone = zones.values()[randi() % zones.size()]
+	zone.enabled = true	
+	add_child(zone)
 
 func setup_initial_chunk():
 	platform_builder.desired_chunk_len=10000
