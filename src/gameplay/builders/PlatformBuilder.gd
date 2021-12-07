@@ -2,7 +2,7 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
-var gap_len_limits = [30, 60] # Platform vars
+var gap_len_limits = [20, 40] # Platform vars
 var platform_len_limits = [100,250]
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
@@ -71,7 +71,12 @@ func adjust_gap_len_limits_to_player_speed():
 		ratio_gap_len = [gap_len_limits[0], gap_len_limits[1]]
 		ratio_platform_len = [platform_len_limits[0], platform_len_limits[1]]
 
-	gap_len_limits = [scene_speed*ratio_gap_len[0], scene_speed*ratio_gap_len[1]]
-	platform_len_limits = [scene_speed*ratio_platform_len[0], scene_speed*ratio_platform_len[1]]
-	
+	if scene_speed ==0:
+		gap_len_limits = [ratio_gap_len[0], ratio_gap_len[1]]
+		platform_len_limits = [ratio_platform_len[0], ratio_platform_len[1]]
+	elif scene_speed < 1:
+		gap_len_limits = [scene_speed*ratio_gap_len[0], scene_speed*ratio_gap_len[1]]
+	else:	
+		gap_len_limits = [scene_speed*ratio_gap_len[0], scene_speed*ratio_gap_len[1]]
+		platform_len_limits = [scene_speed*ratio_platform_len[0], scene_speed*ratio_platform_len[1]]
 	
