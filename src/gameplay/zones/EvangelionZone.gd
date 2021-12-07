@@ -32,7 +32,7 @@ func _ready():
 	var rand
 	var anim_player
 	
-	for i in 100:
+	for i in 200:
 		star = star_scene.instance()
 		star.get_node("Light").self_modulate = (Color(0.15,0.84,1,0.8))
 		star.position = Vector2(rand_range(-1000,1000),rand_range(-300,300))
@@ -64,7 +64,7 @@ var cloud_2_speed
 var cloud_3_speed
 
 func _process(_delta):
-	stars.set_motion_offset(Vector2(-offset_x/2.5,0))
+	stars.set_motion_offset(Vector2(-cool_offset*1.7,0))
 	#stars.set_motion_offset(Vector2(-offset_x,0))
 	background.set_motion_offset(Vector2(cool_offset*2,0))
 	moon.set_motion_offset(Vector2(-cool_offset,0))

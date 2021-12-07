@@ -15,8 +15,12 @@ var time_passed
 
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
-	scene_speed = START_SCENE_SPEED
 	
+	setup_initial_chunk()
+	
+	start_time = OS.get_unix_time()
+
+func setup_initial_chunk():
 	platform_builder.desired_chunk_len=10000
 	var chunk = platform_builder.generate_chunk()
 	var item =[]
@@ -26,19 +30,41 @@ func _ready():
 	
 	item = item_builder.create_collectables(chunk)
 	items.append(item)
-	start_time = OS.get_unix_time()
 
 func _physics_process(delta):
 	time_passed = OS.get_unix_time()-start_time
 	move_scene(delta)
+	
+	create_and_delete_chunks()
+	
+const MAX_SCENE_SPEED = 10
+const START_SCENE_SPEED = 8
+var scene_acceleration = 0.005
+var scene_speed = START_SCENE_SPEED
 
+func move_scene(delta):
+	scene_speed = min(scene_speed + scene_acceleration*delta, MAX_SCENE_SPEED)
+	
+	position.position.x -= scene_speed*0.6 if souly.ray_cast2d.is_colliding() else scene_speed
+	
+	limit_scene_acceleration()
+	
+func limit_scene_acceleration():
+	if time_passed>100:
+		scene_acceleration = 0.005
+	elif time_passed>70:
+		scene_acceleration = 0.015
+	elif time_passed>60:
+		scene_acceleration = 0.065
+
+func create_and_delete_chunks():
 	for chunk in chunks:
 		if chunk.size()==2 and position.position.x < -chunk[1]+450: 
 			chunks.append(platform_builder.generate_chunk(chunk[1]))
 			Logger.log("Created chunk [" +str(chunk[1])+":"+str(chunks.back()[1])+"]")
 			items.push_front(item_builder.create_collectables(chunks.back(), chunk[1]))
 			chunk.append("DELETE") # TODO: const
-			line.position.x = chunk[1]
+			#line.position.x = chunk[1] НЕ УБИРАТЬ ЭТОТ КОММЕНТАРИЙ, НУЖЕН ДЛЯ ДЕБАГА
 
 		elif position.position.x < -chunk[1]-300 and chunk.size()==3:
 			Logger.log("Deleted chunk ["+str(chunk[1])+":"+str(chunks.back()[1])+"], cur. pos is: "+str(-position.position.x))
@@ -48,29 +74,6 @@ func _physics_process(delta):
 			for it in items[1]:
 				if is_instance_valid(it):it.queue_free()	
 			items.remove(1)
-			
-
-const MAX_SCENE_SPEED = 10
-const START_SCENE_SPEED = 8
-
-
-var scene_acceleration = 0.005
-var scene_speed = START_SCENE_SPEED
-
-func move_scene(delta):
-	scene_speed = min(scene_speed + scene_acceleration*delta, MAX_SCENE_SPEED)
-	
-
-	position.position.x -= scene_speed*0.6 if souly.ray_cast2d.is_colliding() else scene_speed
-	
-	if time_passed>100:
-		scene_acceleration = 0.005
-	elif time_passed>70:
-		scene_acceleration = 0.015
-	elif time_passed>60:
-		scene_acceleration = 0.065
-	
-	
 
 func _on_souly_pickup_collectable(collectable):
 	collectable.free()
