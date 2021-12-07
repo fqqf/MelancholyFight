@@ -1,4 +1,4 @@
-extends Node2D
+extends Zone
 
 onready var background = $ParallaxBackground/Background
 onready var moon = $ParallaxBackground2/Moon

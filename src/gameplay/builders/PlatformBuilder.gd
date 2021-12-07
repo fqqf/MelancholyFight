@@ -2,7 +2,7 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
-var gap_len_limits = [30, 40] # Platform vars
+var gap_len_limits = [30, 60] # Platform vars
 var platform_len_limits = [100,250]
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
@@ -36,7 +36,11 @@ func generate_chunk(offset=0):
 	
 	while true:
 		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
-		gap_len = rand_range(gap_len_limits[0],gap_len_limits[1])
+		
+		
+		gap_len = Utils.get_prob_ps([platform_len_limits[0], platform_len_limits[1]], [[0,50,30],[51,80,50],[81,100,100]])
+		print("gap = "+str(gap_len))
+		
 		platform_height = Utils.get_prob_s([platform_height_limits[0], platform_height_limits[1]], [[platform_height_limits[1]-3, platform_height_limits[1], 200],[platform_height_limits[0]+3,platform_height_limits[0],200]])
 		
 		if create_gap_at_chunk_start and taken==0: pass
@@ -46,7 +50,9 @@ func generate_chunk(offset=0):
 			add_child(chunk.back())
 		else: break
 		
-		if gap_len+max_platform_len<=left: use_mem(gap_len)  # Generate gap only if there will be space for platform after gap
+		if gap_len+max_platform_len<=left: 
+			use_mem(gap_len)
+			  # Generate gap only if there will be space for platform after gap
 		else: break
 			
 	return [chunk, taken+offset]
@@ -54,12 +60,12 @@ func generate_chunk(offset=0):
 func use_mem(mem):
 	taken += mem
 	left = total - taken
-	
+
 func alloc_mem():
 	total = desired_chunk_len
 	taken = 0
 	left = desired_chunk_len - taken
-	
+
 func adjust_gap_len_limits_to_player_speed():
 	var scene_speed = get_parent().get_parent().scene_speed
 	if ratio_gap_len.empty():
@@ -67,7 +73,6 @@ func adjust_gap_len_limits_to_player_speed():
 		ratio_gap_len = [gap_len_limits[0], gap_len_limits[1]]
 		ratio_platform_len = [platform_len_limits[0], platform_len_limits[1]]
 
-	
 	gap_len_limits = [scene_speed*ratio_gap_len[0], scene_speed*ratio_gap_len[1]]
 	platform_len_limits = [scene_speed*ratio_platform_len[0], scene_speed*ratio_platform_len[1]]
 	
