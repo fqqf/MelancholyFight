@@ -23,8 +23,6 @@ func _ready():
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
 	platform_builder.create_gap_at_chunk_start = true
-
-	#items[chunk] = item_builder.create_collectables(chunk)
 	
 	item = item_builder.create_collectables(chunk)
 	items.append(item)

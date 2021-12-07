@@ -7,8 +7,8 @@ onready var numus_scene = preload("res://src/gameplay/objects/collectables/Numus
 var numus_structures
 var numus_structure_min_width
 
-var numus_size = 7
-var numus_gap = 1
+var numus_size = 9
+var numus_gap = 0
 
 var chunk
 var offset
@@ -26,6 +26,7 @@ func create_collectables(chunk_, offset_=0):
 	
 func create_numus(chunk):
 	var width
+	var height
 	var numus_amount
 	var struct
 	var x
@@ -33,11 +34,12 @@ func create_numus(chunk):
 	
 	for platform in chunk[0]:
 		width = platform.width_PX
+		height = (platform.height_PX-56)/4 + 20
 		x = platform.position.x
 		var scene_speed = get_parent().get_parent().scene_speed
 		while width > scene_speed*50:
 			#пока платформа не меньше 60 кидаем кубик на каждое место gjrf 50%
-			var lacky = round(rand_range(0,2))
+			var lacky = round(rand_range(3,1))
 			
 			if lacky == 1:
 				var struct_range = round(rand_range(0,numus_structures.size()-1))
@@ -58,7 +60,7 @@ func create_numus(chunk):
 					#x += (c*2)+struct[0].size()*(numus_size+numus_gap)
 					width = 0
 				else:
-					instance_numus_struct(12+x,platform.position.y-11, struct)
+					instance_numus_struct(12+x,platform.position.y-height, struct)
 					x += 10+numus_gap+struct[0].size()*(numus_size+numus_gap)
 			else:# если кубик не выкинул структуру на место - оставляем пустым на 112 пикселей
 				width-= (10+numus_gap+100)

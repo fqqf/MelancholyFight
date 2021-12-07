@@ -72,7 +72,7 @@ animations = [ {
 "frames": [ ExtResource( 14 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 26 ), ExtResource( 17 ), ExtResource( 27 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 25 ), ExtResource( 1 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 21 ), ExtResource( 3 ), ExtResource( 22 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 32 ), ExtResource( 46 ), ExtResource( 40 ), ExtResource( 31 ), ExtResource( 37 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 43 ), ExtResource( 35 ), ExtResource( 13 ), ExtResource( 28 ), ExtResource( 47 ), ExtResource( 34 ), ExtResource( 41 ), ExtResource( 45 ), ExtResource( 29 ), ExtResource( 50 ), ExtResource( 44 ), ExtResource( 30 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 42 ) ],
 "loop": true,
 "name": "default",
-"speed": 10.0
+"speed": 14.0
 } ]
 
 [sub_resource type="Animation" id=2]
@@ -170,9 +170,10 @@ z_index = -2
 texture = ExtResource( 60 )
 
 [node name="light" type="Sprite" parent="ParallaxBackground2/Moon"]
-position = Vector2( 792.889, 91.865 )
-rotation = -0.0425717
-scale = Vector2( 0.6588, 0.586154 )
+self_modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 772.099, 94.7415 )
+rotation = 0.00770319
+scale = Vector2( 0.753817, 0.670693 )
 z_index = 1
 z_as_relative = false
 texture = ExtResource( 56 )

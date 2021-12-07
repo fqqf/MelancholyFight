@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=27 format=2]
 
-[ext_resource path="res://assets/terrain/test_terrain.png" type="Texture" id=1]
+[ext_resource path="res://res/zones/FrenchRoseZone/test_terrain.png" type="Texture" id=1]
 [ext_resource path="res://res/zones/EvangelionZone/tilemap.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
