@@ -39,7 +39,7 @@ func _physics_process(delta):
 	create_and_delete_chunks()
 	
 const MAX_SCENE_SPEED = 10
-const START_SCENE_SPEED = 5
+const START_SCENE_SPEED = 10
 var scene_acceleration = 0.005
 var scene_speed = START_SCENE_SPEED
 
