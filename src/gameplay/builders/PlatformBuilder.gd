@@ -2,7 +2,7 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
-var gap_len_limits = [30, 60] # Platform vars
+var gap_len_limits = [30, 40] # Platform vars
 var platform_len_limits = [100,250]
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
@@ -20,7 +20,7 @@ var node
 
 const U_BLOCK_SIZE = 16
 
-
+var platform_height = platform_height_limits[0]
 
 func generate_chunk(offset=0):
 	var chunk = []
@@ -31,16 +31,31 @@ func generate_chunk(offset=0):
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
 	
 	var platform_len
-	var platform_height
+	
+	var platform_height_diff = platform_height_limits[1]-platform_height_limits[0]
 	var gap_len
 	
 	while true:
 		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
 		
 		gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[100,100,100000]])
-		
-		platform_height = Utils.get_prob_s([platform_height_limits[0], platform_height_limits[1]], [[platform_height_limits[1]-3, platform_height_limits[1], 200],[platform_height_limits[0]+3,platform_height_limits[0],200]])
-		
+		print("PLAT HEIGHT")
+		print(platform_height_limits[0])
+		if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
+			print(str(platform_height)+" <=0.4 == "+str(platform_height_limits[0]+platform_height_diff*0.4))
+			print(platform_height)
+			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
+			print(platform_height)
+		elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
+			print(str(platform_height)+" >=0.65 == "+str(platform_height_limits[0]+platform_height_diff*0.65))
+			print(platform_height)
+			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 250]])
+			print(platform_height)
+		else:
+			print("medium")
+			print(platform_height)
+			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 60, 50],[61, 79, 300],[80,100, 35]])	
+			print(platform_height)
 		if create_gap_at_chunk_start and taken==0: pass
 		elif platform_len<=left: # Instance platform
 			chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
