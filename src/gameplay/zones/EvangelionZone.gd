@@ -76,9 +76,9 @@ func _process(_delta):
 	#stars.set_motion_offset(Vector2(-offset_x,0))
 	background.set_motion_offset(Vector2(cool_offset*2,0))
 	moon.set_motion_offset(Vector2(-cool_offset,0))
-	layer0.set_motion_offset(Vector2(offset_x,0))
-	layer1.set_motion_offset(Vector2(offset_x/3,0))
-	layer2.set_motion_offset(Vector2(-offset_x/6,0))
+	#layer0.set_motion_offset(Vector2(offset_x,0))
+	#layer1.set_motion_offset(Vector2(offset_x/3,0))
+	#layer2.set_motion_offset(Vector2(-offset_x/6,0))
 	
 	cloud1.position.x += cloud_1_speed
 	cloud2.position.x += cloud_2_speed

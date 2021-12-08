@@ -21,7 +21,7 @@ var time
 var current_zone
 var zones = [] 
 
-const ZONE_LIFETIME_SEC = 2.5
+const ZONE_LIFETIME_SEC = 602.5
 var zone_change_time = 0
 
 func _ready():
@@ -40,7 +40,8 @@ func create_zones():
 		"french_rose": french_rose_zone_scene.instance()
 	}
 	
-	current_zone = zones.values()[randi() % zones.size()]
+	#current_zone = zones.values()[randi() % zones.size()]
+	current_zone = zones["evangelion"]
 	current_zone.enabled = true	
 	add_child(current_zone)
 
