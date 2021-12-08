@@ -2,25 +2,23 @@ extends TileMap
 
 export var BLOCK_HEIGHT = 3
 
-var width_PX
-var height_PX
+var width_PX = 0
+var height_PX = 0
+var x = 0
 
-var tilemap_id = 1 setget set_tilemap_id, get_tilemap_id
+var tilemap_id = 1
 
-func set_tilemap_id(id):
-	tilemap_id = id
-	Logger.log("Changed platform type (Tilemap id)")
-	
 func get_tilemap_id(): return tilemap_id
 
 func _ready():
-	print(tilemap_id)
 	pass
 
-func build(x, height_PX_, width_PX_):
+func build(x_=x, height_PX_=height_PX, width_PX_=width_PX):
+	tilemap_id = Singleton.platform_tilemap_id
 	height_PX = height_PX_
 	width_PX = width_PX_
-	var width = unit2block(width_PX)
+	x = x_
+	var width = Utils.unit2block(width_PX)
 	
 	position = Vector2(x, height_PX)
 	
@@ -30,12 +28,4 @@ func build(x, height_PX_, width_PX_):
 	update_bitmask_region(Vector2(0,0),Vector2(width, BLOCK_HEIGHT))
 	return self
 
-const U_BLOCK_SIZE = 16
 
-func unit2block(unit):
-	assert(int(unit)%int(U_BLOCK_SIZE)==0,unit)
-	return unit/U_BLOCK_SIZE
-	
-func block2unit(block):
-	assert(str(block)==str(int(block)),"Wrong block! "+str(block)+"::"+str(int(block)) )
-	return block*U_BLOCK_SIZE

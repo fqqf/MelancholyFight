@@ -13,38 +13,41 @@ var french_rose_zone_scene = preload("res://src/gameplay/zones/FrenchRoseZone.ts
 
 var chunks = []
 var items = []
-var zones = []
 
-var start_time
-var time_passed
+var start_time = 0
+var time_passed = 0
+var time
 
-var zone
+var current_zone
+var zones = [] 
+
+const ZONE_LIFETIME_SEC = 2.5
+var zone_change_time = 0
 
 func _ready():
+	Singleton.game = self
 	VisualServer.set_default_clear_color(Color(0.65098, 0.396078, 0.709804))
-	
 	setup_initial_chunk()
-	
 	start_time = OS.get_unix_time()
-	
 	create_zones()
 	
+	zone_change_time = time_passed+ZONE_LIFETIME_SEC	
 
 func create_zones():
 	
 	zones = {
-		"evangelion": evangelion_zone_scene.instance().init(self),
-		"french_rose": french_rose_zone_scene.instance().init(self)
+		"evangelion": evangelion_zone_scene.instance(),
+		"french_rose": french_rose_zone_scene.instance()
 	}
 	
-	zone = zones.values()[randi() % zones.size()]
-	zone.enabled = true	
-	add_child(zone)
+	current_zone = zones.values()[randi() % zones.size()]
+	current_zone.enabled = true	
+	add_child(current_zone)
 
 func setup_initial_chunk():
 	platform_builder.desired_chunk_len=10000
 	var chunk = platform_builder.generate_chunk()
-	var item =[]
+	var item = []
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
 	platform_builder.create_gap_at_chunk_start = true
@@ -53,7 +56,18 @@ func setup_initial_chunk():
 	items.append(item)
 
 func _physics_process(delta):
-	time_passed = OS.get_unix_time()-start_time
+	time = OS.get_unix_time()
+	time_passed = time-start_time
+	
+	if time_passed>zone_change_time:
+		zone_change_time = time_passed+ZONE_LIFETIME_SEC
+		var previous_zone = current_zone
+		while(current_zone==previous_zone): current_zone = zones.values()[randi() % zones.size()]
+		remove_child(previous_zone)
+		previous_zone.enabled = false
+		add_child(current_zone)
+		current_zone.enabled = true
+	
 	move_scene(delta)
 	
 	create_and_delete_chunks()

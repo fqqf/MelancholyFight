@@ -2,7 +2,7 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
-var gap_len_limits = [30, 40] # Platform vars
+var gap_len_limits = [35, 50] # Platform vars
 
 var platform_len_limits = [100,250]
 var platform_height_limits = [55.247, 90.2]
@@ -27,6 +27,7 @@ func generate_chunk(offset=0):
 	var chunk = []
 	alloc_mem()
 	adjust_gap_len_limits_to_player_speed()
+	Logger.log("!!! WARNING WARNING WARNING !!! REMOVE ME AT PRODUCTION, SET DIFFERENT GAP_LEN, BASED ON get_prob_ps")
 
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
@@ -37,8 +38,9 @@ func generate_chunk(offset=0):
 	var gap_len
 	
 	while true:
-		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
+		platform_len = int(Utils.get_prob_ps([platform_len_limits[0], platform_len_limits[1]], [[90,100,100],[0,20, 40],[21,45, 95],[46,89, 100]] )/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
 		
+
 		gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[100,100,100000]])
 		# print("PLAT HEIGHT")
 		# print(platform_height_limits[0])

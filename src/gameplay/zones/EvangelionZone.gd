@@ -27,6 +27,14 @@ onready var star_scene = preload("res://src/gameplay/zones/Star.tscn")
 var offset_x = 0
 var cool_offset = 0 
 
+func _set_zone_active(active):
+	Logger.log(" !!! WARNING !!! !!! !!! !!! RESTART STARS, AND ROCKS POSITIONS AT EVANGELION  AND AT FRENCH ROSE")
+	game = Singleton.game
+	offset_x = 0
+	cool_offset = 0
+	if active:
+		rebuild_platforms(Singleton.ZoneType.EVANGELION)
+
 func _ready():
 	var star
 	var rand

@@ -46,3 +46,12 @@ func get_prob_ps(all_range, range_percent):
 			var new_range = [all_range[0]+(find_range[0]*one_percent), all_range[0]+(find_range[1]*one_percent)]
 			return rand_range(new_range[0], new_range[1])
 
+const U_BLOCK_SIZE = 16
+
+func unit2block(unit):
+	assert(int(unit)%int(U_BLOCK_SIZE)==0,unit)
+	return unit/U_BLOCK_SIZE
+	
+func block2unit(block):
+	assert(str(block)==str(int(block)),"Wrong block! "+str(block)+"::"+str(int(block)) )
+	return block*U_BLOCK_SIZE
