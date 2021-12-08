@@ -1,6 +1,5 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://src/gameplay/zones/WaterMoon.gd" type="Script" id=51]
 [ext_resource path="res://res/zones/EvangelionZone/background.png" type="Texture" id=52]
 [ext_resource path="res://res/zones/EvangelionZone/moon.png" type="Texture" id=53]
 [ext_resource path="res://src/gameplay/zones/EvangelionZone.gd" type="Script" id=54]
@@ -17,73 +16,6 @@
 [ext_resource path="res://res/zones/EvangelionZone/_0002_Layer-3.png" type="Texture" id=65]
 [ext_resource path="res://res/zones/EvangelionZone/_0001_Layer-2.png" type="Texture" id=66]
 [ext_resource path="res://src/gameplay/zones/water.gd" type="Script" id=68]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [  ]
-
-[sub_resource type="Animation" id=2]
-resource_name = "Idle"
-length = 10.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 1,
-"values": [  ]
-}
-
-[sub_resource type="Animation" id=3]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "Idle"
-length = 6.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 3, 6 ),
-"transitions": PoolRealArray( -2, -2, -2 ),
-"update": 0,
-"values": [ Vector2( 204.336, -380.728 ), Vector2( 204.336, -345.909 ), Vector2( 204.336, -380.728 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 204.336, -390.728 ) ]
-}
 
 [sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
@@ -119,7 +51,6 @@ void fragment() {
 octaves = 7
 period = 4.6
 persistence = 0.505
-lacunarity = 0.1
 
 [sub_resource type="NoiseTexture" id=8]
 seamless = true
@@ -130,16 +61,69 @@ shader = SubResource( 6 )
 shader_param/scale_y = 0.502
 shader_param/zoom_y = 2.258
 shader_param/distortion_scale = Vector2( 0.306, 0.206 )
-shader_param/distortion_intensity = 0.044
-shader_param/distortion_speed = 0.042
+shader_param/distortion_intensity = 0.245
+shader_param/distortion_speed = 0.034
 shader_param/wave_amplitude = -0.037
 shader_param/wave_speed = 0.004
-shader_param/wave_period = -0.082
+shader_param/wave_period = 0.19
 shader_param/water_color = Color( 0.156863, 0.0196078, 0.223529, 0.45098 )
 shader_param/noise = SubResource( 8 )
 
+[sub_resource type="SpriteFrames" id=1]
+animations = [  ]
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends AnimatedSprite
+
+
+"
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 6 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 204.336, -380.728 ), Vector2( 204.336, -345.909 ), Vector2( 204.336, -380.728 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 204.336, -390.728 ) ]
+}
+
 [node name="EvangelionZone" type="Node2D"]
 script = ExtResource( 54 )
+
+[node name="Over" type="CanvasLayer" parent="."]
+layer = -2
+scale = Vector2( 1.67376, 0.306133 )
+transform = Transform2D( 1.67376, 0, 0, 0.306133, 0, 0 )
+
+[node name="water" type="Sprite" parent="Over"]
+material = SubResource( 7 )
+position = Vector2( 147.239, 296.278 )
+scale = Vector2( 1.11344, 1 )
+texture = ExtResource( 62 )
+script = ExtResource( 68 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 offset = Vector2( 180, 50 )
@@ -157,14 +141,17 @@ texture = ExtResource( 52 )
 motion_mirroring = Vector2( 2000, 0 )
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+offset = Vector2( 50, 0 )
 scale = Vector2( 0.3, 0.3 )
-transform = Transform2D( 0.3, 0, 0, 0.3, 0, 0 )
+transform = Transform2D( 0.3, 0, 0, 0.3, 50, 0 )
+scroll_offset = Vector2( 200, 0 )
 
 [node name="Moon" type="ParallaxLayer" parent="ParallaxBackground2"]
-motion_mirroring = Vector2( 1400, 0 )
+motion_offset = Vector2( 0, 2.844 )
+motion_mirroring = Vector2( 3000, 0 )
 
 [node name="light_back" type="Sprite" parent="ParallaxBackground2/Moon"]
-visible = false
+self_modulate = Color( 1, 1, 1, 0.72549 )
 position = Vector2( 660.833, 164.167 )
 scale = Vector2( 1.04902, 1.04902 )
 z_index = -2
@@ -172,9 +159,9 @@ texture = ExtResource( 60 )
 
 [node name="light" type="Sprite" parent="ParallaxBackground2/Moon"]
 self_modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 772.099, 94.7415 )
-rotation = 0.00770319
-scale = Vector2( 0.753817, 0.670693 )
+position = Vector2( 791.333, 96.3637 )
+rotation = -0.0172684
+scale = Vector2( 0.668816, 0.595065 )
 z_index = 1
 z_as_relative = false
 texture = ExtResource( 56 )
@@ -183,12 +170,7 @@ texture = ExtResource( 56 )
 position = Vector2( 665.706, 290.127 )
 scale = Vector2( 0.687952, 0.687952 )
 frames = SubResource( 1 )
-script = ExtResource( 51 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground2/Moon/AnimatedSprite"]
-autoplay = "Idle"
-anims/Idle = SubResource( 2 )
-anims/RESET = SubResource( 3 )
+script = SubResource( 10 )
 
 [node name="MoonPart" type="Sprite" parent="ParallaxBackground2/Moon/AnimatedSprite"]
 position = Vector2( 204.336, -390.728 )
@@ -211,32 +193,12 @@ texture = ExtResource( 53 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="ParallaxBackground2/Moon/AnimatedSprite/Sprite"]
 remote_path = NodePath("../..")
 
-[node name="deco1" type="Sprite" parent="ParallaxBackground2/Moon"]
-position = Vector2( 321.086, 248.742 )
-texture = ExtResource( 57 )
-
-[node name="deco2" type="Sprite" parent="ParallaxBackground2/Moon"]
-position = Vector2( 971.186, 227.931 )
-texture = ExtResource( 59 )
-
-[node name="deco3" type="Sprite" parent="ParallaxBackground2/Moon"]
-position = Vector2( 1296.17, 350.764 )
-texture = ExtResource( 58 )
-
-[node name="water" type="Sprite" parent="ParallaxBackground2/Moon"]
-material = SubResource( 7 )
-position = Vector2( 700.475, 296.986 )
-scale = Vector2( 6.10483, 1.10868 )
-texture = ExtResource( 62 )
-script = ExtResource( 68 )
-
 [node name="ParallaxBackground3" type="ParallaxBackground" parent="."]
 offset = Vector2( 180, 50 )
 scale = Vector2( 0.3, 0.3 )
 transform = Transform2D( 0.3, 0, 0, 0.3, 180, 50 )
 
 [node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground3"]
-visible = false
 motion_mirroring = Vector2( 2000, 0 )
 
 [node name="Cloud1" type="Sprite" parent="ParallaxBackground3/Clouds"]
@@ -251,22 +213,47 @@ texture = ExtResource( 66 )
 position = Vector2( -620.569, -100.576 )
 texture = ExtResource( 65 )
 
-[node name="Layer0" type="ParallaxLayer" parent="ParallaxBackground3"]
-visible = false
-motion_mirroring = Vector2( 1217, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground3/Layer0"]
-texture = ExtResource( 61 )
-
 [node name="ParallaxBackground4" type="ParallaxBackground" parent="."]
-layer = 100
+layer = -2
 offset = Vector2( 180, 50 )
 scale = Vector2( 0.36, 0.36 )
 transform = Transform2D( 0.36, 0, 0, 0.36, 180, 50 )
 
-[node name="Layer2" type="ParallaxLayer" parent="ParallaxBackground4"]
-visible = false
+[node name="decos" type="ParallaxLayer" parent="ParallaxBackground4"]
+z_index = 1
+
+[node name="deco1" type="Sprite" parent="ParallaxBackground4/decos"]
+position = Vector2( 798.114, 127.772 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 7
+texture = ExtResource( 57 )
+
+[node name="deco2" type="Sprite" parent="ParallaxBackground4/decos"]
+position = Vector2( 517.681, 67.0409 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 7
+texture = ExtResource( 59 )
+
+[node name="deco3" type="Sprite" parent="ParallaxBackground4/decos"]
+position = Vector2( 237.538, 67.0409 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 7
+texture = ExtResource( 58 )
+
+[node name="Layer0" type="ParallaxLayer" parent="ParallaxBackground4"]
 motion_mirroring = Vector2( 1217, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground4/Layer2"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground4/Layer0"]
+texture = ExtResource( 61 )
+
+[node name="ParallaxBackground5" type="ParallaxBackground" parent="."]
+layer = 3
+offset = Vector2( 180, 50 )
+scale = Vector2( 0.36, 0.36 )
+transform = Transform2D( 0.36, 0, 0, 0.36, 180, 50 )
+
+[node name="Layer2" type="ParallaxLayer" parent="ParallaxBackground5"]
+motion_mirroring = Vector2( 1217, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground5/Layer2"]
 texture = ExtResource( 63 )

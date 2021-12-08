@@ -21,7 +21,7 @@ var time
 var current_zone
 var zones = [] 
 
-const ZONE_LIFETIME_SEC = 602.5
+const ZONE_LIFETIME_SEC = 5
 var zone_change_time = 0
 
 func _ready():
