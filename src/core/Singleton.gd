@@ -13,7 +13,8 @@ enum CollectableType {
 
 enum ZoneType {
 	FRENCH_ROSE = 0,
-	EVANGELION = 1
+	EVANGELION = 1,
+	HEAVENLY_YARD = 2
 }
 
 var platform_tilemap_id = ZoneType.FRENCH_ROSE

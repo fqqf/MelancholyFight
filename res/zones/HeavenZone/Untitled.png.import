@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Untitled.png-0ce54c1e14445f59c7f6ebf82a7f559e.stex"
+path="res://.import/Untitled.png-76f7ecc042c4616463f5e1a0ac8798bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/zones/Zone3/Untitled.png"
-dest_files=[ "res://.import/Untitled.png-0ce54c1e14445f59c7f6ebf82a7f559e.stex" ]
+source_file="res://res/zones/HeavenZone/Untitled.png"
+dest_files=[ "res://.import/Untitled.png-76f7ecc042c4616463f5e1a0ac8798bb.stex" ]
 
 [params]
 

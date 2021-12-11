@@ -6,4 +6,5 @@ func _ready():
 	_zoom()
 
 func _zoom():
-	material.set_shader_param("zoom_y", get_viewport_transform().get_scale().y)
+	if is_physics_processing():
+		material.set_shader_param("zoom_y", get_viewport_transform().get_scale().y)

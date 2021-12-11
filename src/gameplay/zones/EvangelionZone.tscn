@@ -151,6 +151,7 @@ motion_offset = Vector2( 0, 2.844 )
 motion_mirroring = Vector2( 3000, 0 )
 
 [node name="light_back" type="Sprite" parent="ParallaxBackground2/Moon"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.72549 )
 position = Vector2( 660.833, 164.167 )
 scale = Vector2( 1.04902, 1.04902 )

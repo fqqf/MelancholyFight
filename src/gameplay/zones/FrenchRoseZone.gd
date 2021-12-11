@@ -40,11 +40,11 @@ func _ready():
 	
 		stars.add_child(star)
 func _process(_delta):
-	stars.set_motion_offset(Vector2(-offset_x,0))
-	background.set_motion_offset(Vector2(offset_x,0))
-	layer1.set_motion_offset(Vector2(offset_x/2,0))
-	layer2.set_motion_offset(Vector2(offset_x/3,0))
-	layer3.set_motion_offset(Vector2(offset_x/4,0))
-	layer4.set_motion_offset(Vector2(-offset_x/6,0))
+	stars.motion_offset.x = -offset_x
+	background.motion_offset.x = offset_x
+	layer1.motion_offset.x = offset_x/2
+	layer2.motion_offset.x = offset_x/3
+	layer3.motion_offset.x = offset_x/4
+	layer4.motion_offset.x = -offset_x/6
 	offset_x += 6
 	pass

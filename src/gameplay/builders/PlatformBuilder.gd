@@ -47,17 +47,17 @@ func generate_chunk(offset=0):
 		if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
 			# print(str(platform_height)+" <=0.4 == "+str(platform_height_limits[0]+platform_height_diff*0.4))
 			# print(platform_height)
-			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
+			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,200], [21, 60, 40],[61, 79, 50],[80,100, 30]])
 			# print(platform_height)
 		elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
 			# print(str(platform_height)+" >=0.65 == "+str(platform_height_limits[0]+platform_height_diff*0.65))
 			# print(platform_height)
-			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 250]])
+			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 200]])
 			# print(platform_height)
 		else:
 			# print("medium")
 			# print(platform_height)
-			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 60, 50],[61, 79, 300],[80,100, 35]])	
+			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 40, 50],[41, 79, 300],[80,100, 35]])	
 			# print(platform_height)
 		if create_gap_at_chunk_start and taken==0: pass
 		elif platform_len<=left: # Instance platform

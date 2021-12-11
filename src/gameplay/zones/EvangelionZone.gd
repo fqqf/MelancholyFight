@@ -45,14 +45,15 @@ func _ready():
 	var rand
 	var anim_player
 	
-	for i in 200:
+	for i in 100:
 		star = star_scene.instance()
-		star.get_node("Light").self_modulate = (Color(0.15,0.84,1,0.8))
+		star.self_modulate = Color(1,1,1,0.7)
+		star.get_node("Light").self_modulate = (Color(0.84,0.34,0.58,0.6))
 		star.position = Vector2(rand_range(-1000,1000),rand_range(-300,300))
-		rand = rand_range(0.05,0.4)
+		rand = rand_range(0.25,0.4)
 		star.scale = Vector2(rand, rand)
 		anim_player = star.get_node("Light").get_node("AnimationPlayer")
-		anim_player.play("Idle")
+		anim_player.play("Idle (copy)")
 		anim_player.seek(rand_range(0,4), true)
 		anim_player.set_speed_scale(rand_range(0.5,2.5))
 		stars.add_child(star)
@@ -77,14 +78,15 @@ var cloud_2_speed
 var cloud_3_speed
 
 func _process(_delta):
-	stars.set_motion_offset(Vector2(-cool_offset*1.7,0))
+	
+	stars.motion_offset.x = -cool_offset*1.7
 	#stars.set_motion_offset(Vector2(-offset_x,0))
-	background.set_motion_offset(Vector2(cool_offset*2,0))
-	moon.set_motion_offset(Vector2(-cool_offset,0))
-	decos.set_motion_offset(Vector2(-cool_offset,0))
-	layer0.set_motion_offset(Vector2(offset_x,0))
+	background.motion_offset.x = cool_offset*2
+	moon.motion_offset.x = -cool_offset
+	decos.motion_offset.x = -cool_offset
+	layer0.motion_offset.x = offset_x
 	#layer1.set_motion_offset(Vector2(offset_x/3,0))
-	layer2.set_motion_offset(Vector2(-offset_x/6,0))
+	layer2.motion_offset.x = -offset_x/6
 	
 	cloud1.position.x += cloud_1_speed
 	cloud2.position.x += cloud_2_speed

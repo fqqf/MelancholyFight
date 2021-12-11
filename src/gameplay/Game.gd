@@ -10,7 +10,7 @@ onready var position = $Position
 
 var evangelion_zone_scene = preload("res://src/gameplay/zones/EvangelionZone.tscn")
 var french_rose_zone_scene = preload("res://src/gameplay/zones/FrenchRoseZone.tscn")
-
+var heavenly_yard_zone_scene = preload("res://src/gameplay/zones/HeavenlyYardZone.tscn")
 var chunks = []
 var items = []
 
@@ -37,11 +37,12 @@ func create_zones():
 	
 	zones = {
 		"evangelion": evangelion_zone_scene.instance(),
-		"french_rose": french_rose_zone_scene.instance()
+		"french_rose": french_rose_zone_scene.instance(),
+		"heavenly_yard": heavenly_yard_zone_scene.instance()
 	}
 	
 	#current_zone = zones.values()[randi() % zones.size()]
-	current_zone = zones["evangelion"]
+	current_zone = zones["heavenly_yard"]
 	current_zone.enabled = true	
 	add_child(current_zone)
 
@@ -74,7 +75,7 @@ func _physics_process(delta):
 	create_and_delete_chunks()
 	
 const MAX_SCENE_SPEED = 10
-const START_SCENE_SPEED = 10
+const START_SCENE_SPEED = 4
 var scene_acceleration = 0.005
 var scene_speed = START_SCENE_SPEED
 
