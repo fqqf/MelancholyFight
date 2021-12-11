@@ -21,7 +21,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends ParallaxLayer
 
-tool
+#tool
 
 onready var wing = $Wing
 onready var wing2 = $Wing2
@@ -71,7 +71,7 @@ scale = Vector2( 0.633601, 0.633601 )
 texture = ExtResource( 9 )
 
 [node name="Creeper" type="ParallaxLayer" parent="Between"]
-position = Vector2( -1054.52, 6.67419 )
+position = Vector2( -832.71, 132.524 )
 motion_mirroring = Vector2( 2217, 0 )
 
 [node name="Sprite" type="Sprite" parent="Between/Creeper"]
@@ -88,6 +88,7 @@ scale = Vector2( 0.709724, 0.709724 )
 texture = ExtResource( 5 )
 
 [node name="Platform2" type="ParallaxLayer" parent="Between"]
+position = Vector2( 261.898, 24.4063 )
 motion_mirroring = Vector2( 2217, 0 )
 
 [node name="Sprite" type="Sprite" parent="Between/Platform2"]
@@ -104,6 +105,7 @@ scale = Vector2( 0.638452, 0.638452 )
 texture = ExtResource( 4 )
 
 [node name="Platform3" type="ParallaxLayer" parent="Between"]
+position = Vector2( 11.892, 162.525 )
 motion_mirroring = Vector2( 2217, 0 )
 
 [node name="Sprite" type="Sprite" parent="Between/Platform3"]
@@ -112,6 +114,7 @@ scale = Vector2( 0.633601, 0.633601 )
 texture = ExtResource( 7 )
 
 [node name="Platform4" type="ParallaxLayer" parent="Between"]
+position = Vector2( 975.3, 63.7915 )
 motion_mirroring = Vector2( 2217, 0 )
 script = SubResource( 1 )
 
@@ -127,7 +130,7 @@ offset = Vector2( 69.7144, 32.3965 )
 
 [node name="Wing2" type="Sprite" parent="Between/Platform4"]
 position = Vector2( -1309.55, -136.335 )
-rotation = 2.17468
+rotation = 2.19737
 texture = ExtResource( 16 )
 offset = Vector2( 69.7144, 32.3965 )
 
@@ -146,6 +149,7 @@ scale = Vector2( 0.633601, 0.633601 )
 texture = ExtResource( 3 )
 
 [node name="Platform5" type="ParallaxLayer" parent="Between"]
+position = Vector2( 343.178, 118.143 )
 motion_mirroring = Vector2( 2217, 0 )
 
 [node name="Sprite" type="Sprite" parent="Between/Platform5"]
@@ -154,6 +158,7 @@ scale = Vector2( 0.633601, 0.633601 )
 texture = ExtResource( 10 )
 
 [node name="Platform6" type="ParallaxLayer" parent="Between"]
+position = Vector2( 198.312, 140.647 )
 motion_mirroring = Vector2( 2217, 0 )
 
 [node name="Sprite" type="Sprite" parent="Between/Platform6"]
@@ -162,6 +167,7 @@ scale = Vector2( 0.633601, 0.633601 )
 texture = ExtResource( 8 )
 
 [node name="Platform7" type="ParallaxLayer" parent="Between"]
+position = Vector2( 446.823, 96.6865 )
 motion_mirroring = Vector2( 2217, 0 )
 
 [node name="Sprite" type="Sprite" parent="Between/Platform7"]
