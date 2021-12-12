@@ -144,7 +144,7 @@ script = SubResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.0690119, 0.0690119 )
 frames = SubResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CreoEyes" type="Sprite" parent="AnimatedSprite"]
