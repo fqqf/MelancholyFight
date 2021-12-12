@@ -2,9 +2,9 @@ extends Node
 
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 
-var gap_len_limits = [35, 50] # Platform vars
+var gap_len_limits = [0, 55] # Platform vars
 
-var platform_len_limits = [100,250]
+var platform_len_limits = [25,250]
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
 var ratio_platform_len = []
@@ -41,7 +41,7 @@ func generate_chunk(offset=0):
 		platform_len = int(Utils.get_prob_ps([platform_len_limits[0], platform_len_limits[1]], [[90,100,100],[0,20, 40],[21,45, 95],[46,89, 100]] )/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
 		
 
-		gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[100,100,100000]])
+		gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30]])
 		# print("PLAT HEIGHT")
 		# print(platform_height_limits[0])
 		if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL

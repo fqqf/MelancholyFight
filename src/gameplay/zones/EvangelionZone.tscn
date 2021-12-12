@@ -15,7 +15,7 @@
 [ext_resource path="res://res/zones/EvangelionZone/_0000_Layer-1.png" type="Texture" id=64]
 [ext_resource path="res://res/zones/EvangelionZone/_0002_Layer-3.png" type="Texture" id=65]
 [ext_resource path="res://res/zones/EvangelionZone/_0001_Layer-2.png" type="Texture" id=66]
-[ext_resource path="res://src/gameplay/zones/water.gd" type="Script" id=68]
+[ext_resource path="res://src/gameplay/zones/Water.gd" type="Script" id=68]
 
 [sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
