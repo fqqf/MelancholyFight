@@ -6,7 +6,7 @@ const platforms = {
 		[3,3,3,3,3,3],#position 0-top - 5 bottom
 		[30,0] #leght platform, gap if 0 - standart
 	],
-	
+		
 	"1": [
 		[4],
 		[2,3,4,3,2],
@@ -25,7 +25,7 @@ const platforms = {
 	"4": [
 		[5],#quantity levels
 		[0,1,2,3,4,5],#position 0-top - 5 bottom
-		[30,1] #leght platform, gap if 0 - standart
+		[40,1] #leght platform, gap if 0 - standart
 	]
 	}
 

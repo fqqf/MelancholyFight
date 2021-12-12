@@ -4,6 +4,7 @@ onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platf
 onready var platforms_zone = preload("res://res/collectables/platforms_zone.gd")
 
 var gap_len_limits = [30, 40] # Platform vars
+var _break_no_gap=false
 
 var platform_len_limits = [100,250]
 var platform_height_limits = [55.247, 90.2]
@@ -40,40 +41,40 @@ func generate_chunk(offset=0):
 	var platform_height_diff = platform_height_limits[1]-platform_height_limits[0]
 	var gap_len
 	var lacky 
-	while _max_gap_len+max_platform_len<=left:
-		lacky = round(rand_range(0,5))
-		if lacky == 1 and  taken!=0:
-			chunk = create_pl(offset,chunk)
-		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
-		
-		gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[100,100,100000]])
-		print("PLAT HEIGHT")
-		print(platform_height_limits[0])
-		if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
-			print(str(platform_height)+" <=0.4 == "+str(platform_height_limits[0]+platform_height_diff*0.4))
-			print(platform_height)
-			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
-			print(platform_height)
-		elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
-			print(str(platform_height)+" >=0.65 == "+str(platform_height_limits[0]+platform_height_diff*0.65))
-			print(platform_height)
-			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 250]])
-			print(platform_height)
+	_break_no_gap = false
+	while true:
+		if taken==0:
+			lacky = 1
 		else:
-			print("medium")
-			print(platform_height)
-			platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 60, 50],[61, 79, 300],[80,100, 35]])	
-			print(platform_height)
-		#if create_gap_at_chunk_start and taken==0: pass
-		if _max_gap_len+max_platform_len<=left: # Instance platform
-			chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
-			use_mem(platform_len)
-			add_child(chunk.back())
+			lacky = round(rand_range(0,6))
+		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
+		if lacky == 0 and max_platform_len<=left:
+			chunk = create_pl(offset,chunk)
 		
-			use_mem(gap_len)
-			  # Generate gap only if there will be space for platform after gap
-		else: break
+		
+		elif lacky > 0 and max_platform_len<=left:
 			
+			gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[100,100,100000]])
+			if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
+				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
+				
+			elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
+				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 250]])
+				
+			else:
+				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 60, 50],[61, 79, 300],[80,100, 35]])	
+			if create_gap_at_chunk_start and taken==0: pass
+			elif platform_len<=left and _break_no_gap == false: # Instance platform
+				chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
+				use_mem(platform_len)
+				add_child(chunk.back())
+			else: break
+			
+			if gap_len+max_platform_len<=left: 
+				use_mem(gap_len)
+			else: break
+		else:
+			break	
 	return [chunk, taken+offset]
 
 func use_mem(mem):
@@ -106,7 +107,7 @@ func create_pl(offset,chunk):
 
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
-	
+	var max_platform_len_local = max_platform_len
 	var platform_len
 	var platform_height
 	var gap_len
@@ -120,27 +121,46 @@ func create_pl(offset,chunk):
 		
 		if gap_len == 0: 
 			gap_fl = 0
+		
 		platform_len = max(U_BLOCK_SIZE*3, int((scene_speed*platform_structures[str(platform_range)][2][0])/U_BLOCK_SIZE)*U_BLOCK_SIZE)
 		var pl_fl
-		if platform_structures[str(platform_range)][2][0] ==0: pl_fl=0
+		if platform_structures[str(platform_range)][2][0] ==0: 
+			pl_fl=0
 		var count=0
-		var platform_height_change = (35.0/platform_structures[str(platform_range)][0][0])
-		while _max_gap_len+max_platform_len<=left:
-			if count == platform_structures[str(platform_range)][1].size():
-				break
+		var platform_height_change = (30.0/platform_structures[str(platform_range)][0][0])
+		while true:# _max_gap_len+max_platform_len<=left:
 			if pl_fl ==0:
 				platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
-			#if create_gap_at_chunk_start and taken==0: pass
-			
-			platform_height = 55.0 + platform_structures[str(platform_range)][1][count]*platform_height_change
-			chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
-			use_mem(platform_len)
-			add_child(chunk.back())
-		
+			else:
+				max_platform_len_local=platform_len
 			if gap_fl == 0:
 				gap_len = rand_range(gap_len_limits[0],gap_len_limits[1])
-			use_mem(gap_len)  # Generate gap only if there will be space for platform after gap
+			if create_gap_at_chunk_start and taken==0: pass
+			elif platform_len<=left: # Instance platform
+				platform_height = 55.0 + platform_structures[str(platform_range)][1][count]*platform_height_change
+				chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
+				use_mem(platform_len)
+				add_child(chunk.back())
+				
+			else: break
 			count += 1
-		pass
-	
+			#обработка исключений для завершения циклов
+			if count != platform_structures[str(platform_range)][1].size():
+				if gap_len+max_platform_len_local<=left:
+					use_mem(gap_len)
+					
+				else:
+					_break_no_gap = true
+					break
+			else:	
+				gap_len = rand_range(gap_len_limits[0],gap_len_limits[1])
+				if gap_len+max_platform_len<=left:
+					use_mem(gap_len)
+					break
+				else:
+					if max_platform_len<=left:
+						_break_no_gap = false
+					_break_no_gap = true
+					break
+
 	return chunk	

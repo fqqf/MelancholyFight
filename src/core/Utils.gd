@@ -42,7 +42,6 @@ func get_prob_ps(all_range, range_percent):
 		find_percent -= find_range[2]
 		if find_percent <=0:
 			assert( 0 <= find_range[0] and find_range[0] <=100 and 0 <= find_range[1] and find_range[1] <=100 )
-			one_percent = (float(abs(all_range[0])) + abs(all_range[1]))/100
+			one_percent = (float((all_range[1]) - all_range[0])/100)
 			var new_range = [all_range[0]+(find_range[0]*one_percent), all_range[0]+(find_range[1]*one_percent)]
 			return int(round(rand_range(new_range[0], new_range[1])))
-
