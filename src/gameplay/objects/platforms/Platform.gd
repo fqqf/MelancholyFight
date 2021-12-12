@@ -16,9 +16,8 @@ func _ready():
 
 var array
 
-func recolor():
+func recolor(width):
 	tilemap_id = Singleton.platform_tilemap_id
-	var width = Utils.unit2block(width_PX)
 	for _x in width:
 		for y in BLOCK_HEIGHT:
 			set_cell(_x,y,tilemap_id)
@@ -28,8 +27,8 @@ func build(x_=x, height_PX_=height_PX, width_PX_=width_PX):
 	height_PX = height_PX_
 	width_PX = width_PX_
 	x = x_
-	
-	recolor()
+	var width = Utils.unit2block(width_PX)
+	recolor(width)
 	
 	position = Vector2(x, height_PX)
 	
