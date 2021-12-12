@@ -56,14 +56,14 @@ func generate_chunk(offset=0):
 		else:
 			lacky = round(rand_range(0,1))
 		platform_len = int(Utils.get_prob_ps([platform_len_limits[0], platform_len_limits[1]], [[90,100,100],[0,20, 40],[21,45, 95],[46,89, 100]] )/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
-    if lacky == 0 and max_platform_len<=left:
+		if lacky == 0 and max_platform_len<=left:
 			chunk = create_pl(offset,chunk)
 			not_together = true
 		
 		elif lacky > 0 and max_platform_len<=left:
-      gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30]])
-      
-      if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
+			gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30]])
+		
+			if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
 				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
 				
 			elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
@@ -76,13 +76,14 @@ func generate_chunk(offset=0):
 				chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
 				use_mem(platform_len)
 				add_child(chunk.back())
-			else: break
-			
+			else:
+				break
 			if gap_len+max_platform_len<=left: 
 				use_mem(gap_len)
-			else: break
+			else:
+				break	
 		else:
-			break	
+			break
 	return [chunk, taken+offset]
 
 func use_mem(mem):
