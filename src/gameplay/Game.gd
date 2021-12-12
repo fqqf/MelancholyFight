@@ -114,4 +114,7 @@ func create_and_delete_chunks():
 
 func _on_souly_pickup_collectable(collectable):
 	collectable.free()
+	
+func end_game():
+	Logger.log("Game over")
 

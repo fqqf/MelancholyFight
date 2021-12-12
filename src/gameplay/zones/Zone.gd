@@ -32,5 +32,5 @@ func rebuild_platforms(zone_type):
 	Singleton.platform_tilemap_id = zone_type
 	for chunk in game.chunks:
 		for platform in chunk[0]:
-			platform.build()
+			platform.recolor()
 	

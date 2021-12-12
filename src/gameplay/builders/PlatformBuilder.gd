@@ -14,7 +14,7 @@ var ratio_gap_len = []
 var ratio_platform_len = []
 var platform_structures
 
-var desired_chunk_len=500 # Chunk vars
+var desired_chunk_len=10000 # Chunk vars
 
 var create_gap_at_chunk_start = false
 var generate_unique_platforms = false # Супер большие, платформы кусочками маленькими
@@ -37,7 +37,6 @@ func generate_chunk(offset=0):
 	var chunk = []
 	alloc_mem()
 	adjust_gap_len_limits_to_player_speed()
-	Logger.log("!!! WARNING WARNING WARNING !!! REMOVE ME AT PRODUCTION, SET DIFFERENT GAP_LEN, BASED ON get_prob_ps")
 
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
@@ -60,7 +59,7 @@ func generate_chunk(offset=0):
 			not_together = true
 		
 		elif lacky > 0 and max_platform_len<=left:
-			gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30]])
+			gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30090]])
 			
 			set_platform_height()
 			

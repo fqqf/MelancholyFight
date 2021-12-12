@@ -108,3 +108,8 @@ func apply_gravity(delta):
 func _on_CoyoteJumpTimer_timeout():
 	pass
 	#Logger.log("Coyote timer has ended")
+
+
+func screen_exited():
+	Logger.log("Player has died :(")
+	Singleton.game.end_game()

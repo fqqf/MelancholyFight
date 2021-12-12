@@ -137,7 +137,6 @@ position = Vector2( 113.708, -203.732 )
 rotation = 0.349066
 scale = Vector2( 1.00215, 1.00215 )
 frames = SubResource( 7 )
-frame = 1
 playing = true
 
 [node name="clothes" type="AnimatedSprite" parent="body"]
@@ -171,4 +170,9 @@ cast_to = Vector2( 15, 0 )
 collision_mask = 2
 collide_with_areas = true
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 2.33597, 83.0938 )
+rect = Rect2( -11.358, -10.659, 18.632, 18 )
+
 [connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_CoyoteJumpTimer_timeout"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="screen_exited"]

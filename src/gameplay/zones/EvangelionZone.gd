@@ -27,10 +27,10 @@ var offset_x = 0
 var cool_offset = 0 
 
 func _set_zone_active(active):
-	Logger.log(" !!! WARNING !!! !!! !!! !!! RESTART STARS, AND ROCKS POSITIONS AT EVANGELION  AND AT FRENCH ROSE")
+	# !!!! DO NOT REMOVE THIS COMMENT !!!! Logger.log(" !!! WARNING !!! !!! !!! !!! RESTART STARS, AND ROCKS POSITIONS AT EVANGELION  AND AT FRENCH ROSE")
 	game = Singleton.game
 	offset_x = 0
-	cool_offset = 0
+	cool_offset = -randf() * 5000
 
 	if cloud1 != null:
 		cloud1.position = Vector2(rand_range(-726,830), rand_range(-108,110))
