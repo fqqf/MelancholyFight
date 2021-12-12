@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/gameplay/deprecated/GameObjectsOptimizer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://res/zones/FrenchRoseZone/FrenchRoseZonePlatformSet.tres" type="TileSet" id=2]
-[ext_resource path="res://src/gameplay/deprecated/TileMapOptimizer.gd" type="Script" id=3]
+[ext_resource path="res://res/zones/EvangelionZone/EvangelionZonePlatformSet.tres" type="TileSet" id=2]
 [ext_resource path="res://src/gameplay/objects/platforms/Platform.gd" type="Script" id=4]
 
 [node name="Platform" type="TileMap"]
@@ -14,5 +13,4 @@ format = 1
 script = ExtResource( 4 )
 
 [node name="TileMapOptimizer" parent="." instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-ENABLE_DISTANCE = 400
+script = null

@@ -8,6 +8,8 @@ onready var coyote_timer = $CoyoteJumpTimer
 onready var collectables_detector = $CollectablesDetector
 onready var ray_cast2d = $RayCast2D
 
+onready var body_sprite = $body
+
 var motion = Vector2.ZERO
 
 var has_jumped = false
@@ -16,21 +18,26 @@ var early_released = false
 
 var start_position
 
+#var clothes_offset
+#var clothes_start_position
+#var clothes_speed
 
 func _ready():
 	collectables_detector.connect("area_entered",get_parent(), "_on_souly_pickup_collectable")
 	start_position = position
-func move():
+
+
+func move(delta):
 	var _was_in_air = not is_on_floor()
 	var was_on_floor = is_on_floor()
 	var last_position = position
-	
+
 	motion = move_and_slide_with_snap(motion, Vector2.DOWN, Vector2.UP) 
-	
 	if was_on_floor and not is_on_floor() and not has_jumped:
 		motion.y = 0
 		position.y = last_position.y
 		coyote_timer.start()
+	
 
 var is_adjustin_pos
 
@@ -43,7 +50,8 @@ func _physics_process(delta):
 		motion.y = 1000
 	
 	adjust_pos_to_start_pos(delta)
-	move()
+	#print(motion.y)
+	move(delta)
 	
 func adjust_pos_to_start_pos(delta):
 	if  abs(start_position.x-position.x)>0.005 and not ray_cast2d.is_colliding():

@@ -1,0 +1,204 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://src/gameplay/zones/HeavenlyYardZone.gd" type="Script" id=1]
+[ext_resource path="res://res/zones/HeavenZone/background.png" type="Texture" id=2]
+[ext_resource path="res://res/zones/HeavenZone/cloud3.png" type="Texture" id=3]
+[ext_resource path="res://res/zones/HeavenZone/cloud1.png" type="Texture" id=4]
+[ext_resource path="res://res/zones/HeavenZone/cloud2.png" type="Texture" id=5]
+[ext_resource path="res://res/zones/HeavenZone/plat2.png" type="Texture" id=6]
+[ext_resource path="res://res/zones/HeavenZone/plat3.png" type="Texture" id=7]
+[ext_resource path="res://res/zones/HeavenZone/plat6.png" type="Texture" id=8]
+[ext_resource path="res://res/zones/HeavenZone/plat1.png" type="Texture" id=9]
+[ext_resource path="res://res/zones/HeavenZone/plat5.png" type="Texture" id=10]
+[ext_resource path="res://res/zones/HeavenZone/plat7.png" type="Texture" id=11]
+[ext_resource path="res://res/zones/HeavenZone/plat8.png" type="Texture" id=12]
+[ext_resource path="res://res/zones/HeavenZone/plat4.png" type="Texture" id=13]
+[ext_resource path="res://res/zones/HeavenZone/creeper.png" type="Texture" id=14]
+[ext_resource path="res://res/zones/HeavenZone/layer1.png" type="Texture" id=15]
+[ext_resource path="res://res/zones/HeavenZone/wing.png" type="Texture" id=16]
+[ext_resource path="res://res/zones/HeavenZone/layer0.png" type="Texture" id=17]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ParallaxLayer
+
+#tool
+
+onready var wing = $Wing
+onready var wing2 = $Wing2
+onready var wing3 = $Wing3
+
+func _physics_process(delta):
+	wing.rotation_degrees += 1
+	wing2.rotation_degrees += 1
+	wing3.rotation_degrees += 1
+func change_rotation(wing):
+	if wing.rotation_degrees==360:
+		wing.rotation_degrees = 0
+	wing.rotation_degrees += 1
+"
+
+[node name="HeavenlyYardZone" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Back" type="ParallaxBackground" parent="."]
+offset = Vector2( 180, 50 )
+scale = Vector2( 0.3, 0.3 )
+transform = Transform2D( 0.3, 0, 0, 0.3, 180, 50 )
+
+[node name="Background" type="ParallaxLayer" parent="Back"]
+motion_mirroring = Vector2( 1217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Back/Background"]
+texture = ExtResource( 2 )
+
+[node name="Layer0" type="ParallaxLayer" parent="Back"]
+motion_mirroring = Vector2( 1217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Back/Layer0"]
+texture = ExtResource( 17 )
+
+[node name="Between" type="ParallaxBackground" parent="."]
+offset = Vector2( 180, 50 )
+scale = Vector2( 0.3, 0.3 )
+transform = Transform2D( 0.3, 0, 0, 0.3, 180, 50 )
+
+[node name="Platform1" type="ParallaxLayer" parent="Between"]
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform1"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 9 )
+
+[node name="Creeper" type="ParallaxLayer" parent="Between"]
+position = Vector2( -832.71, 132.524 )
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Creeper"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 14 )
+
+[node name="Cloud2" type="ParallaxLayer" parent="Between"]
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Cloud2"]
+position = Vector2( -583.658, -120.501 )
+scale = Vector2( 0.709724, 0.709724 )
+texture = ExtResource( 5 )
+
+[node name="Platform2" type="ParallaxLayer" parent="Between"]
+position = Vector2( 261.898, 24.4063 )
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform2"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 6 )
+
+[node name="Cloud1" type="ParallaxLayer" parent="Between"]
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Cloud1"]
+position = Vector2( -776.048, 81.8922 )
+scale = Vector2( 0.638452, 0.638452 )
+texture = ExtResource( 4 )
+
+[node name="Platform3" type="ParallaxLayer" parent="Between"]
+position = Vector2( 11.892, 162.525 )
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform3"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 7 )
+
+[node name="Platform4" type="ParallaxLayer" parent="Between"]
+position = Vector2( 975.3, 63.7915 )
+motion_mirroring = Vector2( 2217, 0 )
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform4"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 13 )
+
+[node name="Wing" type="Sprite" parent="Between/Platform4"]
+position = Vector2( -1309.55, -136.335 )
+texture = ExtResource( 16 )
+offset = Vector2( 69.7144, 32.3965 )
+
+[node name="Wing2" type="Sprite" parent="Between/Platform4"]
+position = Vector2( -1309.55, -136.335 )
+rotation = 2.19737
+texture = ExtResource( 16 )
+offset = Vector2( 69.7144, 32.3965 )
+
+[node name="Wing3" type="Sprite" parent="Between/Platform4"]
+position = Vector2( -1309.55, -136.335 )
+rotation = 4.21846
+texture = ExtResource( 16 )
+offset = Vector2( 69.7144, 32.3965 )
+
+[node name="Cloud3" type="ParallaxLayer" parent="Between"]
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Cloud3"]
+position = Vector2( -251.92, 65.3995 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 3 )
+
+[node name="Platform5" type="ParallaxLayer" parent="Between"]
+position = Vector2( 343.178, 118.143 )
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform5"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 10 )
+
+[node name="Platform6" type="ParallaxLayer" parent="Between"]
+position = Vector2( 198.312, 140.647 )
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform6"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 8 )
+
+[node name="Platform7" type="ParallaxLayer" parent="Between"]
+position = Vector2( 446.823, 96.6865 )
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform7"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 11 )
+
+[node name="Platform8" type="ParallaxLayer" parent="Between"]
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Platform8"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 12 )
+
+[node name="Cloud4" type="ParallaxLayer" parent="Between"]
+motion_mirroring = Vector2( 2217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Between/Cloud4"]
+position = Vector2( -1313.12, -59.1856 )
+scale = Vector2( 0.633601, 0.633601 )
+texture = ExtResource( 3 )
+
+[node name="Front" type="ParallaxBackground" parent="."]
+layer = 1
+offset = Vector2( 180, 50 )
+scale = Vector2( 0.3, 0.3 )
+transform = Transform2D( 0.3, 0, 0, 0.3, 180, 50 )
+
+[node name="Layer1" type="ParallaxLayer" parent="Front"]
+motion_mirroring = Vector2( 1217, 0 )
+
+[node name="Sprite" type="Sprite" parent="Front/Layer1"]
+texture = ExtResource( 15 )

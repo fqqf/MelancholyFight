@@ -3,10 +3,12 @@ extends Node
 onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platform.tscn")
 onready var platforms_zone = preload("res://res/collectables/platforms_zone.gd")
 
+
 var gap_len_limits = [30, 40] # Platform vars
 var _break_no_gap=false
 
 var platform_len_limits = [100,250]
+
 var platform_height_limits = [55.247, 90.2]
 var ratio_gap_len = []
 var ratio_platform_len = []
@@ -25,13 +27,16 @@ var node
 const U_BLOCK_SIZE = 16
 
 var platform_height = platform_height_limits[0]
+
 func _ready():
 	platform_structures = platforms_zone.platforms
 	
+
 func generate_chunk(offset=0):
 	var chunk = []
 	alloc_mem()
 	adjust_gap_len_limits_to_player_speed()
+	Logger.log("!!! WARNING WARNING WARNING !!! REMOVE ME AT PRODUCTION, SET DIFFERENT GAP_LEN, BASED ON get_prob_ps")
 
 	var max_platform_len = int(max(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
@@ -40,6 +45,7 @@ func generate_chunk(offset=0):
 	
 	var platform_height_diff = platform_height_limits[1]-platform_height_limits[0]
 	var gap_len
+	
 	var lacky 
 	_break_no_gap = false
 	var not_together = false
@@ -49,15 +55,15 @@ func generate_chunk(offset=0):
 			#not_together = false
 		else:
 			lacky = round(rand_range(0,1))
-		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
-		if lacky == 0 and max_platform_len<=left:
+		platform_len = int(Utils.get_prob_ps([platform_len_limits[0], platform_len_limits[1]], [[90,100,100],[0,20, 40],[21,45, 95],[46,89, 100]] )/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
+    if lacky == 0 and max_platform_len<=left:
 			chunk = create_pl(offset,chunk)
 			not_together = true
 		
 		elif lacky > 0 and max_platform_len<=left:
-			
-			gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[100,100,100000]])
-			if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
+      gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30]])
+      
+      if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
 				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
 				
 			elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
@@ -104,6 +110,7 @@ func adjust_gap_len_limits_to_player_speed():
 		gap_len_limits = [scene_speed*ratio_gap_len[0], scene_speed*ratio_gap_len[1]]
 		platform_len_limits = [scene_speed*ratio_platform_len[0], scene_speed*ratio_platform_len[1]]
 
+
 func create_pl(offset,chunk):
 	var scene_speed = get_parent().get_parent().scene_speed
 
@@ -115,6 +122,7 @@ func create_pl(offset,chunk):
 	var gap_len
 	var gap_fl =1
 	
+
 	
 	var lacky =1# round(rand_range(0,1))
 	if lacky == 1 :

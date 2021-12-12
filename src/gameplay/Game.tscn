@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/gameplay/objects/souly/Souly.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/gameplay/builders/PlatformBuilder.gd" type="Script" id=2]
 [ext_resource path="res://src/gameplay/builders/ItemBuilder.gd" type="Script" id=3]
 [ext_resource path="res://src/gameplay/Game.gd" type="Script" id=4]
-[ext_resource path="res://src/gameplay/zones/FrenchRoseZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/gameplay/objects/creo/Creo.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+"
 
 [node name="Game" type="Node"]
 script = ExtResource( 4 )
@@ -15,11 +20,10 @@ one_shot = true
 autostart = true
 
 [node name="Souly" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 0.145098, 0.839216, 1, 1 )
 position = Vector2( 38.1904, 39.4674 )
 z_index = 1000
 z_as_relative = false
-
-[node name="FrenchRoseZone" parent="." instance=ExtResource( 5 )]
 
 [node name="Position" type="Node2D" parent="."]
 
@@ -35,3 +39,55 @@ script = ExtResource( 2 )
 
 [node name="ItemBuilder" type="Node2D" parent="Position"]
 script = ExtResource( 3 )
+
+[node name="CreosBuilder" type="Node2D" parent="."]
+position = Vector2( 41.4709, 36.5102 )
+script = SubResource( 1 )
+
+[node name="Creo2" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -42.6614, -2.3811 )
+
+[node name="Creo4" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -35.1203, -13.0717 )
+
+[node name="Creo3" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -43.3098, -18.5838 )
+
+[node name="Creo" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -16.8514, -11.3393 )
+
+[node name="Creo5" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -34.8053, -6.61457 )
+
+[node name="Creo7" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -24.8834, -20.0012 )
+
+[node name="Creo8" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -23.466, -34.1753 )
+
+[node name="Creo6" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -13.7016, -18.1113 )
+
+[node name="Creo9" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -26.7733, -13.5441 )
+
+[node name="Creo10" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -29.6081, -28.1907 )
+
+[node name="Creo11" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -16.694, -27.5607 )
+
+[node name="Creo12" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -32.7579, -20.4737 )
+
+[node name="Creo13" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -19.0563, -16.6939 )
+
+[node name="Creo14" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -21.2612, -25.0409 )
+
+[node name="Creo15" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -23.9385, -7.402 )
+
+[node name="Creo16" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -12.7567, -23.151 )

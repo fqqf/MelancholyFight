@@ -1,10 +1,111 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://assets/souly/main.png" type="Texture" id=1]
+[ext_resource path="res://res/souly/dress/_0005_dress1.png" type="Texture" id=1]
 [ext_resource path="res://src/gameplay/objects/souly/Souly.gd" type="Script" id=2]
+[ext_resource path="res://res/souly/dress/_0004_dress2.png" type="Texture" id=3]
+[ext_resource path="res://res/souly/dress/_0003_dress3.png" type="Texture" id=4]
+[ext_resource path="res://res/souly/hair/hair2.png" type="Texture" id=5]
+[ext_resource path="res://res/souly/hair/hair1.png" type="Texture" id=6]
+[ext_resource path="res://res/souly/hair/hair3.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../head:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( -30, 0 ), Vector2( 0, -40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1.5, 2.5, 3.5 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, 33 ), Vector2( 0, 0 ), Vector2( 0, 33 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../head:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ 5.0, 40.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../head:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 33 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../head:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 20.0 ]
+}
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15.2677, 12.8307 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.30217, 12.7844 )
@@ -16,15 +117,34 @@ extents = Vector2( 6.42915, 12 )
 collision_mask = 2
 script = ExtResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../body/clothes")
+autoplay = "Idle"
+anims/Idle = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
 [node name="PhysicsShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0713968, -0.159549 )
 scale = Vector2( 0.6, 1 )
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="body" type="Node2D" parent="."]
+rotation = 3.01072e-08
+scale = Vector2( 0.0618671, 0.0618671 )
+
+[node name="head" type="AnimatedSprite" parent="body"]
+position = Vector2( 113.708, -203.732 )
+rotation = 0.349066
+scale = Vector2( 1.00215, 1.00215 )
+frames = SubResource( 7 )
+frame = 1
+playing = true
+
+[node name="clothes" type="AnimatedSprite" parent="body"]
 self_modulate = Color( 0.984314, 0.678431, 1, 1 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 1 )
+frames = SubResource( 4 )
+playing = true
+offset = Vector2( 0, 33 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 

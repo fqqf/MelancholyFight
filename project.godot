@@ -8,11 +8,29 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://src/gameplay/Game.gd"
+}, {
+"base": "Node2D",
+"class": "Zone",
+"language": "GDScript",
+"path": "res://src/gameplay/zones/Zone.gd"
+} ]
+_global_script_class_icons={
+"Game": "",
+"Zone": ""
+}
+
 [application]
 
 config/name="Cave-Game"
 run/main_scene="res://src/core/Init.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://res/app-core/icon.png"
+boot_splash/bg_color=Color( 0.203922, 0.172549, 0.231373, 1 )
+config/icon="res://res/app-core/icon.png"
 
 [autoload]
 

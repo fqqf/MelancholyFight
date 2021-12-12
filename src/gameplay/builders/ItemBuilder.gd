@@ -11,6 +11,7 @@ var numus_structure_min_width
 var numus_size =7
 var numus_gap = 1
 
+
 var chunk
 var offset
 var items
@@ -23,13 +24,13 @@ func create_collectables(chunk_, offset_=0):
 	items = []
 	chunk = chunk_
 	offset = offset_
-	create_numus(chunk)
+	create_numus()
 	return items
 	
-func create_numus(chunk):
+func create_numus():
 	var width
 	var height
-	var numus_amount
+
 	var struct
 	var x
 	
@@ -39,6 +40,7 @@ func create_numus(chunk):
 		height = (platform.height_PX-56)/4 + 20
 		x = platform.position.x
 		var scene_speed = get_parent().get_parent().scene_speed
+
 		var not_together = false
 		if width <= max(60, scene_speed*40):
 			var variant=round(rand_range(14,15))
@@ -52,6 +54,7 @@ func create_numus(chunk):
 			if lacky == 1 and not_together == false:
 				not_together = true
 				var struct_range = round(rand_range(0,numus_structures.size()-3))
+
 				struct = numus_structures[str(struct_range)]
 				
 				#пока остаток платформы меньше чем выбранная структура
@@ -59,8 +62,8 @@ func create_numus(chunk):
 					struct_range = round(rand_range(0,6))
 					struct = numus_structures[str(struct_range)]
 
-				var width2 = 0
-				width2 = width
+				# var width2 = 0
+				# width2 = width
 				width -=10+numus_gap+(struct[0].size()*(numus_size+numus_gap))
 
 				if width < max(40, scene_speed*40):
@@ -69,8 +72,10 @@ func create_numus(chunk):
 					#x += (c*2)+struct[0].size()*(numus_size+numus_gap)
 					width = 0
 				else:
+
 					height = rand_range(numus_size/2+3, 29)
 					if struct.size() > 4 or scene_speed>4: height = numus_size/2+3
+
 					instance_numus_struct(12+x,platform.position.y-height, struct)
 					x += 10+numus_gap+struct[0].size()*(numus_size+numus_gap)
 			else:# если кубик не выкинул структуру на место - оставляем пустым на 112 пикселей

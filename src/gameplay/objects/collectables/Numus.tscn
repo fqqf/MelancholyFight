@@ -4,8 +4,9 @@
 [ext_resource path="res://res/collectables/coin.png" type="Texture" id=2]
 
 [node name="Numus" instance=ExtResource( 1 )]
+modulate = Color( 0.243137, 0.129412, 0.227451, 0.4 )
 type = 0
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2( 0.07, 0.07 )
+scale = Vector2( 0.09, 0.09 )
 texture = ExtResource( 2 )
