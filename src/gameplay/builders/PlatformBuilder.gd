@@ -27,6 +27,7 @@ var node
 const U_BLOCK_SIZE = 16
 
 var platform_height = platform_height_limits[0]
+var platform_height_diff = platform_height_limits[1]-platform_height_limits[0]
 
 func _ready():
 	platform_structures = platforms_zone.platforms
@@ -42,49 +43,50 @@ func generate_chunk(offset=0):
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
 	
 	var platform_len
-	
-	var platform_height_diff = platform_height_limits[1]-platform_height_limits[0]
 	var gap_len
 	
 	var lacky 
 	_break_no_gap = false
 	var not_together = false
 	while true:
-		if taken==0 or not_together == true:
-			lacky = 1
-			#not_together = false
+		if taken==0 or not_together == true: lacky = 1
 		else:
 			lacky = round(rand_range(0,1))
+		
 		platform_len = int(Utils.get_prob_ps([platform_len_limits[0], platform_len_limits[1]], [[90,100,100],[0,20, 40],[21,45, 95],[46,89, 100]] )/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
+		
 		if lacky == 0 and max_platform_len<=left:
 			chunk = create_pl(offset,chunk)
 			not_together = true
 		
 		elif lacky > 0 and max_platform_len<=left:
 			gap_len = Utils.get_prob_ps([gap_len_limits[0], gap_len_limits[1]], [[0,0,4],[5,10,4],[11,50,10],[51,70,20],[71,99,50],[100,100,30]])
-		
-			if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
-				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
-				
-			elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
-				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 250]])
-				
-			else:
-				platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 60, 50],[61, 79, 300],[80,100, 35]])	
+			
+			set_platform_height()
+			
 			if create_gap_at_chunk_start and taken==0: pass
+			
 			elif platform_len<=left and _break_no_gap == false: # Instance platform
 				chunk.append(platform_scene.instance().build(offset+taken, platform_height, platform_len))
 				use_mem(platform_len)
 				add_child(chunk.back())
-			else:
-				break
-			if gap_len+max_platform_len<=left: 
-				use_mem(gap_len)
-			else:
-				break	
+			else: break
+			
+			if gap_len+max_platform_len<=left: use_mem(gap_len) 
+			else: break	
+	
 		else:
 			break
 	return [chunk, taken+offset]
+
+func set_platform_height():
+	if platform_height <= platform_height_limits[0]+platform_height_diff*0.4: # TALL
+		platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,250], [21, 60, 40],[61, 79, 50],[80,100, 30]])
+	elif platform_height >= platform_height_limits[0]+platform_height_diff*0.7: # SMALL	
+		platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,40],[21, 60, 40],[61, 79, 50],[80,100, 250]])
+	else:
+		platform_height = Utils.get_prob_ps([platform_height_limits[0], platform_height_limits[1]],[[0,20,35],[21, 60, 50],[61, 79, 300],[80,100, 35]])	
+			
 
 func use_mem(mem):
 	taken += mem
@@ -119,7 +121,6 @@ func create_pl(offset,chunk):
 	var _max_gap_len = max(gap_len_limits[0], gap_len_limits[1])
 	var max_platform_len_local = max_platform_len
 	var platform_len
-	var platform_height
 	var gap_len
 	var gap_fl =1
 	

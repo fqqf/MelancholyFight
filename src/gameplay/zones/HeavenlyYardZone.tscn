@@ -27,14 +27,15 @@ onready var wing = $Wing
 onready var wing2 = $Wing2
 onready var wing3 = $Wing3
 
-func _physics_process(delta):
-	wing.rotation_degrees += 1
-	wing2.rotation_degrees += 1
-	wing3.rotation_degrees += 1
-func change_rotation(wing):
-	if wing.rotation_degrees==360:
-		wing.rotation_degrees = 0
-	wing.rotation_degrees += 1
+func _physics_process(_delta):
+	change_rotation(wing)
+	change_rotation(wing2)
+	change_rotation(wing3)
+
+func change_rotation(wing_):
+	if wing_.rotation_degrees==360:
+		wing_.rotation_degrees = 0
+	wing_.rotation_degrees += 1
 "
 
 [node name="HeavenlyYardZone" type="Node2D"]

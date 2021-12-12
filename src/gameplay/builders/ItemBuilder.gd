@@ -8,8 +8,8 @@ onready var scc =  preload("res://src/gameplay/objects/collectables/Collectable.
 var numus_structures
 var numus_structure_min_width
 
-var numus_size =7
-var numus_gap = 1
+var numus_size = 9
+var numus_gap = 0
 
 
 var chunk

@@ -27,7 +27,7 @@ func _ready():
 	start_position = position
 
 
-func move(delta):
+func move(_delta):
 	var _was_in_air = not is_on_floor()
 	var was_on_floor = is_on_floor()
 	var last_position = position

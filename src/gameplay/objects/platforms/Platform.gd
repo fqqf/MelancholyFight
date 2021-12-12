@@ -22,9 +22,9 @@ func build(x_=x, height_PX_=height_PX, width_PX_=width_PX):
 	
 	position = Vector2(x, height_PX)
 	
-	for x in width:
+	for _x in width:
 		for y in BLOCK_HEIGHT:
-			set_cell(x,y,tilemap_id)
+			set_cell(_x,y,tilemap_id)
 	update_bitmask_region(Vector2(0,0),Vector2(width, BLOCK_HEIGHT))
 	return self
 

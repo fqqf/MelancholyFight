@@ -16,9 +16,9 @@ func _set_zone_active(active):
 	if active:
 		rebuild_platforms(Singleton.ZoneType.FRENCH_ROSE)
 
-func _change_properties(state):
+func _change_properties(_state):
 	#._change_properties(state)
-	var platform_script = load("res://src/gameplay/objects/platforms/Platform.gd")
+	#var platform_script = load("res://src/gameplay/objects/platforms/Platform.gd")
 	for chunk in game.chunks:
 		for platform in chunk[0]:
 			platform.tilemap_id = 0
