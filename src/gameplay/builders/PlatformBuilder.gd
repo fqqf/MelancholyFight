@@ -42,15 +42,17 @@ func generate_chunk(offset=0):
 	var gap_len
 	var lacky 
 	_break_no_gap = false
+	var not_together = false
 	while true:
-		if taken==0:
+		if taken==0 or not_together == true:
 			lacky = 1
+			#not_together = false
 		else:
-			lacky = round(rand_range(0,6))
+			lacky = round(rand_range(0,1))
 		platform_len = int(rand_range(platform_len_limits[0], platform_len_limits[1])/U_BLOCK_SIZE)*U_BLOCK_SIZE # Setup platform and gap
 		if lacky == 0 and max_platform_len<=left:
 			chunk = create_pl(offset,chunk)
-		
+			not_together = true
 		
 		elif lacky > 0 and max_platform_len<=left:
 			
