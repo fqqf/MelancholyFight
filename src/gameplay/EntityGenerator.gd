@@ -23,14 +23,14 @@ func create_entities(chunk):
 		# Проверить память на платформе, кинуть кубик, если влезает - instance_numus()
 		numus_struct = [[0,0,0,0,0],[1,1,1,1,1],[0,0,0,0,1]]
 		numus_struct_x = 4234
-		numus_struct_y = 4525
+		numus_struct_y = 4525 # ЗАПОЛНИТЬ СВОИМ АЛГОРИТМОМ
 		
-		instance_numus(platform, numus_struct)
+		instance_numus_struct(platform, numus_struct)
 	return entities
 
 var numus_struct
 
-func instance_numus(platform, numus_struct):
+func instance_numus_struct(platform, numus_struct):
 	
 	var i = 0
 	var j = 0
