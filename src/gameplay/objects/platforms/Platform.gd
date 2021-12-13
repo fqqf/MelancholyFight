@@ -2,6 +2,8 @@ extends TileMap
 
 tool
 
+onready var coordinate_system = $Transform
+
 export var BLOCK_HEIGHT = 3
 
 var width_PX = 0
@@ -14,10 +16,8 @@ var tilemap_id = 1
 func get_tilemap_id(): return tilemap_id
 
 func _ready():
-	var t = Transform2D()
-	t.y*=-0.16
-	transform =t
-
+	pass
+	
 var array
 
 func recolor():
@@ -39,4 +39,9 @@ func build(x_=x, height_PX_=height_PX, width_PX_=width_PX):
 	
 	return self
 
+func add_entity(entity, adjust_scale=true):
+	if adjust_scale:
+		entity.scale.x *= 0.01
+		entity.scale.y *= -0.01
+	add_child(entity)
 
