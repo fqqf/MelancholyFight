@@ -1,5 +1,7 @@
 extends TileMap
 
+tool
+
 export var BLOCK_HEIGHT = 3
 
 var width_PX = 0
@@ -12,11 +14,14 @@ var tilemap_id = 1
 func get_tilemap_id(): return tilemap_id
 
 func _ready():
-	pass
+	var t = Transform2D()
+	t.y*=-0.16
+	transform =t
 
 var array
 
-func recolor(width):
+func recolor():
+	var width = Utils.unit2block(width_PX)
 	tilemap_id = Singleton.platform_tilemap_id
 	for _x in width:
 		for y in BLOCK_HEIGHT:
@@ -27,8 +32,8 @@ func build(x_=x, height_PX_=height_PX, width_PX_=width_PX):
 	height_PX = height_PX_
 	width_PX = width_PX_
 	x = x_
-	var width = Utils.unit2block(width_PX)
-	recolor(width)
+	#var width = Utils.unit2block(width_PX)
+	recolor()
 	
 	position = Vector2(x, height_PX)
 	

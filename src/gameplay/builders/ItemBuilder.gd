@@ -3,7 +3,7 @@ extends Node2D
 onready var collectables_map = preload("res://res/collectables/CollectablesMap.gd")
 
 onready var numus_scene = preload("res://src/gameplay/objects/collectables/Numus.tscn")
-onready var scc =  preload("res://src/gameplay/objects/collectables/Collectable.gd")
+onready var scc =  preload("res://src/gameplay/objects/collectables/Entity.gd")
 
 var numus_structures
 var numus_structure_min_width
