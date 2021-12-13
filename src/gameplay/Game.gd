@@ -12,7 +12,7 @@ var evangelion_zone_scene = preload("res://src/gameplay/zones/EvangelionZone.tsc
 var french_rose_zone_scene = preload("res://src/gameplay/zones/FrenchRoseZone.tscn")
 var heavenly_yard_zone_scene = preload("res://src/gameplay/zones/HeavenlyYardZone.tscn")
 var chunks = []
-var items = []
+var entities = []
 
 var start_time = 0
 var time_passed = 0
@@ -49,13 +49,13 @@ func create_zones():
 func setup_initial_chunk():
 	platform_builder.desired_chunk_len=10000
 	var chunk = platform_builder.generate_chunk()
-	var item = []
+	var entity = []
 	chunks.append(chunk)
 	Logger.log("Created start chunk")
 	platform_builder.create_gap_at_chunk_start = true
 	
-	item = item_builder.create_collectables(chunk)
-	items.append(item)
+	entity = entity_generator.create_entities(chunk)
+	entities.append(entity)
 
 func _physics_process(delta):
 	time = OS.get_unix_time()
@@ -99,7 +99,7 @@ func create_and_delete_chunks():
 		if chunk.size()==2 and position.position.x < -chunk[1]+450: 
 			chunks.append(platform_builder.generate_chunk(chunk[1]))
 			Logger.log("Created chunk [" +str(chunk[1])+":"+str(chunks.back()[1])+"]")
-			items.push_front(item_builder.create_collectables(chunks.back(), chunk[1]))
+			entities.push_front(item_builder.create_collectables(chunks.back(), chunk[1]))
 			chunk.append("DELETE") # TODO: const
 			#line.position.x = chunk[1] НЕ УБИРАТЬ ЭТОТ КОММЕНТАРИЙ, НУЖЕН ДЛЯ ДЕБАГА
 
@@ -108,9 +108,9 @@ func create_and_delete_chunks():
 			for platform in chunk[0]:
 				platform.queue_free()
 			chunks.erase(chunk)
-			for it in items[1]:
-				if is_instance_valid(it):it.queue_free()	
-			items.remove(1)
+			for et in entities[1]:
+				if is_instance_valid(et):et.queue_free()	
+			entities.remove(1)
 
 func _on_souly_pickup_collectable(collectable):
 	collectable.free()
