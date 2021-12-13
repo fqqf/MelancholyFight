@@ -1,26 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://res/zones/EvangelionZone/EvangelionZonePlatformSet.tres" type="TileSet" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://src/gameplay/objects/platforms/Platform.gd" type="Script" id=4]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-func _ready():
-	pass
-	#print(global_scale.y)
-	#global_scale.y = 1
-"
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends Sprite
-
-func _ready():
-	print(global_scale)
-	global_scale.y = 0.16
-	print(scale)
-"
 
 [node name="Platform" type="TileMap"]
 scale = Vector2( 0.16, 0.16 )
@@ -33,10 +14,3 @@ script = ExtResource( 4 )
 [node name="Transform" type="Node2D" parent="."]
 position = Vector2( 0, -100 )
 scale = Vector2( 100, -100 )
-script = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Transform"]
-position = Vector2( 1.46683, -2.49492 )
-scale = Vector2( 0.01, -0.01 )
-texture = ExtResource( 3 )
-script = SubResource( 2 )

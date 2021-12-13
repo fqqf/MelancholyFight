@@ -43,5 +43,5 @@ func add_entity(entity, adjust_scale=true):
 	if adjust_scale:
 		entity.scale.x *= 0.01
 		entity.scale.y *= -0.01
-	add_child(entity)
+	coordinate_system.add_child(entity)
 
