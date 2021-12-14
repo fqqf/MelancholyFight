@@ -26,7 +26,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Cave-Game"
+config/name="SOUL HARVEST - PLAYABLE DEMO - PLAYABLE DEMO"
 run/main_scene="res://src/core/Init.tscn"
 boot_splash/image="res://res/app-core/icon.png"
 boot_splash/bg_color=Color( 0.203922, 0.172549, 0.231373, 1 )

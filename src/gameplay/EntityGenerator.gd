@@ -8,7 +8,7 @@ onready var numus_scene = preload("res://src/gameplay/objects/collectables/Numus
 func _ready():
 	game = Singleton.game
 
-var entities = []
+var entities
 var platform_memory
 
 var numus_struct_x
@@ -19,7 +19,8 @@ var numus_gap = 0
 
 var platform
 
-func create_entities(chunk):	
+func create_entities(chunk):
+	entities = []
 	for platform_ in chunk[0]: # Проверить память на платформе, кинуть кубик, если влезает - instance_numus()
 		self.platform = platform_
 		platform_memory = platform.memory
@@ -36,16 +37,12 @@ func instance_numus_struct(numus_struct_x, numus_struct_y, numus_struct):
 	for y_ in numus_struct: # Создать саму структуру
 		for x_ in y_:
 			if x_ == 1:
-				
-				var numus = numus_scene.instance()	
-				
+				var numus = numus_scene.instance()
 
 				numus.position.x = numus_struct_x+i*numus_size*10+numus_gap*i
-			#	print(numus.position.x)
 				numus.position.y = numus_struct_y+j*numus_size*10-numus_gap*j + 0.5
 				numus.scale.x = numus_size
 				numus.scale.y = numus_size
-				
 
 				platform.add_entity(numus, false)
 				entities.append(numus)

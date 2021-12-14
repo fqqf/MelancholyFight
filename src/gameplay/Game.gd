@@ -100,7 +100,7 @@ func create_and_delete_chunks():
 		if chunk.size()==2 and position.position.x < -chunk[1]+450: 
 			chunks.append(platform_builder.generate_chunk(chunk[1]))
 			Logger.log("Created chunk [" +str(chunk[1])+":"+str(chunks.back()[1])+"]")
-			entities.push_front(item_builder.create_collectables(chunks.back(), chunk[1]))
+			entities.push_front(entity_generator.create_entities(chunks.back()))
 			chunk.append("DELETE") # TODO: const
 			#line.position.x = chunk[1] НЕ УБИРАТЬ ЭТОТ КОММЕНТАРИЙ, НУЖЕН ДЛЯ ДЕБАГА
 
