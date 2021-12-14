@@ -18,7 +18,7 @@ func get_tilemap_id(): return tilemap_id
 func _ready():
 	pass
 	
-var array
+var memory = []
 
 func recolor():
 	var width = Utils.unit2block(width_PX)
@@ -32,7 +32,11 @@ func build(x_=x, height_PX_=height_PX, width_PX_=width_PX):
 	height_PX = height_PX_
 	width_PX = width_PX_
 	x = x_
-	#var width = Utils.unit2block(width_PX)
+	var width = Utils.unit2block(width_PX)
+	
+	for i in range (0,width):
+		memory.append(0)
+	
 	recolor()
 	
 	position = Vector2(x, height_PX)

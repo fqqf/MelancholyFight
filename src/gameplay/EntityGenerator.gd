@@ -14,7 +14,7 @@ var platform_memory
 var numus_struct_x
 var numus_struct_y
 
-var numus_size = 9
+var numus_size = 0.05
 var numus_gap = 0
 
 var platform
@@ -24,8 +24,8 @@ func create_entities(chunk):
 		self.platform = platform_
 		platform_memory = platform.memory
 		
-		numus_struct = [[0,0,0,0,0],[1,1,1,1,1],[0,0,0,0,1]]
-		instance_numus_struct(523542,42342342, numus_struct) # Вычислить x и y для numus_struct через старый код
+		numus_struct = [[1,0,0,1,0],[1,1,1,1,1],[0,1,0,0,1]]
+		instance_numus_struct(0,0, numus_struct) # Вычислить x и y для numus_struct через старый код
 	return entities
 
 var numus_struct
@@ -39,15 +39,20 @@ func instance_numus_struct(numus_struct_x, numus_struct_y, numus_struct):
 				
 				var numus = numus_scene.instance()	
 				
-				numus.x = numus_struct_x+i*numus_size+numus_gap*i
-				numus.y = numus_struct_y-j*numus_size-numus_gap*j
-			
-				platform.add_entity(numus)
-				entities.add(numus)
+
+				numus.position.x = numus_struct_x+i*numus_size*10+numus_gap*i
+			#	print(numus.position.x)
+				numus.position.y = numus_struct_y+j*numus_size*10-numus_gap*j + 0.5
+				numus.scale.x = numus_size
+				numus.scale.y = numus_size
+				
+
+				platform.add_entity(numus, false)
+				entities.append(numus)
 			i+=1
 		i=0
 		j+=1
 		
-	for h in numus_struct[0].size(): # Записать в память ссылки на структуры
+	for h in numus_struct[0].size(): # Записать в память ссылки на структуру
 		platform_memory[round(h)] = numus_struct
 

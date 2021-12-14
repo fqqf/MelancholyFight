@@ -3,6 +3,7 @@ extends Node
 class_name Game
 
 onready var platform_builder = $Position/PlatformBuilder
+onready var entity_generator = $EntityGenerator
 onready var item_builder = $Position/ItemBuilder
 onready var line = $Position/Line2D
 onready var souly = $Souly

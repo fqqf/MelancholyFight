@@ -7,6 +7,11 @@
 modulate = Color( 0.243137, 0.129412, 0.227451, 0.4 )
 type = 0
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 4.48234, -4.44545 )
+
 [node name="Sprite" parent="." index="1"]
+position = Vector2( 0, -9 )
 scale = Vector2( 0.09, 0.09 )
 texture = ExtResource( 2 )
+centered = false

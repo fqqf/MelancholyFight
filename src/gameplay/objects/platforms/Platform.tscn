@@ -12,5 +12,4 @@ format = 1
 script = ExtResource( 4 )
 
 [node name="Transform" type="Node2D" parent="."]
-position = Vector2( 0, -100 )
 scale = Vector2( 100, -100 )
