@@ -52,8 +52,9 @@ func create_entities(chunk):
 				y = 1
 				var _occupy = return_number_occupy(x,size_numus_structur)
 				instance_numus_struct(x,y, numus_struct)
-				var start = _occupy[0]
+				var start = _occupy[0]+1
 				var end = _occupy[1]
+				platform_memory[start-1] = 5#записать структуру или ссылку на структуру
 				while start < end:
 					platform_memory[start] = 1
 					start+=1
@@ -81,8 +82,9 @@ func create_entities(chunk):
 						var _occupy = return_number_occupy(x,size_numus_structur)
 						x= float((_occupy[1]-size_numus_structur)/2)
 						instance_numus_struct(x,y, numus_struct)
-						var start = _occupy[0]#+1
+						var start = _occupy[0]+1
 						var end = _occupy[1]
+						platform_memory[start-1] = 5#записать структуру или ссылку на структуру
 						while start < end:
 							platform_memory[start] = 1
 							start+=1
