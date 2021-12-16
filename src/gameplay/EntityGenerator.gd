@@ -14,6 +14,7 @@ const U_BLOCK_SIZE = 0.1
 
 
 func _ready():
+	randomize()
 	game = Singleton.game
 	numus_structures = collectables_map.numus
 
@@ -25,61 +26,72 @@ var numus_struct_y
 
 var numus_size = 0.05
 var numus_gap = 0
-
 var platform
 
 func create_entities(chunk):
 	entities = []
-	for platform_ in chunk[0]: # Проверить память на платформе, кинуть кубик, если влезает - instance_numus()
+	var x
+	var y
+	var start_platform_flag
+	for platform_ in chunk[0]:
+		var scene_speed = get_parent().scene_speed
 		self.platform = platform_
 		platform_memory = platform.memory
 		##
 		var found_gap = []
-		var size_
+		var size_numus_structur
 		found_gap = search_gap(platform_memory)
-		for count in found_gap:
-			if  count[1]-count[0]+1 <5 and count[1]-count[0]+1 >= 3:
+		if platform_memory[0]==0: start_platform_flag = true
+		for count_gap in found_gap:
+			
+			if  count_gap[1]-count_gap[0]+1 <5 and count_gap[1]-count_gap[0]+1 >= 3:
 				var variant=round(rand_range(14,15))
 				numus_struct = numus_structures[str(variant)]
-				#print("numus_struct",numus_struct)
-				size_ = return_size_numus_struct(numus_struct)
-				var x = float(((count[1]-count[0])+1-size_)/2)#-numus_size/2
-				var y = 1
-				var _occupy = return_number_occupy(x,size_)
+				size_numus_structur = return_size_numus_struct(numus_struct)
+				x = float(((count_gap[1]-count_gap[0])+1-size_numus_structur)/2)#-numus_size/2
+				y = 1
+				var _occupy = return_number_occupy(x,size_numus_structur)
 				instance_numus_struct(x,y, numus_struct)
-				var start = _occupy[0]#+1
+				var start = _occupy[0]
 				var end = _occupy[1]
 				while start < end:
-					#print("start", start)
 					platform_memory[start] = 1
 					start+=1
-				#print("[t_latform_mem]", platform_memory)
-				
-			elif	count[1]-count[0]+1 >= 5:
-				var variant=round(rand_range(0,14))
-				numus_struct = numus_structures[str(variant)]
-				#print("numus_struct",numus_struct)
-				size_ = return_size_numus_struct(numus_struct)
-				if size_ > count[1]-count[0]+1:
-					break
-				var x = float(((count[1]-count[0])+1-size_)/2)#-numus_size/2
-				var y = 1
-				var _occupy = return_number_occupy(x,size_)
-				instance_numus_struct(x,y, numus_struct)
-				var start = _occupy[0]#+1
-				var end = _occupy[1]
-				while start < end:
-					#print("start", start)
-					platform_memory[start] = 1
-					start+=1
-				#print("[t_latform_mem]", platform_memory)
-			pass
-			#platform_memory[round_to_smaller(count)] = numus_struct
-		
-		##
-		
-		#instance_numus_struct(0,0, numus_struct) # Вычислить x и y для numus_struct через старый код
+								
+			elif count_gap[1]-count_gap[0]+1 >= 5:
+				while count_gap[0] <= count_gap[1] - 3:#минимальный параметр
+					var lucky = round(rand_range(0,9))
+					if lucky >3:
+						count_gap[0]+= scene_speed*5 #делаем пропуск если не повезло
+						pass
+					else:
+						var variant=round(rand_range(0,14))
+						numus_struct = numus_structures[str(variant)]
+						size_numus_structur = return_size_numus_struct(numus_struct)
+						if start_platform_flag == true:
+							count_gap[0]+=3
+							start_platform_flag = false
+						if size_numus_structur > count_gap[1]-count_gap[0]+1:
+							break
+						x = count_gap[0]
+						if len(numus_struct) >7:
+							y =-1 
+						else: 
+							y = rand_range(0.5,1.5)
+						var _occupy = return_number_occupy(x,size_numus_structur)
+						x= float((_occupy[1]-size_numus_structur)/2)
+						instance_numus_struct(x,y, numus_struct)
+						var start = _occupy[0]#+1
+						var end = _occupy[1]
+						while start < end:
+							platform_memory[start] = 1
+							start+=1
+							count_gap[0] +=1
+						count_gap[0] += scene_speed*5
 	return entities
+
+
+
 ####
 func return_number_occupy(x,size_):
 	var array = []
