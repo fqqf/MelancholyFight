@@ -78,7 +78,8 @@ func create_entities(chunk):
 						else: 
 							y = rand_range(0.5,1.5)
 						var _occupy = return_number_occupy(x,size_numus_structur)
-						x= float((_occupy[1]-size_numus_structur)/2)
+						x = float(((_occupy[1]-size_numus_structur)-_occupy[0])/2)+_occupy[0]
+
 						instance_numus_struct(x,y, numus_struct)
 						var start = _occupy[0]+1
 						var end = _occupy[1]
