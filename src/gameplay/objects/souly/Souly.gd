@@ -50,6 +50,9 @@ func _physics_process(delta):
 		motion.y = 1000
 	
 	adjust_pos_to_start_pos(delta)
+	
+	#if Input.is_action_pressed("jump"):
+	#	print("PRESS  "+str(OS.get_unix_time()))
 	#print(motion.y)
 	move(delta)
 	
@@ -66,7 +69,7 @@ func adjust_pos_to_start_pos(delta):
 
 func ground_functions():
 		jump_released = false
-		if Input.is_action_just_pressed("jump"):	
+		if Input.is_action_pressed("jump"):	
 			#Logger.log("Actually jumped")
 			jump(JUMP_FORCE)
 			has_jumped = true	
