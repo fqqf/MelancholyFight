@@ -112,10 +112,12 @@ func create_and_delete_chunks():
 			for et in entities[1]:
 				if is_instance_valid(et):et.queue_free()	
 			entities.remove(1)
+			Logger.log("WARNING WARNING Remove Position, when Entity Generator is done")
 
 func _on_souly_pickup_collectable(collectable):
-	collectable.free()
+	collectable.queue_free()
 	
 func end_game():
 	Logger.log("Game over")
+	queue_free()
 
