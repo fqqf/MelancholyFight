@@ -19,7 +19,6 @@ func _ready():
 	numus_structures = collectables_map.numus
 
 var entities
-var platform_memory
 
 var numus_struct_x
 var numus_struct_y
@@ -36,12 +35,11 @@ func create_entities(chunk):
 	for platform_ in chunk[0]:
 		var scene_speed = get_parent().scene_speed
 		self.platform = platform_
-		platform_memory = platform.memory
 		##
 		var found_gap = []
 		var size_numus_structur
-		found_gap = search_gap(platform_memory)
-		if platform_memory[0]==0: start_platform_flag = true
+		found_gap = search_gap(platform.memory)
+		if platform.memory[0]==0: start_platform_flag = true
 		for count_gap in found_gap:
 			
 			if  count_gap[1]-count_gap[0]+1 <5 and count_gap[1]-count_gap[0]+1 >= 3:
@@ -54,9 +52,9 @@ func create_entities(chunk):
 				instance_numus_struct(x,y, numus_struct)
 				var start = _occupy[0]+1
 				var end = _occupy[1]
-				platform_memory[start-1] = 5#записать структуру или ссылку на структуру
+				platform.memory[start-1] = 5#записать структуру или ссылку на структуру
 				while start < end:
-					platform_memory[start] = 1
+					platform.memory[start] = 1
 					start+=1
 								
 			elif count_gap[1]-count_gap[0]+1 >= 5:
@@ -84,12 +82,16 @@ func create_entities(chunk):
 						instance_numus_struct(x,y, numus_struct)
 						var start = _occupy[0]+1
 						var end = _occupy[1]
-						platform_memory[start-1] = 5#записать структуру или ссылку на структуру
+						platform.memory[start-1] = 5#записать структуру или ссылку на структуру
+						
 						while start < end:
-							platform_memory[start] = 1
+							platform.memory[start] = 1
 							start+=1
 							count_gap[0] +=1
 						count_gap[0] += scene_speed*5
+
+	for platform_ in chunk[0]:
+		platform_.draw_debug_for_numus()
 	return entities
 
 
@@ -153,7 +155,7 @@ func search_gap(platform_memory_):
 					temp_array.append(start)
 					temp_array.append(end)
 					array_gap.append(temp_array)
-		elif platform_memory_[count] != 0:
+		elif platform.memory_[count] != 0:
 			if start_gap:
 				end = count - 1
 				start_gap = false
@@ -186,5 +188,5 @@ func instance_numus_struct(numus_struct_x, numus_struct_y, numus_struct):
 		
 #	for count in numus_struct[0].size(): # Записать в память ссылки на структуру
 #		#print("count jopp", count, numus_struct)		
-#		#platform_memory[round_to_smaller(count)] = numus_struct
+#		#platform.memory[round_to_smaller(count)] = numus_struct
 #		pass

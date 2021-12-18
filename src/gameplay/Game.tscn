@@ -49,73 +49,73 @@ position = Vector2( 41.4709, 36.5102 )
 script = SubResource( 1 )
 
 [node name="Creo2" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -40.6559, -30.2285 )
-rotation = -3.14159
-scale = Vector2( 1, -1 )
+position = Vector2( -50.8755, 13.306 )
+rotation = 2.53518e-06
 
 [node name="Creo4" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -0.413761, -3.41952 )
+position = Vector2( -12.2292, -2.64468 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
 [node name="Creo3" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -26.8733, -7.15461 )
+position = Vector2( -25.5933, -5.21474 )
 rotation = 1.50996e-07
 
 [node name="Creo" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -30.9606, -10.1383 )
-rotation = -3.14159
-scale = Vector2( 1, -1 )
+position = Vector2( -32.5401, -5.99372 )
+rotation = 2.53518e-06
 
 [node name="Creo5" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -13.1572, 4.72691 )
+position = Vector2( -21.3867, -11.2766 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
 [node name="Creo7" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -15.5145, 15.184 )
+position = Vector2( 0.0394554, -10.2787 )
+rotation = 2.53518e-06
+
+[node name="Creo8" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -19.6436, -5.929 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
-[node name="Creo8" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -13.2256, -19.7451 )
-rotation = 1.50996e-07
-
 [node name="Creo6" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( 0.469955, -34.9276 )
+position = Vector2( -14.808, -31.6919 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
 [node name="Creo9" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -19.5417, -29.5277 )
+position = Vector2( -1.12597, -20.4962 )
 rotation = 1.50996e-07
 
 [node name="Creo10" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -8.35124, 2.87635 )
+position = Vector2( -34.5537, -15.4143 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
 [node name="Creo11" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -17.4994, -18.8515 )
-rotation = 1.50996e-07
-
-[node name="Creo12" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -2.82158, -16.5333 )
-rotation = 1.50996e-07
-
-[node name="Creo13" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -3.76997, -35.7583 )
-rotation = 1.50996e-07
-
-[node name="Creo14" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -24.2292, 14.806 )
-rotation = 1.50996e-07
-
-[node name="Creo15" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -25.2037, -21.1752 )
+position = Vector2( -19.711, 8.49203 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
+[node name="Creo12" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -37.3888, 8.00399 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="Creo13" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -28.2831, -2.25336 )
+rotation = 1.50996e-07
+
+[node name="Creo14" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -17.3733, -22.9269 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
+[node name="Creo15" parent="CreosBuilder" instance=ExtResource( 5 )]
+position = Vector2( -37.1355, -6.85375 )
+rotation = 2.53518e-06
+
 [node name="Creo16" parent="CreosBuilder" instance=ExtResource( 5 )]
-position = Vector2( -18.0414, -14.4633 )
+position = Vector2( -21.7741, -14.0142 )
 rotation = 1.50996e-07
