@@ -91,8 +91,7 @@ func create_entities(chunk):
 							count_gap[0] +=1
 						count_gap[0] += scene_speed*5
 
-	for platform_ in chunk[0]:
-		platform_.draw_debug_for_numus()
+	# Uncomment for debug :: for platform_ in chunk[0]:	platform_.draw_debug_for_numus()
 	return entities
 
 
@@ -175,9 +174,8 @@ func instance_numus_struct(numus_struct_x, numus_struct_y, numus_struct):
 		for x_ in y_:
 			if x_ == 1:
 				var numus = numus_scene.instance()
-
-				numus.position.x = numus_struct_x+i*numus_size*10+numus_gap*i
-				numus.position.y = numus_struct_y+j*numus_size*10-numus_gap*j 
+				numus.position.x = numus_struct_x+i*(numus_size*9)+numus_gap*i
+				numus.position.y = numus_struct_y+j*(numus_size*9)-numus_gap*j 
 				numus.scale.x = numus_size
 				numus.scale.y = numus_size
 
