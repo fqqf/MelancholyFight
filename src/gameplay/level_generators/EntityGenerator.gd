@@ -36,6 +36,7 @@ func create_entities(chunk):
 		var scene_speed = get_parent().scene_speed
 		self.platform = platform_
 		##
+		#print("platform y ", platform.position.y)
 		var found_gap = []
 		var size_numus_structur
 		found_gap = search_gap(platform.memory)
@@ -59,13 +60,19 @@ func create_entities(chunk):
 								
 			elif count_gap[1]-count_gap[0]+1 >= 5:
 				while count_gap[0] <= count_gap[1] - 3:#минимальный параметр
-					var lucky = round(rand_range(0,9))
+					var lucky = 2#round(rand_range(0,9))
 					if lucky >3:
 						count_gap[0]+= scene_speed*5 #делаем пропуск если не повезло
 						pass
 					else:
 						var variant=round(rand_range(0,14))
 						numus_struct = numus_structures[str(variant)]
+						
+						var top_numus = (platform.position.y - (25+(return_height_numus_struct(numus_struct))*100))/(U_BLOCK_SIZE*100)
+						if top_numus < 0.5: 
+							break
+						y = min(2,rand_range(0.5, top_numus))
+						
 						size_numus_structur = return_size_numus_struct(numus_struct)
 						if start_platform_flag == true:
 							count_gap[0]+=3
@@ -73,10 +80,6 @@ func create_entities(chunk):
 						if size_numus_structur > count_gap[1]-count_gap[0]+1:
 							break
 						x = count_gap[0]
-						if len(numus_struct) >7:
-							y =-1 
-						else: 
-							y = rand_range(0.5,1.5)
 						var _occupy = return_number_occupy(x,size_numus_structur)
 						x = float(((_occupy[1]-size_numus_structur)-_occupy[0])/2)+_occupy[0]
 
@@ -113,6 +116,11 @@ func return_number_occupy(x,size_):
 func return_size_numus_struct(numus_struct_):
 	var size_ = numus_struct_[0].size()
 	size_= float(((size_*(numus_size+numus_gap))-numus_gap)/U_BLOCK_SIZE)
+	return size_
+	
+func return_height_numus_struct(numus_struct_):
+	var size_ = len(numus_struct_)
+	size_= float(((size_*(numus_size+numus_gap))-numus_gap))#/U_BLOCK_SIZE)
 	return size_
 
 
