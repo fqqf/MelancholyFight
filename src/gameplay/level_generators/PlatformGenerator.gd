@@ -4,7 +4,7 @@ onready var platform_scene = preload("res://src/gameplay/objects/platforms/Platf
 onready var platforms_zone = preload("res://res/collectables/platforms_zone.gd")
 
 
-var gap_len_limits = [30, 40] # Platform vars
+var gap_len_limits = [30, 50] # Platform vars
 var _break_no_gap=false
 
 var platform_len_limits = [100,250]
@@ -132,8 +132,10 @@ func create_pl(offset,chunk):
 		
 		if gap_len == 0: 
 			gap_fl = 0
-		
-		platform_len = max(U_BLOCK_SIZE*3, int((scene_speed*platform_structures[str(platform_range)][2][0])/U_BLOCK_SIZE)*U_BLOCK_SIZE)
+		if platform_structures[str(platform_range)][2][2] == 0: #флаг изменяем ли размер платформыв или нет
+			platform_len = max(U_BLOCK_SIZE*3, int((scene_speed*platform_structures[str(platform_range)][2][0])/U_BLOCK_SIZE)*U_BLOCK_SIZE)
+		else:
+			platform_len = max(U_BLOCK_SIZE*3, int((platform_structures[str(platform_range)][2][0])/U_BLOCK_SIZE)*U_BLOCK_SIZE)
 		var pl_fl
 		if platform_structures[str(platform_range)][2][0] ==0: 
 			pl_fl=0
@@ -145,7 +147,7 @@ func create_pl(offset,chunk):
 			else:
 				max_platform_len_local=platform_len
 			if gap_fl == 0:
-				gap_len = rand_range(gap_len_limits[0],gap_len_limits[1])
+				gap_len = max(gap_len_limits[0],gap_len_limits[1])
 			if create_gap_at_chunk_start and taken==0: pass
 			elif platform_len<=left: # Instance platform
 				platform_height = 55.0 + platform_structures[str(platform_range)][1][count]*platform_height_change
