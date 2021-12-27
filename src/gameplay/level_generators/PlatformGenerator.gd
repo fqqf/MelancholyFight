@@ -127,7 +127,7 @@ func create_pl(offset,chunk):
 	
 	var lacky =1# round(rand_range(0,1))
 	if lacky == 1 :
-		var platform_range = 6#round(rand_range(0,platform_structures.size()-1))
+		var platform_range = round(rand_range(0,platform_structures.size()-1))
 		gap_len = platform_structures[str(platform_range)][2][1]
 		
 		if gap_len == 0: 
