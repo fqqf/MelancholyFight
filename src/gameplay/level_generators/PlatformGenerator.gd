@@ -127,15 +127,17 @@ func create_pl(offset,chunk):
 	
 	var lacky =1# round(rand_range(0,1))
 	if lacky == 1 :
-		var platform_range = round(rand_range(0,platform_structures.size()-1))
+		var platform_range = 6#round(rand_range(0,platform_structures.size()-1))
 		gap_len = platform_structures[str(platform_range)][2][1]
 		
 		if gap_len == 0: 
 			gap_fl = 0
-		if platform_structures[str(platform_range)][2][2] == 0: #флаг изменяем ли размер платформыв или нет
+		
+		
+		if platform_structures[str(platform_range)][2][2] == 1 and scene_speed <=3: #флаг изменяем ли размер платформыв или нет
+			platform_len = platform_structures[str(platform_range)][2][0]*U_BLOCK_SIZE 
+		else: #флаг изменяем ли размер платформыв или нет
 			platform_len = max(U_BLOCK_SIZE*3, int((scene_speed*platform_structures[str(platform_range)][2][0])/U_BLOCK_SIZE)*U_BLOCK_SIZE)
-		else:
-			platform_len = max(U_BLOCK_SIZE*3, int((platform_structures[str(platform_range)][2][0])/U_BLOCK_SIZE)*U_BLOCK_SIZE)
 		var pl_fl
 		if platform_structures[str(platform_range)][2][0] ==0: 
 			pl_fl=0
