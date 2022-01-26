@@ -1,0 +1,167 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://UI/Menus/StartMenu.gd" type="Script" id=1]
+[ext_resource path="res://UI/DefaulTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Enemies/PlantEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/World/grass.png" type="Texture" id=4]
+[ext_resource path="res://Enemies/WalkingEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/World/stars.png" type="Texture" id=6]
+[ext_resource path="res://assets/World/tree.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/vignette.png" type="Texture" id=8]
+[ext_resource path="res://Player/MovingPlatforms.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player/UpDown.tres" type="Curve2D" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 47.6806, 8 )
+
+[node name="StartMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.375
+margin_right = -0.375
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovingPlatforms" parent="." instance=ExtResource( 9 )]
+position = Vector2( 16.7717, 139.718 )
+scale = Vector2( 1.70928, 1.70928 )
+
+[node name="KinematicBody2D" parent="MovingPlatforms" index="0"]
+position = Vector2( 13.9995, -8 )
+
+[node name="Path2D" parent="MovingPlatforms" index="1"]
+curve = ExtResource( 10 )
+
+[node name="PathFollow2D" parent="MovingPlatforms/Path2D" index="0"]
+position = Vector2( -0.0163002, -29.1906 )
+
+[node name="stars" type="Sprite" parent="."]
+position = Vector2( 5, 167 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 6 )
+
+[node name="stars2" type="Sprite" parent="."]
+position = Vector2( 47, 199 )
+rotation = -0.647245
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 6 )
+
+[node name="stars3" type="Sprite" parent="."]
+position = Vector2( 5, 83 )
+rotation = 0.942044
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 6 )
+offset = Vector2( 251.513, 5.22968 )
+
+[node name="PlantEnemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 190, 88 )
+rotation = 1.57079
+
+[node name="tree" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.890196 )
+position = Vector2( 107.558, 127.834 )
+scale = Vector2( 0.118807, 0.118807 )
+texture = ExtResource( 7 )
+
+[node name="WalkingEnemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 222, 165 )
+scale = Vector2( 1.6, 1.6 )
+
+[node name="grass" type="Sprite" parent="."]
+position = Vector2( 168.405, 50.8016 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+
+[node name="grass2" type="Sprite" parent="."]
+position = Vector2( 183.24, 174.374 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+
+[node name="grass3" type="Sprite" parent="."]
+position = Vector2( 203.24, 174.374 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+
+[node name="grass5" type="Sprite" parent="."]
+position = Vector2( 246.24, 174.374 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+
+[node name="vignette" type="Sprite" parent="."]
+position = Vector2( 247.277, 17.7113 )
+rotation = -2.8426
+scale = Vector2( 1.07594, 0.450733 )
+texture = ExtResource( 8 )
+
+[node name="grass6" type="Sprite" parent="."]
+position = Vector2( 264.973, 174.374 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+flip_h = true
+
+[node name="grass8" type="Sprite" parent="."]
+position = Vector2( 150.02, 174.374 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+
+[node name="grass9" type="Sprite" parent="."]
+position = Vector2( 107.16, 174.374 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 4 )
+offset = Vector2( -23.0768, -26.923 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 128.0
+margin_top = 56.0
+margin_right = 191.0
+margin_bottom = 124.0
+custom_constants/separation = 10
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 63.0
+margin_bottom = 16.0
+text = "  launch  "
+
+[node name="Load" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 63.0
+margin_bottom = 42.0
+text = "load"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 63.0
+margin_bottom = 68.0
+text = "quit"
+
+[node name="Animation" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 209, 188 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -1.67044, 0 )
+shape = SubResource( 1 )
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+
+[editable path="MovingPlatforms"]

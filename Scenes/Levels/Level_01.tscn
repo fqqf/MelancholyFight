@@ -3,12 +3,13 @@
 [ext_resource path="res://Scenes/Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://DoorConnections/00_link_01.tres" type="Resource" id=3]
-[ext_resource path="res://Brick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Brick.tscn" type="PackedScene" id=4]
 [ext_resource path="res://DoorConnections/01_link_02.tres" type="Resource" id=5]
 [ext_resource path="res://World/Spikes.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/SaveStation.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/stalactite.png" type="Texture" id=8]
 [ext_resource path="res://assets/World/grass.png" type="Texture" id=9]
+
 
 [node name="Level_01" instance=ExtResource( 1 )]
 

@@ -1,4 +1,4 @@
-extends "res://Level.gd"
+extends "res://src/Level.gd"
 
 const PLAYER_BIT = 0
 const WORLD_BIT = 1
