@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/UI/HealthMeterEmpty.png" type="Texture" id=1]
+[ext_resource path="res://assets/UI/HealthMeterFull.png" type="Texture" id=2]
+[ext_resource path="res://UI/HealthMeter.gd" type="Script" id=3]
+
+[node name="HealthMeter" type="Control"]
+margin_right = 33.0
+margin_bottom = 15.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Empty" type="TextureRect" parent="."]
+margin_right = 112.0
+margin_bottom = 101.0
+rect_scale = Vector2( 0.3, 0.15 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Full" type="TextureRect" parent="."]
+margin_right = 112.0
+margin_bottom = 101.0
+rect_scale = Vector2( 0.3, 0.15 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

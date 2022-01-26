@@ -9,35 +9,42 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "Game",
+"base": "Resource",
+"class": "MainInstances",
 "language": "GDScript",
-"path": "res://src/gameplay/Game.gd"
+"path": "res://MainInstances.gd"
 }, {
-"base": "Node2D",
-"class": "Zone",
+"base": "Resource",
+"class": "PlayerStats",
 "language": "GDScript",
-"path": "res://src/gameplay/zones/Zone.gd"
+"path": "res://Player/PlayerStats.gd"
+}, {
+"base": "Area2D",
+"class": "Powerup",
+"language": "GDScript",
+"path": "res://Player/Powerups/Powerup.gd"
 } ]
 _global_script_class_icons={
-"Game": "",
-"Zone": ""
+"MainInstances": "",
+"PlayerStats": "",
+"Powerup": ""
 }
 
 [application]
 
-config/name="SOUL HARVEST - PLAYABLE DEMO - PLAYABLE DEMO"
-run/main_scene="res://src/core/Init.tscn"
-boot_splash/image="res://res/app-core/icon.png"
-boot_splash/bg_color=Color( 0.203922, 0.172549, 0.231373, 1 )
-config/icon="res://res/app-core/icon.png"
+config/name="Platformer"
+run/main_scene="res://Menus/StartMenu.tscn"
+boot_splash/bg_color=Color( 0.262745, 0.262745, 0.262745, 1 )
+config/icon="res://icon.png"
 
 [autoload]
 
-Logger="*res://src/core/Logger.gd"
-Config="*res://src/core/Config.gd"
-Singleton="*res://src/core/Singleton.gd"
-Utils="*res://src/core/Utils.gd"
+Utils="*res://Utils.gd"
+ResourceLoader="*res://ResourceLoader.gd"
+Events="*res://Events.gd"
+SaverAndLoader="*res://SaverAndLoader.gd"
+SoundFX="*res://Music and Sounds/SoundFX.tscn"
+Music="*res://Music and Sounds/Music.tscn"
 
 [debug]
 
@@ -45,35 +52,94 @@ gdscript/warnings/return_value_discarded=false
 
 [display]
 
-window/size/width=10
-window/size/height=100
-window/size/test_width=1400
-window/size/test_height=600
+window/size/width=320
+window/size/height=180
+window/size/test_width=1280
+window/size/test_height=720
 window/stretch/mode="2d"
-window/stretch/aspect="keep_height"
+window/stretch/aspect="keep"
 
 [global]
 
-max_remote_stdout_chars_per_second\=true
-max_remote_stdout_chars_per_second=true
+window=false
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 
-move_right={
+ui_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
-move_left={
+ui_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
-jump={
+ui_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Fire={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+fire_missile={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+save={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+}
+load={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":76,"unicode":0,"echo":false,"script":null)
  ]
 }
 
@@ -81,16 +147,10 @@ jump={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="World"
-2d_physics/layer_3="Collectable"
-
-[logging]
-
-file_logging/enable_file_logging=true
-file_logging/log_path="res://logs/.log"
-
-[network]
-
-limits/debugger_stdout/max_chars_per_second=100000
+2d_physics/layer_3="PlayHurtbox"
+2d_physics/layer_4="EnemyHurtbox"
+2d_physics/layer_5="Brick"
+2d_physics/layer_6="Powerup"
 
 [physics]
 
@@ -98,4 +158,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
